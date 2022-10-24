@@ -2,7 +2,7 @@
 
 [![pub package](https://img.shields.io/pub/v/smart_flutter_widgets.svg)](https://pub.dev/packages/smart_flutter_widgets)
 
-Smart flutter widgets and extensions on it.
+Widget components and extensions to make flutter easy and smart.
 
 ## Getting Started
 
