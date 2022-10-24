@@ -1,5 +1,5 @@
 name: smart_flutter_widgets
-description: Smart flutter widgets and extensions on it.
+description: Widget components and extensions to make flutter easy and smart.
 homepage: https://github.com/asadbaidar/smart
 repository: https://github.com/asadbaidar/smart/tree/master/packages/smart_flutter_widgets
 
@@ -13,8 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  smart_flutter_utils:
-    path: ../smart_flutter_utils
+  smart_flutter_utils: ^0.0.2
 
   auto_size_text: ^3.0.0
   google_fonts: ^3.0.1

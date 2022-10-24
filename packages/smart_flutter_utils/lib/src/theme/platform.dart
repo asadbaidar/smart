@@ -2,7 +2,7 @@ part of 'theme.dart';
 
 extension PlatformContext on BuildContext {
   ThemeData get theme => Theme.of(this);
-  
+
   TargetPlatform get platform => theme.platform;
 
   bool get isIOS => platform == TargetPlatform.iOS;

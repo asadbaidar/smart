@@ -24,7 +24,7 @@ extension GlobalObject on Object {
 
   /// [apply] mapping with dynamic parameter and [R] as return value
   R mapIt<R>(R Function(dynamic it) apply) => apply(this);
-  
+
   /// Lets [apply] with [T] as parameter
   T let<T>(T Function(T) apply) => apply(this as T);
 

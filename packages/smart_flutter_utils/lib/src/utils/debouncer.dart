@@ -13,8 +13,8 @@ class Debouncer {
 
   Timer? _timer;
 
-/// Cancels any pending calls and runs an [action] callback after
-/// [duration] has passed.
+  /// Cancels any pending calls and runs an [action] callback after
+  /// [duration] has passed.
   void run(VoidCallback action) {
     if (_timer != null) {
       _timer?.cancel();

@@ -1,9 +1,9 @@
 name: smart_flutter_utils
-description: Smart flutter utility wrappers and extensions.
+description: Utility wrappers and extensions to make flutter easy and smart. 
 homepage: https://github.com/asadbaidar/smart
 repository: https://github.com/asadbaidar/smart/tree/master/packages/smart_flutter_utils
 
-version: 0.0.1
+version: 0.0.2
 
 environment:
   sdk: ">=2.17.6 <3.0.0"

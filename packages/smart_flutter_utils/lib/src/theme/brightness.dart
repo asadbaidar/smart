@@ -8,7 +8,7 @@ extension SmartBrightness on Brightness {
       isDark ? Brightness.dark : Brightness.light;
 
   bool get isLight => this == Brightness.light;
-  
+
   bool get isDark => this == Brightness.dark;
 }
 
