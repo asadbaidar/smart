@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 import 'package:smart_flutter_widgets/smart_flutter_widgets.dart';
 
 const _mockSliverText = "mock-sliver-text";

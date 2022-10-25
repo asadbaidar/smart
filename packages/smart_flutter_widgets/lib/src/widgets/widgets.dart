@@ -8,6 +8,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart' as bottom_sheet;
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 import 'package:smart_flutter_widgets/smart_flutter_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
