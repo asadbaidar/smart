@@ -19,7 +19,7 @@ part 'builder.dart';
 part 'button.dart';
 part 'clickable.dart';
 part 'expansion_list_view.dart';
-part 'linear_progress.dart';
+part 'progress.dart';
 part 'list_tile.dart';
 part 'list_view.dart';
 part 'paging_list_view.dart';
