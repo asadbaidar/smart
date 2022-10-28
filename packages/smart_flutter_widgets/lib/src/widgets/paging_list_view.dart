@@ -37,6 +37,7 @@ class SmartPagingListView<T> extends StatelessWidget {
   })  : addAutomaticKeepAlives = true,
         addRepaintBoundaries = true,
         addSemanticIndexes = true,
+        removeTopPadding = false,
         divider = null,
         dividerBuilder = null,
         edgeDivider = null,
@@ -79,6 +80,8 @@ class SmartPagingListView<T> extends StatelessWidget {
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
+
+    this. removeTopPadding = false,
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
     this.controller,
@@ -122,6 +125,7 @@ class SmartPagingListView<T> extends StatelessWidget {
   final bool addAutomaticKeepAlives;
   final bool addRepaintBoundaries;
   final bool addSemanticIndexes;
+  final bool removeTopPadding;
   final Axis scrollDirection;
   final bool reverse;
   final ScrollController? controller;
@@ -226,6 +230,7 @@ class SmartPagingListView<T> extends StatelessWidget {
               addAutomaticKeepAlives: addAutomaticKeepAlives,
               addRepaintBoundaries: addRepaintBoundaries,
               addSemanticIndexes: addSemanticIndexes,
+              removeTopPadding: removeTopPadding,
               scrollDirection: scrollDirection,
               reverse: reverse,
               controller: controller,
@@ -292,6 +297,7 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
   })  : addAutomaticKeepAlives = true,
         addRepaintBoundaries = true,
         addSemanticIndexes = true,
+        removeTopPadding = false,
         divider = null,
         dividerBuilder = null,
         edgeDivider = null,
@@ -327,6 +333,7 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
+    this.removeTopPadding = false,
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
     this.controller,
@@ -365,6 +372,7 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
   final bool addAutomaticKeepAlives;
   final bool addRepaintBoundaries;
   final bool addSemanticIndexes;
+  final bool removeTopPadding;
   final Axis scrollDirection;
   final bool reverse;
   final ScrollController? controller;
@@ -414,6 +422,7 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
           addAutomaticKeepAlives: addAutomaticKeepAlives,
           addRepaintBoundaries: addRepaintBoundaries,
           addSemanticIndexes: addSemanticIndexes,
+          removeTopPadding: removeTopPadding,
           scrollDirection: scrollDirection,
           reverse: reverse,
           controller: controller,

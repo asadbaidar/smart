@@ -1,3 +1,7 @@
+## [0.0.5]
+
+* Added ```SmartSliverList.removeTopPadding```.
+
 ## [0.0.4]
 
 * Refactored.

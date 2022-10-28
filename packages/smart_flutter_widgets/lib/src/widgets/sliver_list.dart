@@ -107,6 +107,7 @@ class SmartSliverList<T> extends StatelessWidget {
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
+    this.removeTopPadding = false,
     this.scrollDirection = Axis.vertical,
     Key? key,
   })  : assert(children != null),
@@ -171,6 +172,7 @@ class SmartSliverList<T> extends StatelessWidget {
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
+    this.removeTopPadding = false,
     this.scrollDirection = Axis.vertical,
     Key? key,
   })  : assert(itemBuilder != null),
@@ -198,6 +200,7 @@ class SmartSliverList<T> extends StatelessWidget {
   final bool addAutomaticKeepAlives;
   final bool addRepaintBoundaries;
   final bool addSemanticIndexes;
+  final bool removeTopPadding;
   final Axis scrollDirection;
 
   /// If non-null, forces the children to have the given extent in the scroll
@@ -332,7 +335,11 @@ class SmartSliverList<T> extends StatelessWidget {
         final EdgeInsets mediaQueryHorizontalPadding =
             mediaQuery.padding.copyWith(top: 0.0, bottom: 0.0);
         final EdgeInsets mediaQueryVerticalPadding =
-            mediaQuery.padding.copyWith(top: 0.0, left: 0.0, right: 0.0);
+            mediaQuery.padding.copyWith(
+          top: removeTopPadding ? 0.0 : null,
+          left: 0.0,
+          right: 0.0,
+        );
         // Consume the main axis padding with SliverPadding.
         effectivePadding = scrollDirection == Axis.vertical
             ? mediaQueryVerticalPadding

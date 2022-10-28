@@ -182,6 +182,7 @@ class SmartExpansionPanel<T> {
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
+    this.removeTopPadding = false,
     this.scrollDirection = Axis.vertical,
     this.pageInfo,
     this.onPageChange,
@@ -213,6 +214,7 @@ class SmartExpansionPanel<T> {
   final bool addAutomaticKeepAlives;
   final bool addRepaintBoundaries;
   final bool addSemanticIndexes;
+  final bool removeTopPadding;
   final Axis scrollDirection;
   final PageInfo? pageInfo;
   final SmartPagingCallback? onPageChange;
@@ -308,9 +310,12 @@ class SmartExpansionPanel<T> {
                     items: items,
                     section: section,
                     itemCount: itemCount,
+                    divider: divider,
+                    edgeDivider: edgeDivider,
                     addAutomaticKeepAlives: addAutomaticKeepAlives,
                     addRepaintBoundaries: addRepaintBoundaries,
                     addSemanticIndexes: addSemanticIndexes,
+                    removeTopPadding: removeTopPadding,
                     scrollDirection: scrollDirection,
                   ),
       ),

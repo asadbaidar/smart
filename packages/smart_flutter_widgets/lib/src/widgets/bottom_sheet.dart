@@ -87,6 +87,7 @@ class SmartBottomSheet<T> extends StatelessWidget {
               section: section,
               dividerBuilder: dividerBuilder,
               padding: padding,
+              removeTopPadding: true,
               physics: physics,
             ));
 
