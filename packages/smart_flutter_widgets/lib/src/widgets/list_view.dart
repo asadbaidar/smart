@@ -151,7 +151,7 @@ class SmartListView<T> extends ScrollView {
     bool addAutomaticKeepAlives = true,
     bool addRepaintBoundaries = true,
     bool addSemanticIndexes = true,
-    bool removeTopPadding = false,
+    bool removeTopPadding = true,
     Axis scrollDirection = Axis.vertical,
     bool reverse = false,
     ScrollController? controller,

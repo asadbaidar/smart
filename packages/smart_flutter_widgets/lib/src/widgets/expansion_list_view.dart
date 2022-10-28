@@ -182,7 +182,7 @@ class SmartExpansionPanel<T> {
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
-    this.removeTopPadding = false,
+    this.removeTopPadding = true,
     this.scrollDirection = Axis.vertical,
     this.pageInfo,
     this.onPageChange,

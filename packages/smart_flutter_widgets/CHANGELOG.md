@@ -1,3 +1,7 @@
+## [0.0.6]
+
+* Changed ```removeTopPadding``` default value to ```true```.
+
 ## [0.0.5]
 
 * Added ```SmartSliverList.removeTopPadding```.
