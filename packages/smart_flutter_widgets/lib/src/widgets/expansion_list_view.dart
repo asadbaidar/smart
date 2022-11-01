@@ -9,6 +9,7 @@ typedef SmartExpansionPanelBuilder<PanelItem, ListItem>
 
 class SmartExpansionListView<PanelItem, ListItem> extends StatefulWidget {
   const SmartExpansionListView({
+    super.key,
     required this.itemBuilder,
     this.itemCount,
     this.items,
@@ -29,7 +30,6 @@ class SmartExpansionListView<PanelItem, ListItem> extends StatefulWidget {
     this.clipBehavior = Clip.hardEdge,
     this.allowMultipleExpansion = false,
     this.padding,
-    super.key,
   });
 
   final SmartExpansionPanelBuilder<PanelItem, ListItem> itemBuilder;
@@ -112,7 +112,7 @@ class _SmartExpansionListViewState<PanelItem, ListItem>
 
   @override
   Widget build(BuildContext context) {
-    return SmartListView(
+    return SmartListView.sliver(
       topSliverBuilder: widget.topSliverBuilder,
       bottomSliverBuilder: widget.bottomSliverBuilder,
       replacementBuilder: widget.replacementBuilder,

@@ -7,7 +7,8 @@ const kSmartPagingControlsConstraints = BoxConstraints(minHeight: 60);
 typedef SmartPagingCallback = void Function(PageInfo page);
 
 class SmartPagingListView<T> extends StatelessWidget {
-  const SmartPagingListView({
+  const SmartPagingListView.sliver({
+    super.key,
     this.pageInfo,
     this.onPageChange,
     this.pageButtonBuilder,
@@ -33,7 +34,6 @@ class SmartPagingListView<T> extends StatelessWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
-    super.key,
   })  : addAutomaticKeepAlives = true,
         addRepaintBoundaries = true,
         addSemanticIndexes = true,
@@ -52,6 +52,7 @@ class SmartPagingListView<T> extends StatelessWidget {
         padding = null;
 
   const SmartPagingListView.builder({
+    super.key,
     this.pageInfo,
     this.onPageChange,
     this.pageButtonBuilder,
@@ -92,7 +93,6 @@ class SmartPagingListView<T> extends StatelessWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
-    super.key,
   }) : sliverBuilder = null;
 
   final PageInfo? pageInfo;
@@ -242,7 +242,7 @@ class SmartPagingListView<T> extends StatelessWidget {
               restorationId: restorationId,
               clipBehavior: clipBehavior,
             )
-          : SmartListView<T>(
+          : SmartListView<T>.sliver(
               sliverBuilder: sliverBuilder!,
               topSliverBuilder: topSliverBuilder,
               bottomSliverBuilder: _bottomSliverBuilder,
@@ -269,7 +269,8 @@ class SmartPagingListView<T> extends StatelessWidget {
 }
 
 class SmartApiStatePagingListView<T> extends StatelessWidget {
-  const SmartApiStatePagingListView({
+  const SmartApiStatePagingListView.sliver({
+    super.key,
     required this.apiState,
     this.onPageChange,
     this.pageButtonBuilder,
@@ -292,7 +293,6 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
-    super.key,
   })  : addAutomaticKeepAlives = true,
         addRepaintBoundaries = true,
         addSemanticIndexes = true,
@@ -309,6 +309,7 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
         padding = null;
 
   const SmartApiStatePagingListView.builder({
+    super.key,
     required this.apiState,
     this.onPageChange,
     this.pageButtonBuilder,
@@ -344,7 +345,6 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
-    super.key,
   }) : sliverBuilder = null;
 
   final ApiState<PagingList<T>> apiState;
@@ -434,7 +434,7 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
           restorationId: restorationId,
           clipBehavior: clipBehavior,
         )
-      : SmartPagingListView<T>(
+      : SmartPagingListView<T>.sliver(
           pageInfo: apiState.page,
           onPageChange: onPageChange,
           pageLoadingBuilder: pageLoadingBuilder,
@@ -464,18 +464,18 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
 
 class SmartPagingButton extends StatelessWidget {
   const SmartPagingButton({
+    super.key,
     this.text,
     this.style,
     this.color,
     this.onPressed,
-    super.key,
   }) : primary = false;
 
   const SmartPagingButton.primary({
+    super.key,
     this.text,
     this.style,
     this.onPressed,
-    super.key,
   })  : primary = true,
         color = null;
 

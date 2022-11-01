@@ -1,3 +1,7 @@
+## [0.0.7]
+
+* Improvements in ```SmartListView```.
+
 ## [0.0.6]
 
 * Changed ```removeTopPadding``` default value to ```true```.

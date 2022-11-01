@@ -96,12 +96,20 @@ typedef SmartSection = dynamic Function(int index);
 /// [CustomScrollView.slivers] property instead of the list itself, and having
 /// the [SliverList] instead be a child of the [SliverPadding].
 class SmartListView<T> extends ScrollView {
-  const SmartListView({
-    required this.sliverBuilder,
+  SmartListView({
+    super.key,
     this.topSliverBuilder,
     this.bottomSliverBuilder,
     this.replacementBuilder,
     this.replace = false,
+    List<Widget> children = const [],
+    double? itemExtent,
+    Widget? prototypeItem,
+    EdgeInsetsGeometry? padding,
+    bool addAutomaticKeepAlives = true,
+    bool addRepaintBoundaries = true,
+    bool addSemanticIndexes = true,
+    bool removeTopPadding = true,
     Axis scrollDirection = Axis.vertical,
     bool reverse = false,
     ScrollController? controller,
@@ -114,10 +122,20 @@ class SmartListView<T> extends ScrollView {
         ScrollViewKeyboardDismissBehavior.manual,
     String? restorationId,
     Clip clipBehavior = Clip.hardEdge,
-    Key? key,
-  })  : assert(sliverBuilder != null),
+  })  : sliverBuilder = ((_) => [
+              SmartSliverList(
+                itemExtent: itemExtent,
+                prototypeItem: prototypeItem,
+                padding: padding,
+                addAutomaticKeepAlives: addAutomaticKeepAlives,
+                addRepaintBoundaries: addRepaintBoundaries,
+                addSemanticIndexes: addSemanticIndexes,
+                removeTopPadding: removeTopPadding,
+                scrollDirection: scrollDirection,
+                children: children,
+              )
+            ]),
         super(
-          key: key,
           scrollDirection: scrollDirection,
           reverse: reverse,
           controller: controller,
@@ -125,6 +143,7 @@ class SmartListView<T> extends ScrollView {
           physics: physics,
           shrinkWrap: shrinkWrap,
           cacheExtent: cacheExtent,
+          semanticChildCount: children.length,
           dragStartBehavior: dragStartBehavior,
           keyboardDismissBehavior: keyboardDismissBehavior,
           restorationId: restorationId,
@@ -132,6 +151,7 @@ class SmartListView<T> extends ScrollView {
         );
 
   SmartListView.builder({
+    super.key,
     this.topSliverBuilder,
     this.bottomSliverBuilder,
     this.replacementBuilder,
@@ -164,7 +184,6 @@ class SmartListView<T> extends ScrollView {
         ScrollViewKeyboardDismissBehavior.manual,
     String? restorationId,
     Clip clipBehavior = Clip.hardEdge,
-    Key? key,
   })  : assert(itemBuilder != null),
         sliverBuilder = ((_) => [
               SmartSliverList.builder(
@@ -188,7 +207,6 @@ class SmartListView<T> extends ScrollView {
               )
             ]),
         super(
-          key: key,
           scrollDirection: scrollDirection,
           reverse: reverse,
           controller: controller,
@@ -197,6 +215,40 @@ class SmartListView<T> extends ScrollView {
           shrinkWrap: shrinkWrap,
           cacheExtent: cacheExtent,
           semanticChildCount: itemCount ?? items?.length,
+          dragStartBehavior: dragStartBehavior,
+          keyboardDismissBehavior: keyboardDismissBehavior,
+          restorationId: restorationId,
+          clipBehavior: clipBehavior,
+        );
+
+  const SmartListView.sliver({
+    super.key,
+    required this.sliverBuilder,
+    this.topSliverBuilder,
+    this.bottomSliverBuilder,
+    this.replacementBuilder,
+    this.replace = false,
+    Axis scrollDirection = Axis.vertical,
+    bool reverse = false,
+    ScrollController? controller,
+    bool? primary,
+    ScrollPhysics? physics = const AlwaysBouncingScrollPhysics(),
+    bool shrinkWrap = false,
+    double? cacheExtent,
+    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    ScrollViewKeyboardDismissBehavior keyboardDismissBehavior =
+        ScrollViewKeyboardDismissBehavior.manual,
+    String? restorationId,
+    Clip clipBehavior = Clip.hardEdge,
+  })  : assert(sliverBuilder != null),
+        super(
+          scrollDirection: scrollDirection,
+          reverse: reverse,
+          controller: controller,
+          primary: primary,
+          physics: physics,
+          shrinkWrap: shrinkWrap,
+          cacheExtent: cacheExtent,
           dragStartBehavior: dragStartBehavior,
           keyboardDismissBehavior: keyboardDismissBehavior,
           restorationId: restorationId,
