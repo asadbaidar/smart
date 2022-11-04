@@ -1,3 +1,7 @@
+## [0.0.9+1]
+
+* Optimized ```SmartListTile```.
+
 ## [0.0.9]
 
 * Optimized ```SmartAutocomplete```.

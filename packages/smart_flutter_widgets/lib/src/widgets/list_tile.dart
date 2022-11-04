@@ -86,10 +86,11 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
-    this.topPadding = kStandardPaddingY,
-    this.bottomPadding = kStandardPaddingY,
+    this.topPadding,
+    this.bottomPadding,
     this.startPadding = kStandardPaddingX,
     this.endPadding = kStandardPaddingX,
     this.trailingPadding,
@@ -171,6 +172,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding = kStandardPaddingY,
@@ -256,6 +258,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = true,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding = kStandardPaddingY,
@@ -341,6 +344,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding,
@@ -426,6 +430,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding,
@@ -511,6 +516,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding = kExtendedPaddingY,
@@ -596,6 +602,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding,
@@ -681,6 +688,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding,
@@ -766,6 +774,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding = kExtendedPaddingY,
@@ -851,6 +860,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding = kDensePaddingY,
@@ -936,6 +946,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding = kMediumPaddingY,
@@ -1021,6 +1032,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding,
@@ -1106,6 +1118,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding = 0,
@@ -1191,6 +1204,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding,
@@ -1276,6 +1290,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding,
@@ -1361,6 +1376,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding = kDensePaddingY,
@@ -1446,6 +1462,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding = kStandardPaddingY,
@@ -1531,6 +1548,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding = kDensePaddingY,
@@ -1616,6 +1634,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding = 0,
@@ -1703,6 +1722,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding = 0,
@@ -1789,6 +1809,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding,
@@ -1875,6 +1896,7 @@ class SmartListTile extends StatelessWidget {
     this.highlighted,
     this.checked,
     this.cupertino = false,
+    this.animate = false,
     this.horizontalPadding,
     this.verticalPadding,
     this.topPadding,
@@ -1958,6 +1980,7 @@ class SmartListTile extends StatelessWidget {
   final bool? highlighted;
   final bool? checked;
   final bool cupertino;
+  final bool animate;
   final double? horizontalPadding;
   final double? verticalPadding;
   final double? topPadding;
@@ -2099,6 +2122,7 @@ class SmartListTile extends StatelessWidget {
                   alignment: alignment,
                   enabled: enabled,
                   cupertino: cupertino,
+                  animate: animate,
                   padding: vPadding,
                   onTap: onTapHead,
                   onTapLeading: onTapLeading,
@@ -2233,13 +2257,41 @@ class SmartListTile extends StatelessWidget {
                   ]),
                 ),
                 ...rows ?? [],
-                SizedBox(height: vBottomPadding.half),
+                if (padding == null) SizedBox(height: vBottomPadding.half),
                 ...belowRows ?? [],
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class SimpleListTile extends StatelessWidget {
+  const SimpleListTile({
+    super.key,
+    this.title,
+    this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 3),
+    this.onTap,
+  });
+
+  final Widget? title;
+  final EdgeInsetsGeometry? padding;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: title == null
+          ? null
+          : DefaultTextStyle(
+              style: context.bodyText1 ?? const TextStyle(),
+              child: title!,
+            ),
+      dense: true,
+      contentPadding: padding,
+      onTap: onTap,
     );
   }
 }

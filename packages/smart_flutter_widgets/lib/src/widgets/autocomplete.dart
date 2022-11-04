@@ -28,8 +28,9 @@ class SmartAutocomplete<T extends Object> extends StatelessWidget {
     this.optionHeight = kAutocompleteMinOptionHeight,
     this.visibleOptionCount = kAutocompleteVisibleOptionCount,
     this.padding = const EdgeInsetsDirectional.only(end: 16.0),
-    this.alwaysShowOptions = false,
+    this.clearOnUnfocus = false,
     this.clearOnSubmit = false,
+    this.alwaysShowOptions = false,
     this.optionsOffset = const SmartOffset.only(dy: 8.0),
     this.displayStringForOption = SmartRawAutocomplete.defaultStringForOption,
     this.focusNode,
@@ -46,6 +47,7 @@ class SmartAutocomplete<T extends Object> extends StatelessWidget {
   final double optionHeight;
   final int visibleOptionCount;
   final EdgeInsetsGeometry? padding;
+  final bool clearOnUnfocus;
   final bool clearOnSubmit;
   final bool alwaysShowOptions;
   final Offset optionsOffset;
@@ -69,6 +71,7 @@ class SmartAutocomplete<T extends Object> extends StatelessWidget {
       },
       fieldViewBuilder: fieldViewBuilder,
       optionsViewBuilder: _buildOptionsView,
+      clearOnUnfocus: clearOnUnfocus,
       clearOnSubmit: clearOnSubmit,
       alwaysShowOptions: alwaysShowOptions,
       optionsOffset: optionsOffset,
@@ -89,6 +92,7 @@ class SmartAutocomplete<T extends Object> extends StatelessWidget {
       padding: padding,
       alignment: AlignmentDirectional.topStart,
       child: Card(
+        clipBehavior: Clip.antiAlias,
         child: SizedBox(
           height: min(
             optionHeight * visibleOptionCount,
@@ -106,12 +110,9 @@ class SmartAutocomplete<T extends Object> extends StatelessWidget {
                     index,
                     option,
                   ) ??
-                  SmartListTile.custom(
-                    title: option.toString(),
+                  SimpleListTile(
+                    title: Text(displayStringForOption(option)),
                     onTap: () => onSelected(option),
-                    titleStyle: context.bodyText1,
-                    color: context.primaryColor,
-                    backgroundColor: Colors.transparent,
                   );
             },
           ),
@@ -174,6 +175,7 @@ class SmartRawAutocomplete<T extends Object> extends StatefulWidget {
     this.controller,
     this.initialValue,
     this.alwaysShowOptions = false,
+    this.clearOnUnfocus = false,
     this.clearOnSubmit = false,
     this.optionsOffset = const SmartOffset.only(dy: 8.0),
   })  : assert(displayStringForOption != null),
@@ -284,6 +286,7 @@ class SmartRawAutocomplete<T extends Object> extends StatefulWidget {
   /// This parameter is ignored if [controller] is defined.
   final TextEditingValue? initialValue;
 
+  final bool clearOnUnfocus;
   final bool clearOnSubmit;
   final bool alwaysShowOptions;
   final Offset optionsOffset;
@@ -384,6 +387,10 @@ class _SmartRawAutocompleteState<T extends Object>
 
   // Called when the field's FocusNode changes.
   void _onChangedFocus() {
+    if (widget.clearOnUnfocus && !_focusNode.hasFocus) {
+      _textEditingController.clear();
+      _selection = null;
+    }
     // Options should no longer be hidden when the field is re-focused.
     _userHidOptions = !_focusNode.hasFocus;
     _updateActions();

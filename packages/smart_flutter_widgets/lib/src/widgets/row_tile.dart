@@ -60,6 +60,7 @@ class SmartRowTile extends StatelessWidget {
     this.allCaps = false,
     this.header = false,
     this.cupertino = false,
+    this.animate = false,
     this.topDivider,
     this.bottomDivider,
     this.padding,
@@ -117,6 +118,7 @@ class SmartRowTile extends StatelessWidget {
     this.allCaps = false,
     this.header = false,
     this.cupertino = true,
+    this.animate = false,
     this.topDivider,
     this.bottomDivider,
     this.padding,
@@ -174,6 +176,7 @@ class SmartRowTile extends StatelessWidget {
     this.allCaps = false,
     this.header = false,
     this.cupertino = false,
+    this.animate = false,
     this.topDivider,
     this.bottomDivider,
     this.padding,
@@ -231,6 +234,7 @@ class SmartRowTile extends StatelessWidget {
     this.allCaps = false,
     this.header = false,
     this.cupertino = false,
+    this.animate = false,
     this.topDivider,
     this.bottomDivider,
     this.padding,
@@ -288,6 +292,7 @@ class SmartRowTile extends StatelessWidget {
     this.allCaps = false,
     this.header = false,
     this.cupertino = false,
+    this.animate = false,
     this.topDivider,
     this.bottomDivider,
     this.padding,
@@ -345,6 +350,7 @@ class SmartRowTile extends StatelessWidget {
     this.allCaps = true,
     this.header = true,
     this.cupertino = false,
+    this.animate = false,
     this.topDivider = DividerStyle.full,
     this.bottomDivider = DividerStyle.full,
     this.padding,
@@ -402,6 +408,7 @@ class SmartRowTile extends StatelessWidget {
     this.allCaps = true,
     this.header = true,
     this.cupertino = false,
+    this.animate = false,
     this.topDivider = DividerStyle.full,
     this.bottomDivider = DividerStyle.full,
     this.padding,
@@ -460,6 +467,7 @@ class SmartRowTile extends StatelessWidget {
     this.allCaps = true,
     this.header = true,
     this.cupertino = false,
+    this.animate = false,
     this.topDivider,
     this.bottomDivider = DividerStyle.full,
     this.padding,
@@ -517,6 +525,7 @@ class SmartRowTile extends StatelessWidget {
     this.allCaps = true,
     this.header = true,
     this.cupertino = false,
+    this.animate = false,
     this.topDivider,
     this.bottomDivider = DividerStyle.full,
     this.padding,
@@ -574,6 +583,7 @@ class SmartRowTile extends StatelessWidget {
     this.allCaps = true,
     this.header = true,
     this.cupertino = false,
+    this.animate = false,
     this.topDivider,
     this.bottomDivider,
     this.padding,
@@ -631,6 +641,7 @@ class SmartRowTile extends StatelessWidget {
     this.allCaps = true,
     this.header = true,
     this.cupertino = false,
+    this.animate = false,
     this.topDivider,
     this.bottomDivider,
     this.padding,
@@ -688,6 +699,7 @@ class SmartRowTile extends StatelessWidget {
     this.allCaps = false,
     this.header = false,
     this.cupertino = false,
+    this.animate = false,
     this.topDivider,
     this.bottomDivider,
     this.padding,
@@ -745,6 +757,7 @@ class SmartRowTile extends StatelessWidget {
     this.allCaps = false,
     this.header = false,
     this.cupertino = false,
+    this.animate = false,
     this.topDivider,
     this.bottomDivider,
     this.padding,
@@ -802,6 +815,7 @@ class SmartRowTile extends StatelessWidget {
     this.allCaps = false,
     this.header = false,
     this.cupertino = false,
+    this.animate = false,
     this.topDivider,
     this.bottomDivider,
     this.padding,
@@ -859,6 +873,7 @@ class SmartRowTile extends StatelessWidget {
     this.allCaps = false,
     this.header = false,
     this.cupertino = false,
+    this.animate = false,
     this.topDivider,
     this.bottomDivider,
     this.padding,
@@ -914,6 +929,7 @@ class SmartRowTile extends StatelessWidget {
   final bool allCaps;
   final bool header;
   final bool cupertino;
+  final bool animate;
   final DividerStyle? topDivider;
   final DividerStyle? bottomDivider;
   final EdgeInsetsGeometry? padding;
@@ -990,6 +1006,7 @@ class SmartRowTile extends StatelessWidget {
                   textBaseline: TextBaseline.alphabetic,
                   children: [
                     SmartCrossFade(
+                      animate: animate,
                       showFirst: leading != null,
                       firstChild: leading != null
                           ? Container(
@@ -1027,60 +1044,57 @@ class SmartRowTile extends StatelessWidget {
                             )
                           : null,
                     ),
-                    SmartCrossFade(
-                      firstChild: Container(
-                        constraints: vConstrained ? constraints : null,
-                        alignment: context.isRTL
-                            ? Alignment.centerRight
-                            : Alignment.centerLeft,
-                        child: child ??
-                            (children?.isNotEmpty == true
-                                ? RichText(
-                                    text: TextSpan(
-                                      style: vTextStyle?.copyWith(
-                                        color: text == null
-                                            ? context.hintColor
-                                            : null,
-                                        fontSize: fontSize,
-                                      ),
-                                      children: [
-                                        TextSpan(text: vText),
-                                        ...?children?.map((w) =>
-                                            $cast<Text>(w)?.mapTo(
-                                              (Text w) => TextSpan(
-                                                text: w.data,
-                                                style: (w.style ?? vTextStyle)
-                                                    ?.copyWith(
-                                                  fontSize: fontSize,
-                                                ),
-                                              ),
-                                            ) ??
-                                            WidgetSpan(
-                                              alignment:
-                                                  PlaceholderAlignment.middle,
-                                              child: Padding(
-                                                padding: childrenPadding,
-                                                child: w,
-                                              ),
-                                            ))
-                                      ].applyIf(context.isRTL,
-                                          (it) => it?.reversed.toList()),
-                                    ),
-                                    maxLines: expanded ? null : maxLines,
-                                    overflow: expanded || maxLines == null
-                                        ? TextOverflow.visible
-                                        : TextOverflow.ellipsis,
-                                  )
-                                : Text(
-                                    vText ?? '',
+                    Container(
+                      constraints: vConstrained ? constraints : null,
+                      alignment: context.isRTL
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                      child: child ??
+                          (children?.isNotEmpty == true
+                              ? RichText(
+                                  text: TextSpan(
                                     style: vTextStyle?.copyWith(
                                       color: text == null
                                           ? context.hintColor
                                           : null,
                                       fontSize: fontSize,
                                     ),
-                                  )),
-                      ),
+                                    children: [
+                                      TextSpan(text: vText),
+                                      ...?children?.map((w) =>
+                                          $cast<Text>(w)?.mapTo(
+                                            (Text w) => TextSpan(
+                                              text: w.data,
+                                              style: (w.style ?? vTextStyle)
+                                                  ?.copyWith(
+                                                fontSize: fontSize,
+                                              ),
+                                            ),
+                                          ) ??
+                                          WidgetSpan(
+                                            alignment:
+                                                PlaceholderAlignment.middle,
+                                            child: Padding(
+                                              padding: childrenPadding,
+                                              child: w,
+                                            ),
+                                          ))
+                                    ].applyIf(context.isRTL,
+                                        (it) => it?.reversed.toList()),
+                                  ),
+                                  maxLines: expanded ? null : maxLines,
+                                  overflow: expanded || maxLines == null
+                                      ? TextOverflow.visible
+                                      : TextOverflow.ellipsis,
+                                )
+                              : Text(
+                                  vText ?? '',
+                                  style: vTextStyle?.copyWith(
+                                    color:
+                                        text == null ? context.hintColor : null,
+                                    fontSize: fontSize,
+                                  ),
+                                )),
                     ).flex(enabled: !wrap, expanded: true),
                     if (vShowTrailing)
                       Container(

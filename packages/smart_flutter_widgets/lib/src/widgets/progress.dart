@@ -40,25 +40,46 @@ class SmartLinearProgress extends StatelessWidget {
       );
 }
 
-class SmartCrossFade extends AnimatedCrossFade {
+class SmartCrossFade extends StatelessWidget {
   const SmartCrossFade({
-    bool? showFirst,
-    AlignmentGeometry alignment = Alignment.topCenter,
-    Duration duration = const Duration(milliseconds: 200),
-    Widget? firstChild,
-    Widget? secondChild,
-    Key? key,
-  }) : super(
-          key: key,
+    super.key,
+    this.animate = true,
+    this.showFirst,
+    this.alignment = Alignment.topCenter,
+    this.duration = const Duration(milliseconds: 200),
+    this.firstChild,
+    this.secondChild,
+  });
+
+  final bool animate;
+  final bool? showFirst;
+  final AlignmentGeometry alignment;
+  final Duration duration;
+  final Widget? firstChild;
+  final Widget? secondChild;
+
+  @override
+  Widget build(BuildContext context) => animate
+      ? AnimatedCrossFade(
           alignment: alignment,
           duration: duration,
           secondCurve: Curves.fastLinearToSlowEaseIn,
-          crossFadeState: showFirst ?? firstChild != null
-              ? CrossFadeState.showFirst
-              : CrossFadeState.showSecond,
-          firstChild: firstChild ?? const SizedBox(),
-          secondChild: secondChild ?? const SizedBox(),
-        );
+          crossFadeState: state,
+          firstChild: _firstChild,
+          secondChild: _secondChild,
+        )
+      : _showFirst
+          ? _firstChild
+          : _secondChild;
+
+  CrossFadeState get state =>
+      _showFirst ? CrossFadeState.showFirst : CrossFadeState.showSecond;
+
+  bool get _showFirst => showFirst ?? firstChild != null;
+
+  Widget get _firstChild => firstChild ?? const SizedBox.shrink();
+
+  Widget get _secondChild => secondChild ?? const SizedBox.shrink();
 }
 
 class SmartProgressBar extends StatelessWidget {
