@@ -1,3 +1,7 @@
+## [0.0.9]
+
+* Optimized ```SmartAutocomplete```.
+
 ## [0.0.8]
 
 * Added ```SmartAutocomplete```.

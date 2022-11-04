@@ -11,6 +11,11 @@ typedef AutocompleteOptionViewBuilder<T extends Object> = Widget Function(
   T option,
 );
 
+typedef AutocompleteOptionFilter<T extends Object> = bool Function(
+  TextEditingValue textEditingValue,
+  T option,
+);
+
 class SmartAutocomplete<T extends Object> extends StatelessWidget {
   const SmartAutocomplete({
     super.key,
@@ -18,6 +23,7 @@ class SmartAutocomplete<T extends Object> extends StatelessWidget {
     this.onSelected,
     this.fieldViewBuilder,
     this.optionViewBuilder,
+    this.optionFilter,
     this.divider,
     this.optionHeight = kAutocompleteMinOptionHeight,
     this.visibleOptionCount = kAutocompleteVisibleOptionCount,
@@ -35,6 +41,7 @@ class SmartAutocomplete<T extends Object> extends StatelessWidget {
   final AutocompleteOnSelected<T>? onSelected;
   final AutocompleteFieldViewBuilder? fieldViewBuilder;
   final AutocompleteOptionViewBuilder<T>? optionViewBuilder;
+  final AutocompleteOptionFilter<T>? optionFilter;
   final Widget? divider;
   final double optionHeight;
   final int visibleOptionCount;
@@ -47,13 +54,19 @@ class SmartAutocomplete<T extends Object> extends StatelessWidget {
   final TextEditingController? controller;
   final TextEditingValue? initialValue;
 
+  bool _optionFilter(TextEditingValue textEditingValue, T option) =>
+      option.toString().containsIgnoreCase(textEditingValue.text);
+
   @override
   Widget build(BuildContext context) {
     return SmartRawAutocomplete<T>(
       onSelected: onSelected,
-      optionsBuilder: (textEditingValue) => options.where(
-        (option) => option.toString().containsIgnoreCase(textEditingValue.text),
-      ),
+      optionsBuilder: (textEditingValue) {
+        final filter = optionFilter ?? _optionFilter;
+        return textEditingValue.text.isEmpty
+            ? options
+            : options.where((option) => filter(textEditingValue, option));
+      },
       fieldViewBuilder: fieldViewBuilder,
       optionsViewBuilder: _buildOptionsView,
       clearOnSubmit: clearOnSubmit,
