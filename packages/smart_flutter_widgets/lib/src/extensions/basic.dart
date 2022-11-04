@@ -105,12 +105,10 @@ extension SpaceNumber on num {
   Widget get space => Space.all(toDouble());
 }
 
-class SmartOffset {
-  SmartOffset._();
+class SmartOffset extends Offset {
+  const SmartOffset.only({double dx = 0, double dy = 0}) : super(dx, dy);
 
-  static Offset only({double? dx, double? dy}) => Offset(dx ?? 0, dy ?? 0);
-
-  static Offset all(double d) => Offset(d, d);
+  const SmartOffset.all(double d) : super(d, d);
 }
 
 class SmartBoxBorder {
