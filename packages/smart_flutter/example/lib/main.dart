@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
     $debugPrint("Hello Example");
     return Scaffold(
       body: Center(
-        child: Text("Hello".post("Example", between: " ")),
+        child: Text("Hello".suffix("Example", infix: " ")),
       ),
     );
   }

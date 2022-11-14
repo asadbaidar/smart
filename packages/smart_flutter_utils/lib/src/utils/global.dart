@@ -18,6 +18,9 @@ R? $mapIt<R>(Object? object, R? Function(dynamic it) apply) =>
 List<T>? $mapList<T>(list, T Function(dynamic e) apply) =>
     (list as List?)?.map<T>(apply).toList();
 
+List<R>? $mapToList<T, R>(List<T>? list, R Function(T it) apply) =>
+    list?.map<R>(apply).toList();
+
 extension GlobalObject on Object {
   /// [apply] mapping with [T] as parameter and [R] as return value
   R mapTo<T, R>(R Function(T it) apply) => apply(this as T);

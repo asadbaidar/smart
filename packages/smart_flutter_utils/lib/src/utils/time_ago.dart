@@ -59,7 +59,7 @@ class TimeAgo {
               : date.formatMMMMdy_Y
           : timeago.format(
               date,
-              locale: (locale ?? _default).post("_short", doIf: short),
+              locale: (locale ?? _default).suffix("_short", doIf: short),
               clock: now,
               allowFromNow: withFuture,
             );
@@ -201,42 +201,6 @@ extension DateTimeLeft on DateTime {
       );
 }
 
-/// English Messages
-class EnMessages implements LookupMessages {
-  @override
-  String prefixAgo() => '';
-  @override
-  String prefixFromNow() => '';
-  @override
-  String suffixAgo() => 'ago';
-  @override
-  String suffixFromNow() => 'left';
-  @override
-  String lessThanOneMinute(int seconds) => 'few seconds';
-  @override
-  String aboutAMinute(int minutes) => '1 min';
-  @override
-  String minutes(int minutes) => '$minutes mins';
-  @override
-  String aboutAnHour(int minutes) => '1 hr';
-  @override
-  String hours(int hours) => '$hours hrs';
-  @override
-  String aDay(int hours) => '1 day';
-  @override
-  String days(int days) => '$days days';
-  @override
-  String aboutAMonth(int days) => '1 month';
-  @override
-  String months(int months) => '$months months';
-  @override
-  String aboutAYear(int year) => '1 year';
-  @override
-  String years(int years) => '$years years';
-  @override
-  String wordSeparator() => ' ';
-}
-
 typedef LookupMessages = timeago.LookupMessages;
 typedef ArMessages = timeago.ArMessages;
 typedef AzMessages = timeago.AzMessages;
@@ -245,7 +209,7 @@ typedef CsMessages = timeago.CsMessages;
 typedef DaMessages = timeago.DaMessages;
 typedef DeMessages = timeago.DeMessages;
 typedef DvMessages = timeago.DvMessages;
-// typedef EnMessages = timeago.EnMessages;
+typedef EnMessages = timeago.EnMessages;
 typedef EsMessages = timeago.EsMessages;
 typedef FaMessages = timeago.FaMessages;
 typedef FrMessages = timeago.FrMessages;

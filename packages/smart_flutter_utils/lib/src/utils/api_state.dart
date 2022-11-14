@@ -14,21 +14,39 @@ enum ApiCallState {
 
   bool get isInitial => this == ApiCallState.initial;
 
+  bool get isNotInitial => !isInitial;
+
   bool get isLoading => this == ApiCallState.loading;
+
+  bool get isNotLoading => !isLoading;
 
   bool get isReloading => this == ApiCallState.reloading;
 
+  bool get isNotReloading => !isReloading;
+
   bool get isPageLoading => this == ApiCallState.pageLoading;
+
+  bool get isNotPageLoading => !isPageLoading;
 
   bool get isSearching => this == ApiCallState.searching;
 
+  bool get isNotSearching => !isSearching;
+
   bool get isLoaded => this == ApiCallState.loaded;
+
+  bool get isNotLoaded => !isLoaded;
 
   bool get isCanceled => this == ApiCallState.canceled;
 
+  bool get isNotCanceled => !isCanceled;
+
   bool get isFailure => this == ApiCallState.failure;
 
+  bool get isNotFailure => !isFailure;
+
   bool get isPageFailure => this == ApiCallState.pageFailure;
+
+  bool get isNotPageFailure => !isPageFailure;
 
   ApiCallState toFailure() =>
       isPageLoading ? ApiCallState.pageFailure : ApiCallState.failure;
@@ -122,21 +140,39 @@ class ApiState<T> extends Equatable {
 
   bool get isInitial => state.isInitial;
 
+  bool get isNotInitial => state.isNotInitial;
+
   bool get isLoading => state.isLoading;
+
+  bool get isNotLoading => state.isNotLoading;
 
   bool get isReloading => state.isReloading;
 
+  bool get isNotReloading => state.isNotReloading;
+
   bool get isPageLoading => state.isPageLoading;
+
+  bool get isNotPageLoading => state.isNotPageLoading;
 
   bool get isSearching => state.isSearching;
 
+  bool get isNotSearching => state.isNotSearching;
+
   bool get isLoaded => state.isLoaded;
+
+  bool get isNotLoaded => state.isNotLoaded;
 
   bool get isCanceled => state.isCanceled;
 
+  bool get isNotCanceled => state.isNotCanceled;
+
   bool get isFailure => state.isFailure;
 
+  bool get isNotFailure => state.isNotFailure;
+
   bool get isPageFailure => state.isPageFailure;
+
+  bool get isNotPageFailure => state.isNotPageFailure;
 
   bool get isEmpty {
     final vData = data;
@@ -168,5 +204,5 @@ class ApiState<T> extends Equatable {
   bool get isNotReadyOrLoading => !isReadyOrLoading;
 
   @override
-  List<Object?> get props => [data, state];
+  List<Object?> get props => [data, state, error];
 }

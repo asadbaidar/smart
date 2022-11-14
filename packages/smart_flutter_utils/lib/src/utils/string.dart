@@ -1,56 +1,73 @@
 part of 'utils.dart';
 
 extension StringConcatenation on String {
-  String pre(
-    pre, {
+  String prefix(
+    prefix, {
     int doFor = 1,
     bool doIf = true,
-    between,
-    post,
-  }) =>
-      applyFor(
-        doIf == true && pre != null ? doFor : 0,
-        (s) =>
-            pre!.toString() +
-            (between?.toString() ?? "") +
-            s +
-            (post?.toString() ?? ""),
-      );
+    bool notBlank = true,
+    infix,
+    suffix,
+  }) {
+    final vPrefix = prefix?.toString() ?? "";
+    final vInfix = infix?.toString() ?? "";
+    final vSuffix = suffix?.toString() ?? "";
+    final vDoIf = doIf && (!notBlank || isNotBlank) && vPrefix.isNotBlank;
+    return applyFor(
+      vDoIf ? doFor : 0,
+      (s) => vPrefix + vInfix + s + vSuffix,
+    );
+  }
 
-  String post(
-    post, {
+  String suffix(
+    suffix, {
     int doFor = 1,
     bool doIf = true,
-    between,
-    pre,
-  }) =>
-      applyFor(
-        doIf == true && post != null ? doFor : 0,
-        (s) =>
-            (pre?.toString() ?? "") +
-            s +
-            (between?.toString() ?? "") +
-            post!.toString(),
-      );
+    bool notBlank = true,
+    infix,
+    prefix,
+  }) {
+    final vSuffix = suffix?.toString() ?? "";
+    final vInfix = infix?.toString() ?? "";
+    final vPrefix = prefix?.toString() ?? "";
+    final vDoIf = doIf && (!notBlank || isNotBlank) && vSuffix.isNotBlank;
+    return applyFor(
+      vDoIf ? doFor : 0,
+      (s) => vPrefix + s + vInfix + vSuffix,
+    );
+  }
 
-  String surround(
-    surround, {
+  String confix(
+    confix, {
     int doFor = 1,
     bool doIf = true,
-    String between = "",
+    bool notBlank = true,
+    infix,
+    prefix,
+    suffix,
   }) =>
-      applyFor(
-        doIf == true && surround != null ? doFor : 0,
-        (s) => s
-            .pre(
-              surround,
-              between: between,
-            )
-            .post(
-              surround,
-              between: between,
-            ),
-      );
+      this
+          .prefix(
+            confix,
+            doFor: doFor,
+            doIf: doIf,
+            notBlank: notBlank,
+            infix: infix,
+          )
+          .suffix(
+            confix,
+            doFor: doFor,
+            doIf: doIf,
+            notBlank: notBlank,
+            infix: infix,
+          )
+          .prefix(
+            prefix,
+            doFor: doFor,
+            doIf: doIf,
+            notBlank: notBlank,
+            suffix: suffix,
+          );
 }
 
 extension StringIntials on String {

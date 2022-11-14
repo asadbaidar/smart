@@ -1,3 +1,7 @@
+## [0.1.0]
+
+* Updated utils
+
 ## [0.0.9+1]
 
 * Optimized ```SmartListTile```.
