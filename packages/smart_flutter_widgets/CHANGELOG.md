@@ -1,3 +1,7 @@
+## [0.1.1]
+
+* Bug fixes in ```SmartRowTile```
+
 ## [0.1.0]
 
 * Updated utils

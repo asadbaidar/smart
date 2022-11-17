@@ -1094,6 +1094,10 @@ class SmartRowTile extends StatelessWidget {
                                         text == null ? context.hintColor : null,
                                     fontSize: fontSize,
                                   ),
+                                  maxLines: expanded ? null : maxLines,
+                                  overflow: expanded || maxLines == null
+                                      ? TextOverflow.visible
+                                      : TextOverflow.ellipsis,
                                 )),
                     ).flex(enabled: !wrap, expanded: true),
                     if (vShowTrailing)
