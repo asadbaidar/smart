@@ -16,6 +16,8 @@ typedef AutocompleteOptionFilter<T extends Object> = bool Function(
   T option,
 );
 
+typedef AutocompleteOptions<T extends Object> = Iterable<T> Function();
+
 class SmartAutocomplete<T extends Object> extends StatelessWidget {
   const SmartAutocomplete({
     super.key,
@@ -32,7 +34,7 @@ class SmartAutocomplete<T extends Object> extends StatelessWidget {
     this.clearOnSelection = false,
     this.alwaysShowOptions = false,
     this.selectOnSubmit = true,
-    this.selectOnSubmitIfNotEmpty = true,
+    this.selectOnSubmitIfEmpty = true,
     this.optionsOffset = const SmartOffset.only(dy: 8.0),
     this.displayStringForOption = SmartRawAutocomplete.defaultStringForOption,
     this.focusNode,
@@ -40,7 +42,7 @@ class SmartAutocomplete<T extends Object> extends StatelessWidget {
     this.initialValue,
   });
 
-  final Iterable<T> options;
+  final AutocompleteOptions<T> options;
   final AutocompleteOnSelected<T>? onSelected;
   final AutocompleteFieldViewBuilder? fieldViewBuilder;
   final AutocompleteOptionViewBuilder<T>? optionViewBuilder;
@@ -53,7 +55,7 @@ class SmartAutocomplete<T extends Object> extends StatelessWidget {
   final bool clearOnSelection;
   final bool alwaysShowOptions;
   final bool selectOnSubmit;
-  final bool selectOnSubmitIfNotEmpty;
+  final bool selectOnSubmitIfEmpty;
   final Offset optionsOffset;
   final AutocompleteOptionToString<T> displayStringForOption;
   final FocusNode? focusNode;
@@ -68,6 +70,7 @@ class SmartAutocomplete<T extends Object> extends StatelessWidget {
     return SmartRawAutocomplete<T>(
       onSelected: onSelected,
       optionsBuilder: (textEditingValue) {
+        final options = this.options();
         final filter = optionFilter ?? _optionFilter;
         return textEditingValue.text.isEmpty
             ? options
@@ -79,7 +82,7 @@ class SmartAutocomplete<T extends Object> extends StatelessWidget {
       clearOnSelection: clearOnSelection,
       alwaysShowOptions: alwaysShowOptions,
       selectOnSubmit: selectOnSubmit,
-      selectOnSubmitIfNotEmpty: selectOnSubmitIfNotEmpty,
+      selectOnSubmitIfEmpty: selectOnSubmitIfEmpty,
       optionsOffset: optionsOffset,
       displayStringForOption: displayStringForOption,
       focusNode: focusNode,
@@ -184,7 +187,7 @@ class SmartRawAutocomplete<T extends Object> extends StatefulWidget {
     this.clearOnUnfocus = false,
     this.clearOnSelection = false,
     this.selectOnSubmit = true,
-    this.selectOnSubmitIfNotEmpty = true,
+    this.selectOnSubmitIfEmpty = true,
     this.optionsOffset = const SmartOffset.only(dy: 8.0),
   })  : assert(displayStringForOption != null),
         assert(
@@ -298,7 +301,7 @@ class SmartRawAutocomplete<T extends Object> extends StatefulWidget {
   final bool clearOnSelection;
   final bool alwaysShowOptions;
   final bool selectOnSubmit;
-  final bool selectOnSubmitIfNotEmpty;
+  final bool selectOnSubmitIfEmpty;
   final Offset optionsOffset;
 
   /// Calls [AutocompleteFieldViewBuilder]'s onFieldSubmitted callback for the
@@ -413,8 +416,10 @@ class _SmartRawAutocompleteState<T extends Object>
       return;
     }
     if (widget.selectOnSubmit) {
-      if (widget.selectOnSubmitIfNotEmpty &&
-          _textEditingController.text.isEmpty) return;
+      if (!widget.selectOnSubmitIfEmpty &&
+          _textEditingController.text.isEmpty) {
+        return;
+      }
       _select(_options.elementAt(_highlightedOptionIndex.value));
     }
   }

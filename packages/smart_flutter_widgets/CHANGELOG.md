@@ -1,6 +1,10 @@
+## [0.1.1+2]
+
+* Bug fixes in ```SmartAutocomplete```
+
 ## [0.1.1+1]
 
-* Added more features in ```AutoComplete```
+* Added more features in ```SmartAutocomplete```
 
 ## [0.1.1]
 
