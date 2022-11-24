@@ -1,3 +1,7 @@
+## [0.0.5]
+
+* added more collection utils
+
 ## [0.0.4]
 
 * collection package dependency fixed.

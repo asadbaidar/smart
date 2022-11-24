@@ -1,3 +1,7 @@
+## [0.1.1+1]
+
+* Added more features in ```AutoComplete```
+
 ## [0.1.1]
 
 * Bug fixes in ```SmartRowTile```

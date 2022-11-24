@@ -61,7 +61,7 @@ extension IterableOperations<E> on Iterable<E> {
   Iterable<E> exclude(bool Function(E element) where) =>
       expand((e) => where(e) ? [] : [e]);
 
-  Iterable<E> get notEmpty => exclude((e) => e.toString().isEmpty);
+  Iterable<E> get emptyExcluded => exclude((e) => e.toString().isEmpty);
 }
 
 extension EnumByNameFromIterable<E extends Enum> on Iterable<E> {
@@ -78,4 +78,20 @@ extension EnumByNameFromIterable<E extends Enum> on Iterable<E> {
     }
     return null;
   }
+}
+
+extension IterableNotEmpty<E> on Iterable<E> {
+  Iterable<E>? get notEmpty => isNotEmpty ? this : null;
+}
+
+extension SortEnumList<T extends Enum> on List<T> {
+  void sortByName() => sort((a, b) => a.name.compareTo(b.name));
+
+  void sortByIndex() => sort((a, b) => a.index.compareTo(b.index));
+}
+
+extension SortEnumIterable<T extends Enum> on Iterable<T> {
+  List<T> sortedByName() => sorted((a, b) => a.name.compareTo(b.name));
+
+  List<T> sortedByIndex() => sorted((a, b) => a.index.compareTo(b.index));
 }

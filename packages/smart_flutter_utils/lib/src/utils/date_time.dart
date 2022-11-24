@@ -101,6 +101,15 @@ extension DateTimeUtils on DateTime {
   bool operator <(DateTime other) => other.isAfter(this);
 }
 
+extension TimeOfDayToDateTime on TimeOfDay {
+  DateTime toDateTime() => SmartDate.from(
+        timeOfDay: this,
+        second: 0,
+        millisecond: 0,
+        microsecond: 0,
+      );
+}
+
 extension DateTimeFormat on DateTime {
   String get formatY => SmartDateFormat.Y.format(this);
 

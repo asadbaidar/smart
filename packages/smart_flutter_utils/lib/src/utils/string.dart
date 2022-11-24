@@ -219,7 +219,11 @@ extension StringConversions on String {
 
   int toInt() => int.tryParse(this) ?? 0;
 
+  int? toIntOrNull() => int.tryParse(this);
+
   double toDouble() => double.tryParse(this) ?? 0.0;
+
+  double? toDoubleOrNull() => double.tryParse(this);
 
   Uri? get uri => Uri.tryParse(this);
 
