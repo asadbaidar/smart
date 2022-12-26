@@ -1,25 +1,43 @@
 part of 'theme.dart';
 
 extension PlatformContext on BuildContext {
-  ThemeData get theme => Theme.of(this);
-
   TargetPlatform get platform => theme.platform;
 
-  bool get isIOS => platform == TargetPlatform.iOS;
+  bool get isIOS => platform.isIOS;
 
-  bool get isAndroid => platform == TargetPlatform.android;
+  bool get isAndroid => platform.isAndroid;
+
+  bool get isIOSWeb => platform.isIOSWeb;
+
+  bool get isAndroidWeb => platform.isAndroidWeb;
+
+  bool get isLinux => platform.isLinux;
+
+  bool get isMacOS => platform.isMacOS;
+
+  bool get isWindows => platform.isWindows;
+
+  bool get isFuchsia => platform.isFuchsia;
+
+  bool get isWeb => platform.isWeb;
+}
+
+extension TargetPlatformX on TargetPlatform {
+  bool get isIOS => this == TargetPlatform.iOS;
+
+  bool get isAndroid => this == TargetPlatform.android;
 
   bool get isIOSWeb => isWeb && isIOS;
 
   bool get isAndroidWeb => isWeb && isAndroid;
 
-  bool get isLinux => platform == TargetPlatform.linux;
+  bool get isLinux => this == TargetPlatform.linux;
 
-  bool get isMacOS => platform == TargetPlatform.macOS;
+  bool get isMacOS => this == TargetPlatform.macOS;
 
-  bool get isWindows => platform == TargetPlatform.windows;
+  bool get isWindows => this == TargetPlatform.windows;
 
-  bool get isFuchsia => platform == TargetPlatform.fuchsia;
+  bool get isFuchsia => this == TargetPlatform.fuchsia;
 
   bool get isWeb => kIsWeb;
 }

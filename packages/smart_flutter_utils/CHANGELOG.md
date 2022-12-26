@@ -1,3 +1,7 @@
+## [0.0.6]
+
+* location utils fixes
+
 ## [0.0.5]
 
 * added more collection utils

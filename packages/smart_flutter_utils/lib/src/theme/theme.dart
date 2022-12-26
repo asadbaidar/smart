@@ -18,6 +18,7 @@ part 'material_state.dart';
 part 'text.dart';
 
 extension ThemeContext on BuildContext {
+  ThemeData get theme => Theme.of(this);
   /// A set of thirteen colors that can be used to configure the
   /// color properties of most components.
   ColorScheme get colorScheme => theme.colorScheme;

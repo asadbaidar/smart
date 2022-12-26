@@ -13,14 +13,14 @@ enum MapTravelMode {
 
 enum MapPreference { google, apple, waze }
 
-class MapNavigation {
+class MapNavigation extends Equatable {
   final MapLocation destination;
   final MapLocation? origin;
   final TargetPlatform? platform;
   final MapTravelMode travelMode;
   final MapPreference preference;
 
-  MapNavigation({
+  const MapNavigation({
     required this.destination,
     this.origin,
     this.platform,
@@ -79,7 +79,7 @@ class MapNavigation {
       case MapPreference.apple:
         return destination.hasAddress ? appleUrl : googleUrl;
       case MapPreference.waze:
-        return destination.hasLatLng ? wazeUrl : googleUrl;
+        return destination.isNotEmpty ? wazeUrl : googleUrl;
     }
   }
 
@@ -118,24 +118,54 @@ class MapNavigation {
     if (!success) throw Exception('Failed to launch map');
     return success;
   }
+  
+  @override
+  List<Object?> get props => [
+        destination,
+        origin,
+        platform,
+        travelMode,
+        preference,
+      ];
 }
 
-class MapLocation {
+class MapLocation extends Equatable {
   final double? latitude;
   final double? longitude;
   final String? address;
 
-  MapLocation({
+  const MapLocation({
     this.latitude,
     this.longitude,
     this.address,
   });
 
-  bool get hasLatLng => latitude != null && longitude != null;
+  bool get isEmpty => latitude == null || longitude == null;
+  
+  bool get isNotEmpty => !isEmpty;
 
   bool get hasAddress => address != null;
 
-  String? get latLng => hasLatLng ? '$latitude,$longitude' : null;
+  String? get latLng => isNotEmpty ? '$latitude,$longitude' : null;
 
   String? get latLngOrAddress => latLng ?? address;
+
+  MapLocation copyWith({
+    double? latitude,
+    double? longitude,
+    String? address,
+  }) {
+    return MapLocation(
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
+      address: address ?? this.address,
+    );
+  }
+
+  @override
+  List<Object?> get props => [
+        latitude,
+        longitude,
+        address,
+      ];
 }
