@@ -1,3 +1,7 @@
+## [0.0.8]
+
+* `PageInfo` bug fixes.
+
 ## [0.0.7]
 
 * Added `PageInfo.start` parameter.

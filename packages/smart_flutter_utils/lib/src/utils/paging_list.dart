@@ -26,12 +26,7 @@ class PagingList<E> extends DelegatingList<E> {
   PagingList<E> mergeWith(PagingList<E> other) {
     return PagingList<E>(
       items: [...items, ...other.items],
-      page: PageInfo(
-        start: other.page.start,
-        current: other.page.current,
-        size: other.page.size,
-        totalItems: other.page.totalItems,
-      ),
+      page: other.page.copyWith(),
     );
   }
 
