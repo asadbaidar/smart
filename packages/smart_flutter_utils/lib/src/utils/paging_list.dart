@@ -27,6 +27,7 @@ class PagingList<E> extends DelegatingList<E> {
     return PagingList<E>(
       items: [...items, ...other.items],
       page: PageInfo(
+        start: other.page.start,
         current: other.page.current,
         size: other.page.size,
         totalItems: other.page.totalItems,
@@ -49,21 +50,25 @@ class PagingList<E> extends DelegatingList<E> {
 
 class PageInfo extends Equatable {
   const PageInfo({
+    this.start = 0,
     this.current = 0,
     this.size = 10,
     this.totalItems = 0,
   });
 
+  final int start;
   final int current;
   final int size;
   final int totalItems;
 
   PageInfo copyWith({
+    int? start,
     int? current,
     int? size,
     int? totalItems,
   }) {
     return PageInfo(
+      start: start ?? this.start,
       current: current ?? this.current,
       size: size ?? this.size,
       totalItems: totalItems ?? this.totalItems,
@@ -72,10 +77,10 @@ class PageInfo extends Equatable {
 
   int get totalPages => (totalItems / size).ceil();
 
-  bool get hasMore => current < totalPages - 1;
+  bool get hasMore => current < totalPages + (start - 1);
 
   int get next => hasMore ? current + 1 : current;
 
   @override
-  List<Object?> get props => [current, size, totalItems];
+  List<Object?> get props => [start, current, size, totalItems];
 }

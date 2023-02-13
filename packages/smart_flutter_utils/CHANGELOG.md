@@ -1,3 +1,7 @@
+## [0.0.7]
+
+* Added `PageInfo.start` parameter.
+
 ## [0.0.6]
 
 * location utils fixes
