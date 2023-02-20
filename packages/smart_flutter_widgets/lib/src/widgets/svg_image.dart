@@ -1,5 +1,6 @@
 part of 'widgets.dart';
 
+/// Base SVG provider
 abstract class SmartSvgProvider {
   SmartSvgProvider({
     this.assetName,
@@ -12,6 +13,7 @@ abstract class SmartSvgProvider {
   final String? package;
 }
 
+/// Asset SVG provider
 class SmartSvgAsset extends SmartSvgProvider {
   SmartSvgAsset(
     String assetName, {
@@ -24,8 +26,9 @@ class SmartSvgAsset extends SmartSvgProvider {
         );
 }
 
+/// A widget that will parse SVG data for rendering on screen.
 class SmartSvgImage extends StatelessWidget {
-  const SmartSvgImage(
+  SmartSvgImage(
     this.svgProvider, {
     this.matchTextDirection = false,
     this.width,
@@ -34,15 +37,14 @@ class SmartSvgImage extends StatelessWidget {
     this.alignment = Alignment.center,
     this.allowDrawingOutsideViewBox = false,
     this.placeholderBuilder,
-    this.color,
-    this.colorBlendMode = BlendMode.srcIn,
     this.semanticsLabel,
     this.excludeFromSemantics = false,
-    this.clipBehavior = Clip.hardEdge,
-    this.cacheColorFilter = false,
-    this.theme,
-    Key? key,
-  }) : super(key: key);
+    this.theme = const SvgTheme(),
+    Color? color,
+    BlendMode? colorBlendMode,
+    ColorFilter? colorFilter,
+    super.key,
+  }) : colorFilter = colorFilter ?? _getColorFilter(color, colorBlendMode);
 
   SmartSvgImage.asset(
     String assetName, {
@@ -55,20 +57,19 @@ class SmartSvgImage extends StatelessWidget {
     this.alignment = Alignment.center,
     this.allowDrawingOutsideViewBox = false,
     this.placeholderBuilder,
-    this.color,
-    this.colorBlendMode = BlendMode.srcIn,
     this.semanticsLabel,
     this.excludeFromSemantics = false,
-    this.clipBehavior = Clip.hardEdge,
-    this.cacheColorFilter = false,
-    this.theme,
-    Key? key,
+    this.theme = const SvgTheme(),
+    Color? color,
+    BlendMode? colorBlendMode,
+    ColorFilter? colorFilter,
+    super.key,
   })  : svgProvider = SmartSvgAsset(
           assetName,
           bundle: bundle,
           package: package,
         ),
-        super(key: key);
+        colorFilter = colorFilter ?? _getColorFilter(color, colorBlendMode);
 
   final SmartSvgProvider svgProvider;
   final bool matchTextDirection;
@@ -78,13 +79,18 @@ class SmartSvgImage extends StatelessWidget {
   final AlignmentGeometry alignment;
   final bool allowDrawingOutsideViewBox;
   final WidgetBuilder? placeholderBuilder;
-  final Color? color;
-  final BlendMode colorBlendMode;
   final String? semanticsLabel;
   final bool excludeFromSemantics;
-  final Clip clipBehavior;
-  final bool cacheColorFilter;
-  final SvgTheme? theme;
+  final SvgTheme theme;
+  final ColorFilter? colorFilter;
+
+  static ColorFilter? _getColorFilter(
+    Color? color,
+    BlendMode? colorBlendMode,
+  ) =>
+      color == null
+          ? null
+          : ColorFilter.mode(color, colorBlendMode ?? BlendMode.srcIn);
 
   @override
   Widget build(BuildContext context) => svgProvider is SmartSvgAsset
@@ -99,13 +105,10 @@ class SmartSvgImage extends StatelessWidget {
           alignment: alignment,
           allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
           placeholderBuilder: placeholderBuilder,
-          color: color,
-          colorBlendMode: colorBlendMode,
           semanticsLabel: semanticsLabel,
           excludeFromSemantics: excludeFromSemantics,
-          clipBehavior: clipBehavior,
-          cacheColorFilter: cacheColorFilter,
           theme: theme,
+          colorFilter: colorFilter,
         )
       : Container();
 }

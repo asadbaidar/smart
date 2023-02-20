@@ -7,6 +7,7 @@ typedef SmartExpansionPanelBuilder<PanelItem, ListItem>
   PanelItem? data,
 );
 
+/// A list view that allows for expansion of a single or multiple panels.
 class SmartExpansionListView<PanelItem, ListItem> extends StatefulWidget {
   const SmartExpansionListView({
     super.key,
@@ -163,6 +164,7 @@ typedef SmartPageFailureBuilder = Widget Function(
 typedef SmartPageButtonBuilder = Widget Function(
     BuildContext context, VoidCallback load);
 
+/// An expansion panel that can be either expanded or collapsed.
 class SmartExpansionPanel<T> {
   const SmartExpansionPanel({
     required this.expansionBuilder,
@@ -330,6 +332,8 @@ class SmartExpansionPanel<T> {
   }
 }
 
+/// A [SmartExpansionPanel] that uses an [ApiState] for [PagingList] to build
+///  its content.
 class SmartExpansionPagingApiStatePanel<T> extends SmartExpansionPanel<T> {
   SmartExpansionPagingApiStatePanel({
     required ApiState<PagingList<T>> apiState,

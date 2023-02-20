@@ -41,15 +41,15 @@ extension AppBarThemeContext on BuildContext {
   Color get appBarForegroundColor =>
       appBarTheme.foregroundColor ?? primaryColor;
 
-  /// [AppBar.titleTextStyle]. Defaults to [primaryHeadline6].
+  /// [AppBar.titleTextStyle]. Defaults to [primaryTitleLarge].
   TextStyle? get titleTextStyle =>
       appBarTheme.titleTextStyle ??
-      primaryHeadline6?.copyWith(color: Colors.black);
+      primaryTitleLarge?.copyWith(color: Colors.black);
 
-  /// [AppBar.toolbarTextStyle]. Defaults to [primaryBodyText1].
+  /// [AppBar.toolbarTextStyle]. Defaults to [primaryBodyLarge].
   TextStyle? get toolbarTextStyle =>
       appBarTheme.toolbarTextStyle ??
-      primaryBodyText1?.copyWith(color: primaryColor);
+      primaryBodyLarge?.copyWith(color: primaryColor);
 
   /// An icon theme that contrasts with the primary color.
   IconThemeData get primaryIconTheme => theme.primaryIconTheme;

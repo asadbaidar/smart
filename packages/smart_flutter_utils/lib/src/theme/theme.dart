@@ -19,6 +19,7 @@ part 'text.dart';
 
 extension ThemeContext on BuildContext {
   ThemeData get theme => Theme.of(this);
+
   /// A set of thirteen colors that can be used to configure the
   /// color properties of most components.
   ColorScheme get colorScheme => theme.colorScheme;
@@ -45,9 +46,8 @@ extension ThemeContext on BuildContext {
   /// The default color of [MaterialType.canvas] [Material].
   Color get canvasColor => theme.canvasColor;
 
-  /// A color that contrasts with the [primaryColor], e.g. used as the
-  /// remaining part of a progress bar.
-  Color get backgroundColor => theme.backgroundColor;
+  /// A color that typically appears behind scrollable content.
+  Color get backgroundColor => colorScheme.background;
 
   /// The default color of the [Material] that underlies the [Scaffold]. The
   /// background color for a typical material app or a page within the app.

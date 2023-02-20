@@ -9,6 +9,8 @@ typedef SmartRefreshCallback = Future<void> Function();
 /// Observes the current state of the refresh control.
 typedef SmartRefreshStateCallback = void Function(RefreshIndicatorMode state);
 
+/// A widget implementing the Material Design pull to refresh content
+/// interaction.
 class SmartRefresh extends StatefulWidget {
   const SmartRefresh({
     required this.child,
@@ -66,6 +68,7 @@ class SmartRefreshState extends State<SmartRefresh> {
       _refresh.currentState?.show(atTop: atTop);
 }
 
+/// A widget implementing the iOS-style pull to refresh content control.
 class SmartCupertinoRefresh extends StatelessWidget {
   const SmartCupertinoRefresh({
     this.color,

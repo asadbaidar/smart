@@ -9,9 +9,11 @@ const _kHorizontalPadding = 16.0;
 const kTabBarBottomConstant = 30.0;
 const kSearchBarBottomConstant = 36.0;
 
+/// A widget wrapper that combines common [AppBar] configurations into one.
 class SmartAppBar {
   SmartAppBar._();
 
+  /// Creates a non-scrollable [AppBar].
   static SmartSimpleAppBar simple({
     Widget? leading,
     Widget? bottom,
@@ -100,6 +102,7 @@ class SmartAppBar {
     );
   }
 
+  /// Creates a scrollable [SliverAppBar].
   static SmartSliverAppBar sliver({
     Widget? leading,
     Widget? bottom, // CupertinoSearchTextField()
@@ -520,6 +523,7 @@ class SmartAppBar {
     ];
   }
 
+  /// Creates a non-scrollable [AppBar] for modal bottom sheets.
   static SmartSimpleAppBar modal({
     Widget? leading,
     Widget? bottom,
@@ -570,6 +574,7 @@ class SmartAppBar {
     );
   }
 
+  /// Creates a scrollable [SliverAppBar] for modal bottom sheets.
   static SmartSliverAppBar sliverModal({
     Widget? leading,
     Widget? bottom,
@@ -679,6 +684,7 @@ class SmartAppBar {
   }
 }
 
+/// A back button with flexible styling.
 class SmartBackButton extends StatelessWidget {
   const SmartBackButton({
     this.text,

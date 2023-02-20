@@ -1,3 +1,11 @@
+## [0.1.2]
+
+* Flutter 3.7.0 fixes
+
+## [0.1.1+3]
+
+* Flutter 3.7.0 support
+
 ## [0.1.1+2]
 
 * Bug fixes in ```SmartAutocomplete```

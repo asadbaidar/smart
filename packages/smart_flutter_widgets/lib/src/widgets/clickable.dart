@@ -1,5 +1,7 @@
 part of 'widgets.dart';
 
+/// A widget that combines [CupertinoButton] and [GestureDetector] to provide
+/// a clickable widget with a custom cursor.
 class Clickable extends MouseRegion {
   Clickable({
     bool enabled = true,
@@ -27,6 +29,7 @@ class Clickable extends MouseRegion {
                 ),
         );
 
+  /// Creates a [Clickable] with a [CupertinoButton].
   Clickable.cupertino({
     bool enabled = true,
     double pressedOpacity = 0.4,

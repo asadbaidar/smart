@@ -956,7 +956,7 @@ class SmartRowTile extends StatelessWidget {
                 ? vTintColor
                 : context.iconColor ?? context.secondaryColor);
     final vTextColor = textColor ?? (vTintAble ? vTintColor : textStyle?.color);
-    final vTextStyle = (textStyle ?? context.caption)
+    final vTextStyle = (textStyle ?? context.bodySmall)
         ?.copyWith(fontWeight: fontWeight, color: vTextColor);
     final vConstrained = alignment == CrossAxisAlignment.start ||
         alignment == CrossAxisAlignment.end;
@@ -1118,7 +1118,7 @@ class SmartRowTile extends StatelessWidget {
                             ),
                             child: trailingText?.notEmpty?.mapIt((it) => Text(
                                       it,
-                                      style: trailingStyle ?? context.caption,
+                                      style: trailingStyle ?? context.bodySmall,
                                     )) ??
                                 vTrailing ??
                                 0.space,

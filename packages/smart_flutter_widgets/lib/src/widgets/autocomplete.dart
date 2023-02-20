@@ -531,7 +531,7 @@ class _SmartRawAutocompleteState<T extends Object>
           );
         },
       );
-      Overlay.of(context, rootOverlay: true)!.insert(newFloatingOptions);
+      Overlay.of(context, rootOverlay: true).insert(newFloatingOptions);
       _floatingOptions = newFloatingOptions;
     } else {
       _floatingOptions = null;
