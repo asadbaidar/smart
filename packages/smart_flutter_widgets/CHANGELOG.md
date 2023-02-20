@@ -1,3 +1,7 @@
+## [0.1.3]
+
+* Updated to `smart_flutter_utils: 0.1.0`
+
 ## [0.1.2]
 
 * Flutter 3.7.0 fixes
