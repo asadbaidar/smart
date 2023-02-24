@@ -1,3 +1,11 @@
+## [0.1.0]
+
+* Flutter 3.7.0 fixes
+
+## [0.0.9]
+
+* Flutter 3.7.0 support
+
 ## [0.0.8]
 
 * `PageInfo` bug fixes.

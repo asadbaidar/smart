@@ -118,7 +118,7 @@ class MapNavigation extends Equatable {
     if (!success) throw Exception('Failed to launch map');
     return success;
   }
-  
+
   @override
   List<Object?> get props => [
         destination,
@@ -141,7 +141,7 @@ class MapLocation extends Equatable {
   });
 
   bool get isEmpty => latitude == null || longitude == null;
-  
+
   bool get isNotEmpty => !isEmpty;
 
   bool get hasAddress => address != null;

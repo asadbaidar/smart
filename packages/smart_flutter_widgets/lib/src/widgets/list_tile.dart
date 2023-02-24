@@ -34,6 +34,7 @@ const kExtendedPaddingV = EdgeInsets.symmetric(vertical: kExtendedPaddingY);
 const kTileConstraints = BoxConstraints(minHeight: 31);
 const kTileFontSize = 14.0;
 
+/// A list tile with various styles and options.
 class SmartListTile extends StatelessWidget {
   /// Tile without fixed styles for easy customization.
   const SmartListTile.custom({
@@ -2062,10 +2063,10 @@ class SmartListTile extends StatelessWidget {
     final vTrailingPadding =
         trailingPadding?.mapIt((it) => EdgeInsetsDirectional.only(start: it)) ??
             kRowTileTrailingPadding;
-    final vTitleStyle = (titleStyle ?? context.bodyText2);
+    final vTitleStyle = (titleStyle ?? context.bodyMedium);
     final vTitleColor =
         titleColor ?? (vTintAble ? tintColor : vTitleStyle?.color);
-    final vSubtitleStyle = subtitleStyle ?? context.bodyText2;
+    final vSubtitleStyle = subtitleStyle ?? context.bodyMedium;
     final vSubtitleColor =
         subtitleColor ?? (vTintAble ? tintColor : vSubtitleStyle?.color);
     final vStartPadding =
@@ -2152,8 +2153,8 @@ class SmartListTile extends StatelessWidget {
                                             )) ??
                                         Text(
                                           trailingTop!,
-                                          style:
-                                              trailingStyle ?? context.caption,
+                                          style: trailingStyle ??
+                                              context.bodySmall,
                                         ),
                                   if (isTrailingTop && isTrailingBottom)
                                     const Space.y(1.5),
@@ -2168,8 +2169,8 @@ class SmartListTile extends StatelessWidget {
                                                 )) ??
                                         Text(
                                           trailingBottom!,
-                                          style:
-                                              trailingStyle ?? context.caption,
+                                          style: trailingStyle ??
+                                              context.bodySmall,
                                         ),
                                 ],
                               ),
@@ -2286,7 +2287,7 @@ class SimpleListTile extends StatelessWidget {
       title: title == null
           ? null
           : DefaultTextStyle(
-              style: context.bodyText1 ?? const TextStyle(),
+              style: context.bodyLarge ?? const TextStyle(),
               child: title!,
             ),
       dense: true,

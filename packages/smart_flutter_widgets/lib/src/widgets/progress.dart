@@ -1,5 +1,6 @@
 part of 'widgets.dart';
 
+/// Linear progress indicator with cross fade animation.
 class SmartLinearProgress extends StatelessWidget {
   const SmartLinearProgress({
     this.visible = true,
@@ -40,6 +41,7 @@ class SmartLinearProgress extends StatelessWidget {
       );
 }
 
+/// Cross fade animation between two widgets.
 class SmartCrossFade extends StatelessWidget {
   const SmartCrossFade({
     super.key,
@@ -82,6 +84,7 @@ class SmartCrossFade extends StatelessWidget {
   Widget get _secondChild => secondChild ?? const SizedBox.shrink();
 }
 
+/// Decorated progress indicator.
 class SmartProgressBar extends StatelessWidget {
   const SmartProgressBar({
     super.key,

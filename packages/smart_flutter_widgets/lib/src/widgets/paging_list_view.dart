@@ -6,7 +6,10 @@ const kSmartPagingControlsConstraints = BoxConstraints(minHeight: 60);
 
 typedef SmartPagingCallback = void Function(PageInfo page);
 
+/// A widget that displays a list of items by pagination on user scrolling
+/// through a callback to load the next page.
 class SmartPagingListView<T> extends StatelessWidget {
+  /// Creates a sliver list with pagination.
   const SmartPagingListView.sliver({
     super.key,
     this.pageInfo,
@@ -51,6 +54,7 @@ class SmartPagingListView<T> extends StatelessWidget {
         sectionBuilder = null,
         padding = null;
 
+  /// Creates a simple list with pagination.
   const SmartPagingListView.builder({
     super.key,
     this.pageInfo,
@@ -268,6 +272,7 @@ class SmartPagingListView<T> extends StatelessWidget {
               ));
 }
 
+/// A [SmartListView] that uses a [ApiState] to load data for [PagingList].
 class SmartApiStatePagingListView<T> extends StatelessWidget {
   const SmartApiStatePagingListView.sliver({
     super.key,
@@ -462,6 +467,7 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
         );
 }
 
+/// A button that can be used in [SmartPagingListView] to show more items.
 class SmartPagingButton extends StatelessWidget {
   const SmartPagingButton({
     super.key,
@@ -496,7 +502,7 @@ class SmartPagingButton extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
               text ?? 'Show more',
-              style: (style ?? context.bodyText1)?.copyWith(
+              style: (style ?? context.bodyLarge)?.copyWith(
                 color: color ?? (primary ? context.primaryColor : null),
               ),
               textAlign: TextAlign.center,

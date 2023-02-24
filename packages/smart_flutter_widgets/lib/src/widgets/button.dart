@@ -1,5 +1,7 @@
 part of 'widgets.dart';
 
+/// An animated button that mimics the behavior of expanding and collapsing
+/// with easy to customize animations.
 class SmartDetailButton extends StatelessWidget {
   const SmartDetailButton({
     this.icon,

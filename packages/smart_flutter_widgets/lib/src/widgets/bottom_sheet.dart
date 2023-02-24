@@ -12,7 +12,12 @@ const ShapeBorder kSmartBottomSheetRoundedshape = RoundedRectangleBorder(
 
 typedef SmartCupertinoScafold = bottom_sheet.CupertinoScaffold;
 
+/// A bottom sheet that can be expanded, collapsed, and snapped
+/// to a specific size.
+///
+/// It supports both scrollable and non-scrollable content with builders.
 class SmartBottomSheet<T> extends StatelessWidget {
+  /// Creates a bottom sheet with a custom child widget.
   const SmartBottomSheet({
     super.key,
     required Widget this.child,
@@ -30,6 +35,7 @@ class SmartBottomSheet<T> extends StatelessWidget {
     this.backgroundColor,
   }) : builder = null;
 
+  /// Creates a bottom sheet with a scrollable child widget.
   const SmartBottomSheet.scrollable({
     super.key,
     required ScrollableWidgetBuilder this.builder,
@@ -47,6 +53,7 @@ class SmartBottomSheet<T> extends StatelessWidget {
     this.backgroundColor,
   }) : child = null;
 
+  /// Creates a bottom sheet with a list of items.
   SmartBottomSheet.list({
     super.key,
     SmartSliverBuilder? topSliverBuilder,
@@ -127,6 +134,7 @@ class SmartBottomSheet<T> extends StatelessWidget {
               removeTopPadding: true,
             ));
 
+  /// Creates a bottom sheet with a sliver list of items.
   SmartBottomSheet.sliver({
     super.key,
     SmartSliverBuilder? topSliverBuilder,
@@ -253,6 +261,7 @@ class SmartBottomSheet<T> extends StatelessWidget {
   }
 }
 
+/// A handle for the [SmartBottomSheet].
 class SmartBarHandle extends StatelessWidget {
   const SmartBarHandle({
     this.color,
@@ -305,6 +314,7 @@ class SmartBarHandle extends StatelessWidget {
       );
 }
 
+/// Shows a modal Material Design bottom sheet.
 Future<T?> showMaterialModalBottomSheet<T>({
   required BuildContext context,
   required WidgetBuilder builder,
@@ -322,6 +332,7 @@ Future<T?> showMaterialModalBottomSheet<T>({
       backgroundColor: Colors.transparent,
     );
 
+/// Shows a modal Cupertino style bottom sheet.
 Future<T?> showCupertinoModalBottomSheet<T>({
   required BuildContext context,
   required WidgetBuilder builder,
@@ -336,6 +347,7 @@ Future<T?> showCupertinoModalBottomSheet<T>({
       backgroundColor: Colors.transparent,
     );
 
+/// Shows a modal bottom sheet with a bar.
 Future<T?> showBarModalBottomSheet<T>({
   required BuildContext context,
   required WidgetBuilder builder,

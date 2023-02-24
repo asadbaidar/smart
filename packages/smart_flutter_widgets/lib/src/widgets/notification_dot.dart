@@ -1,5 +1,7 @@
 part of 'widgets.dart';
 
+/// A widget that shows a dot on top of another widget. It can be used to show
+/// notifications.
 class SmartNotificationDot extends StatelessWidget {
   const SmartNotificationDot({
     super.key,
@@ -40,7 +42,7 @@ class SmartNotificationDot extends StatelessWidget {
                 width: size,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: color ?? context.theme.errorColor,
+                  color: color ?? context.colorScheme.error,
                 ),
               ),
             ),
