@@ -1,4 +1,3 @@
-
 /// Configure Http properties to be used later on
 /// thoroughout Http calls
 ///

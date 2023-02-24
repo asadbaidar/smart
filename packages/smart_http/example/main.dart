@@ -7,6 +7,6 @@ void main() async {
     baseUrl: 'https://pub.dev',
     path: '/packages/smart_http',
   );
-  
+
   print(result);
 }
