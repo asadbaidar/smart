@@ -18,69 +18,69 @@ void main() {
 
   tearDown(stopServer);
 
-  group('SmartHttp.post() request', () {
+  group('SmartHttp.patch() request', () {
     group('works with', () {
       test('json body', () async {
-        final result = await http.post(
+        final result = await http.patch(
           path: mockTest,
           body: mockBodyJson,
         );
         expect(result, isA<Map<String, dynamic>>());
         expect(result[pathKey], mockTest);
         expect(result[statusCodeKey], 200);
-        expect(result[methodKey], SmartHttpMethod.post());
+        expect(result[methodKey], SmartHttpMethod.patch());
         expect(result[bodyKey], mockBodyJson);
       });
 
       test('list body', () async {
-        final result = await http.post(
+        final result = await http.patch(
           path: mockTest,
           body: mockBodyList,
         );
         expect(result, isA<Map<String, dynamic>>());
         expect(result[pathKey], mockTest);
         expect(result[statusCodeKey], 200);
-        expect(result[methodKey], SmartHttpMethod.post());
+        expect(result[methodKey], SmartHttpMethod.patch());
         expect(result[bodyKey], mockBodyList);
       });
 
       test('string body', () async {
-        final result = await http.post(
+        final result = await http.patch(
           path: mockTest,
           body: mockBodyString,
         );
         expect(result, isA<Map<String, dynamic>>());
         expect(result[pathKey], mockTest);
         expect(result[statusCodeKey], 200);
-        expect(result[methodKey], SmartHttpMethod.post());
+        expect(result[methodKey], SmartHttpMethod.patch());
         expect(result[bodyKey], mockBodyString);
       });
 
       test('no body', () async {
-        final result = await http.post(
+        final result = await http.patch(
           path: mockTest,
         );
         expect(result, isA<Map<String, dynamic>>());
         expect(result[pathKey], mockTest);
         expect(result[statusCodeKey], 200);
-        expect(result[methodKey], SmartHttpMethod.post());
+        expect(result[methodKey], SmartHttpMethod.patch());
         expect(result[bodyKey], null);
       });
 
       test('query parameters', () async {
-        final result = await http.post(
+        final result = await http.patch(
           path: mockTest,
           query: mockQuery,
         );
         expect(result, isA<Map<String, dynamic>>());
         expect(result[pathKey], mockTest);
         expect(result[statusCodeKey], 200);
-        expect(result[methodKey], SmartHttpMethod.post());
+        expect(result[methodKey], SmartHttpMethod.patch());
         expect(result[queryKey], mockQuery);
       });
 
       test('string response', () async {
-        final result = await http.post(
+        final result = await http.patch(
           path: mockSuccess,
         );
         expect(result, isA<String>());
@@ -88,7 +88,7 @@ void main() {
       });
 
       test('list response', () async {
-        final result = await http.post(
+        final result = await http.patch(
           path: mockList,
         );
         expect(result, isA<List>());
@@ -98,7 +98,7 @@ void main() {
 
     group('headers check', () {
       test('passes if default headers are set', () async {
-        final result = await http.post(
+        final result = await http.patch(
           path: mockTest,
         );
         expect(result, isA<Map<String, dynamic>>());
@@ -113,7 +113,7 @@ void main() {
 
       test('passes if default headers are overriden by provided ones',
           () async {
-        final result = await http.post(
+        final result = await http.patch(
           path: mockTest,
           headers: mockHeader,
         );
@@ -139,7 +139,7 @@ void main() {
       test(
           'throws NoDataException if the '
           'http call completes with an error', () async {
-        final result = http.post(
+        final result = http.patch(
           path: mockError,
         );
         expect(result, throwsA(isA<NoDataException>()));
@@ -148,7 +148,7 @@ void main() {
       test(
           'throws BadRequestException if the '
           'http call completes with a 400 error', () async {
-        final result = http.post(
+        final result = http.patch(
           path: mockBadRequest,
         );
         expect(result, throwsA(isA<BadRequestException>()));
@@ -157,7 +157,7 @@ void main() {
       test(
           'throws UnauthorisedException if the '
           'http call completes with a 401 error', () async {
-        final result = http.post(
+        final result = http.patch(
           path: mockUnauthorized401,
         );
         expect(result, throwsA(isA<UnauthorisedException>()));
@@ -166,7 +166,7 @@ void main() {
       test(
           'throws UnauthorisedException if the '
           'http call completes with a 403 error', () async {
-        final result = http.post(
+        final result = http.patch(
           path: mockUnauthorized403,
         );
         expect(result, throwsA(isA<UnauthorisedException>()));
@@ -175,14 +175,14 @@ void main() {
       test(
           'throws NoDataException if the '
           'http call completes with a 404 error', () async {
-        final result = http.post(
+        final result = http.patch(
           path: mockNotFound,
         );
         expect(result, throwsA(isA<NoDataException>()));
       });
 
       test('throws NoDataException if no connection', () async {
-        final result = http.post(
+        final result = http.patch(
           baseUrl: '',
           path: '',
         );
@@ -190,7 +190,7 @@ void main() {
       });
 
       test('throws CancelException if cancelled manually', () async {
-        final result = http.post(
+        final result = http.patch(
           path: mockTest,
         );
         http.cancel();
@@ -201,7 +201,7 @@ void main() {
     group('timeout check', () {
       test('passess if the http call returns before the given timeout time',
           () async {
-        final result = await http.post(
+        final result = await http.patch(
           path: mockTimeout,
           receiveTimeout: const Duration(seconds: 3),
         );
@@ -212,7 +212,7 @@ void main() {
       test(
           'throws TimeoutException if the http '
           'call timesout by the given timeout time', () async {
-        final result = http.post(
+        final result = http.patch(
           path: mockTimeout,
           receiveTimeout: const Duration(seconds: 1),
         );

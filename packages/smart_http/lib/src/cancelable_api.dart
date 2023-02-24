@@ -4,8 +4,8 @@ import 'package:smart_http/smart_http.dart';
 /// A mixin that provides a cancelable http client to cancel all the pending
 /// http requests in the current http client.
 mixin CancelableApiMixin {
-  /// A [HttpApi] instance that is used to make the http requests.
-  HttpApi get http;
+  /// A [SmartHttp] instance that is used to make the http requests.
+  SmartHttp get http;
 
   /// Cancels all the pending http requests in the current http client.
   Future<void> cancel() => http.cancel();

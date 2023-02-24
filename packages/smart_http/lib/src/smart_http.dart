@@ -6,67 +6,98 @@ import 'dart:developer' as developer;
 
 import 'package:uuid/uuid.dart';
 
-typedef HttpFormData = FormData;
-typedef HttpMultipartFile = MultipartFile;
-
 /// FormData builder helps to build `multipart/form-data` requests.
 typedef HttpFormDataBuilder = FormData Function(
   Map<String, dynamic> body,
-  List<HttpMultipartFile>? files,
+  List<MultipartFile>? files,
 );
 
 /// An enum that represents HTTP methods
-enum HttpMethod {
+enum SmartHttpMethod {
+  /// HTTP `DELETE` method.
+  delete,
+
   /// HTTP `GET` method.
   get,
+
+  /// HTTP `PATCH` method.
+  patch,
 
   /// HTTP `POST` method.
   post,
 
   /// HTTP `PUT` method.
   put,
-
-  /// HTTP `DELETE` method.
-  delete,
-
-  /// HTTP `PATCH` method.
-  patch;
+  ;
 
   String call() => name.toUpperCase();
 }
 
-const uuid = Uuid();
+const _uuid = Uuid();
 
 /// General Repository to interact with any REST API
-class HttpApi {
-  HttpApi() : id = uuid.v4();
+class SmartHttp {
+  SmartHttp() : id = _uuid.v4();
 
   /// Unique id for this repository
   final String id;
 
   /// Base url for this repository
-  /// Defaults to [HttpApiConfig.baseUrl]
-  String get baseUrl => HttpApiConfig.baseUrl;
+  /// Defaults to [SmartHttpConfig.baseUrl]
+  String get baseUrl => SmartHttpConfig.baseUrl;
 
   /// Headers for this repository
-  /// Defaults to [HttpApiConfig.headers]
-  Map<String, String>? get headers => HttpApiConfig.headers;
+  /// Defaults to [SmartHttpConfig.headers]
+  Map<String, String>? get headers => SmartHttpConfig.headers;
 
   /// Repository timeout duration for request connection
-  /// Defaults to [HttpApiConfig.connectTimeout]
-  Duration get timeout => HttpApiConfig.connectTimeout;
+  /// Defaults to [SmartHttpConfig.connectTimeout]
+  Duration get timeout => SmartHttpConfig.connectTimeout;
 
   /// Repository timeout duration for uploading data request
-  /// Defaults to [HttpApiConfig.sendTimeout]
-  Duration get sendTimeout => HttpApiConfig.sendTimeout;
+  /// Defaults to [SmartHttpConfig.sendTimeout]
+  Duration get sendTimeout => SmartHttpConfig.sendTimeout;
 
   /// Repository timeout duration for downloading data request
-  /// Defaults to [HttpApiConfig.receiveTimeout]
-  Duration get receiveTimeout => HttpApiConfig.receiveTimeout;
+  /// Defaults to [SmartHttpConfig.receiveTimeout]
+  Duration get receiveTimeout => SmartHttpConfig.receiveTimeout;
 
   /// Enable logs for the api calls in this repository
-  /// Defaults to [HttpApiConfig.enableLogs]
-  bool get enableLogs => HttpApiConfig.enableLogs;
+  /// Defaults to [SmartHttpConfig.enableLogs]
+  bool get enableLogs => SmartHttpConfig.enableLogs;
+
+  /// Used to initiate a HTTP `DELETE` request.
+  ///
+  /// - [path] is end point that will be attached to the [baseUrl].
+  /// - [query] parameters will be attached to [path] with `?`.
+  /// - [body] sets Map, List or any http supported type as body of the request.
+  ///
+  /// [baseUrl] defaults to [SmartHttpConfig.baseUrl] and can be overidden in
+  /// this function or in this repository. Same applies to the [headers],
+  /// [timeout], and [enableLogs] parameters.
+  Future<T> delete<T>({
+    String? baseUrl,
+    required String path,
+    Map<String, dynamic> query = const {},
+    dynamic body,
+    ProgressCallback? onReceiveProgress,
+    Map<String, String>? headers,
+    Duration? timeout,
+    Duration? receiveTimeout,
+    bool? enableLogs,
+  }) =>
+      request<T>(
+        baseUrl: baseUrl,
+        path: path,
+        method: SmartHttpMethod.delete,
+        query: query,
+        body: body,
+        onReceiveProgress: onReceiveProgress,
+        headers: headers,
+        timeout: timeout,
+        receiveTimeout: receiveTimeout,
+        enableLogs: enableLogs,
+      );
 
   /// Used to initiate a HTTP `GET` request.
   ///
@@ -74,7 +105,7 @@ class HttpApi {
   /// - [query] parameters will be attached to [path] with `?`.
   /// - [onReceiveProgress] delievers progress updates for downloading requests.
   ///
-  /// [baseUrl] defaults to [HttpApiConfig.baseUrl] and can be overidden in
+  /// [baseUrl] defaults to [SmartHttpConfig.baseUrl] and can be overidden in
   /// this function or in this repository. Same applies to the [headers],
   /// [timeout], [receiveTimeout], and [enableLogs] parameters
   Future<T> get<T>({
@@ -91,7 +122,7 @@ class HttpApi {
       request<T>(
         baseUrl: baseUrl,
         path: path,
-        method: HttpMethod.get,
+        method: SmartHttpMethod.get,
         query: query,
         onReceiveProgress: onReceiveProgress,
         headers: headers,
@@ -101,15 +132,15 @@ class HttpApi {
         responseType: responseType,
       );
 
-  /// Used to initiate a HTTP `POST` request.
+  /// Used to initiate a HTTP `PATCH` request.
   ///
   /// {@macro request}
-  Future<T> post<T>({
+  Future<T> patch<T>({
     String? baseUrl,
     required String path,
     Map<String, dynamic> query = const {},
     dynamic body,
-    List<HttpFile>? files,
+    List<SmartHttpFile>? files,
     FormData? formData,
     HttpFormDataBuilder? formDataBuilder,
     ProgressCallback? onSendProgress,
@@ -123,7 +154,44 @@ class HttpApi {
       request<T>(
         baseUrl: baseUrl,
         path: path,
-        method: HttpMethod.post,
+        method: SmartHttpMethod.patch,
+        query: query,
+        body: body,
+        files: files,
+        formData: formData,
+        formDataBuilder: formDataBuilder,
+        onSendProgress: onSendProgress,
+        onReceiveProgress: onReceiveProgress,
+        headers: headers,
+        timeout: timeout,
+        sendTimeout: sendTimeout,
+        receiveTimeout: receiveTimeout,
+        enableLogs: enableLogs,
+      );
+
+  /// Used to initiate a HTTP `POST` request.
+  ///
+  /// {@macro request}
+  Future<T> post<T>({
+    String? baseUrl,
+    required String path,
+    Map<String, dynamic> query = const {},
+    dynamic body,
+    List<SmartHttpFile>? files,
+    FormData? formData,
+    HttpFormDataBuilder? formDataBuilder,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+    Map<String, String>? headers,
+    Duration? timeout,
+    Duration? sendTimeout,
+    Duration? receiveTimeout,
+    bool? enableLogs,
+  }) =>
+      request<T>(
+        baseUrl: baseUrl,
+        path: path,
+        method: SmartHttpMethod.post,
         query: query,
         body: body,
         files: files,
@@ -146,7 +214,7 @@ class HttpApi {
     required String path,
     Map<String, dynamic> query = const {},
     dynamic body,
-    List<HttpFile>? files,
+    List<SmartHttpFile>? files,
     FormData? formData,
     HttpFormDataBuilder? formDataBuilder,
     ProgressCallback? onSendProgress,
@@ -160,74 +228,7 @@ class HttpApi {
       request<T>(
         baseUrl: baseUrl,
         path: path,
-        method: HttpMethod.put,
-        query: query,
-        body: body,
-        files: files,
-        formData: formData,
-        formDataBuilder: formDataBuilder,
-        onSendProgress: onSendProgress,
-        onReceiveProgress: onReceiveProgress,
-        headers: headers,
-        timeout: timeout,
-        sendTimeout: sendTimeout,
-        receiveTimeout: receiveTimeout,
-        enableLogs: enableLogs,
-      );
-
-  /// Used to initiate a HTTP `DELETE` request.
-  ///
-  /// - [path] is end point that will be attached to the [baseUrl].
-  /// - [query] parameters will be attached to [path] with `?`.
-  /// - [body] sets Map, List or any http supported type as body of the request.
-  ///
-  /// [baseUrl] defaults to [HttpApiConfig.baseUrl] and can be overidden in
-  /// this function or in this repository. Same applies to the [headers],
-  /// [timeout], and [enableLogs] parameters.
-  Future<T> delete<T>({
-    String? baseUrl,
-    required String path,
-    Map<String, dynamic> query = const {},
-    dynamic body,
-    ProgressCallback? onReceiveProgress,
-    Map<String, String>? headers,
-    Duration? timeout,
-    Duration? receiveTimeout,
-    bool? enableLogs,
-  }) =>
-      request<T>(
-        baseUrl: baseUrl,
-        path: path,
-        method: HttpMethod.delete,
-        query: query,
-        body: body,
-        onReceiveProgress: onReceiveProgress,
-        headers: headers,
-        timeout: timeout,
-        receiveTimeout: receiveTimeout,
-        enableLogs: enableLogs,
-      );
-
-  Future<T> patch<T>({
-    String? baseUrl,
-    required String path,
-    Map<String, dynamic> query = const {},
-    dynamic body,
-    List<HttpFile>? files,
-    FormData? formData,
-    HttpFormDataBuilder? formDataBuilder,
-    ProgressCallback? onSendProgress,
-    ProgressCallback? onReceiveProgress,
-    Map<String, String>? headers,
-    Duration? timeout,
-    Duration? sendTimeout,
-    Duration? receiveTimeout,
-    bool? enableLogs,
-  }) =>
-      request<T>(
-        baseUrl: baseUrl,
-        path: path,
-        method: HttpMethod.patch,
+        method: SmartHttpMethod.put,
         query: query,
         body: body,
         files: files,
@@ -255,17 +256,17 @@ class HttpApi {
   ///   and recieve in [formDataBuilder] for `multipart/form-data` requests.
   /// - [formData] custom form data for `multipart/form-data` requests.
   ///
-  /// [baseUrl] defaults to [HttpApiConfig.baseUrl] and can be overidden in
+  /// [baseUrl] defaults to [SmartHttpConfig.baseUrl] and can be overidden in
   /// this function or in this repository. Same applies to the [headers],
   /// [timeout], [sendTimeout], [receiveTimeout], and [enableLogs] parameters.
   /// {@endtemplate}
   Future<T> request<T>({
     String? baseUrl,
     required String path,
-    required HttpMethod method,
+    required SmartHttpMethod method,
     Map<String, dynamic> query = const {},
     dynamic body,
-    List<HttpFile>? files,
+    List<SmartHttpFile>? files,
     FormData? formData,
     HttpFormDataBuilder? formDataBuilder,
     ProgressCallback? onSendProgress,
@@ -305,11 +306,11 @@ class HttpApi {
       );
       return await httpRequestFromParcel<T>(parcel);
     } catch (e) {
-      if (e is HttpException) {
+      if (e is SmartHttpException) {
         rethrow;
       } else {
         log(json, path, enableLogs);
-        throw HttpException(e.toString());
+        throw SmartHttpException(e.toString());
       }
     }
   }
@@ -325,7 +326,7 @@ class HttpApi {
     try {
       rawResponse = jsonDecode(json);
     } catch (e) {
-      throw HttpException(e.toString());
+      throw SmartHttpException(e.toString());
     } finally {
       log(rawResponse, 'local.json.raw', enableLogs);
     }
@@ -370,10 +371,10 @@ class HttpApi {
     required String id,
     required String baseUrl,
     required String path,
-    required HttpMethod method,
+    required SmartHttpMethod method,
     Map<String, dynamic> query = const {},
     dynamic body,
-    List<HttpFile>? files,
+    List<SmartHttpFile>? files,
     FormData? formData,
     HttpFormDataBuilder? formDataBuilder,
     ProgressCallback? onSendProgress,
@@ -397,9 +398,6 @@ class HttpApi {
         error: enableLogs,
         logPrint: (object) => _log(object, path, enableLogs),
       ));
-      if (HttpApiConfig.alice != null) {
-        dio.interceptors.add(HttpApiConfig.alice!.getDioInterceptor());
-      }
       final isMultipart = formData != null ||
           files?.isNotEmpty == true && formDataBuilder != null;
       dio.options
@@ -429,7 +427,7 @@ class HttpApi {
         queryParameters: query,
         data: isMultipart
             ? formData ??
-                formDataBuilder!(body, await HttpFile.toMultipart(files!))
+                formDataBuilder!(body, await SmartHttpFile.toMultipart(files!))
             : body,
         options: Options(
           method: method(),
@@ -460,7 +458,7 @@ class HttpApi {
       }
     } catch (e) {
       _log(e, path, enableLogs);
-      throw HttpException(e.toString());
+      throw SmartHttpException(e.toString());
     } finally {
       dio?.close();
       _cancelTokens.remove(id);
@@ -477,7 +475,7 @@ class HttpApi {
   }
 
   /// HTTP error codes - invalid responses
-  static Future<HttpException> _invalidResponse(DioError e) async {
+  static Future<SmartHttpException> _invalidResponse(DioError e) async {
     final response = e.response;
     final error = e.error;
     final data = response != null ? _decodeData(response.data) : null;
@@ -505,7 +503,7 @@ class HttpApi {
   }
 
   static _log(object, String name, [bool? enable]) {
-    if (enable ?? HttpApiConfig.enableLogs) {
+    if (enable ?? SmartHttpConfig.enableLogs) {
       developer.log(
         '$object',
         name: 'http_api.${name.startsWith('/') ? name.replaceFirst(
@@ -550,10 +548,10 @@ class HttpRequestParcel {
   final String id;
   final String baseUrl;
   final String path;
-  final HttpMethod method;
+  final SmartHttpMethod method;
   final Map<String, dynamic> query;
   final dynamic body;
-  final List<HttpFile>? files;
+  final List<SmartHttpFile>? files;
   final FormData? formData;
   final HttpFormDataBuilder? formDataBuilder;
   final ProgressCallback? onSendProgress;

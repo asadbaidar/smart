@@ -35,7 +35,8 @@ const mockTimeout = 'timeout';
 const mockSuccess = '200-success';
 const mockList = 'list';
 const mockDownload = 'download';
-const mockError = '500-error';
+const mockError = '502-error';
+const mockInternalServerError = '500-internal-server-error';
 const mockBadRequest = '400-bad-request';
 const mockUnauthorized401 = '401-unauthorized';
 const mockUnauthorized403 = '403-unauthorized';
@@ -59,7 +60,7 @@ Future<void> startServer() async {
       if (path.startsWith(RegExp("[0-9]{3}-"))) {
         final content = path;
         response
-          ..statusCode = int.tryParse(path.substring(0, 3)) ?? 500
+          ..statusCode = int.tryParse(path.substring(0, 3)) ?? 502
           ..contentLength = content.length
           ..write(content);
         response.close();

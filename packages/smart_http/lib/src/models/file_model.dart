@@ -1,7 +1,8 @@
 part of 'models.dart';
 
-class HttpFile {
-  HttpFile({
+/// Model for multipart file to be uploaded
+class SmartHttpFile {
+  SmartHttpFile({
     required this.path,
     this.bytes,
     String? name,
@@ -32,20 +33,20 @@ class HttpFile {
 
   File get toFile => File(path);
 
-  HttpMultipartFile? multipart({Map<String, List<String>>? headers}) =>
+  MultipartFile? multipart({Map<String, List<String>>? headers}) =>
       bytes == null
           ? null
-          : HttpMultipartFile.fromBytes(
+          : MultipartFile.fromBytes(
               bytes!,
               filename: name,
               contentType: mediaType,
               headers: headers,
             );
 
-  Future<HttpMultipartFile> multipartByIOFile({
+  Future<MultipartFile> multipartByIOFile({
     Map<String, List<String>>? headers,
   }) =>
-      HttpMultipartFile.fromFile(
+      MultipartFile.fromFile(
         path,
         filename: name,
         contentType: mediaType,
@@ -59,14 +60,14 @@ class HttpFile {
         "size": size,
       }}";
 
-  static Future<List<HttpMultipartFile>> toMultipart(
-    List<HttpFile> files, {
+  static Future<List<MultipartFile>> toMultipart(
+    List<SmartHttpFile> files, {
     Map<String, List<String>>? headers,
   }) async {
-    final multipartFiles = <HttpMultipartFile>[];
+    final multipartFiles = <MultipartFile>[];
     await Future.forEach(
       files,
-      (HttpFile file) async =>
+      (SmartHttpFile file) async =>
           multipartFiles.add(await file.multipartByIOFile(headers: headers)),
     );
     return multipartFiles;

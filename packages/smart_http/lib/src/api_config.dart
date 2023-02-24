@@ -1,12 +1,10 @@
-import 'package:alice/alice.dart';
 
-/// Configure REST API properties to be used later on
-/// thoroughout API calls
+/// Configure Http properties to be used later on
+/// thoroughout Http calls
 ///
 /// Though for a specific use case these can also be
-/// overriden in API call functions it [getRequest()]
-/// and [postRequest()]
-class HttpApiConfig {
+/// overriden in http request functions
+class SmartHttpConfig {
   /// Base url for the project
   static String baseUrl = '';
 
@@ -28,6 +26,4 @@ class HttpApiConfig {
   /// Enable logs for the api calls in the project
   /// Defaults to [false]
   static bool enableLogs = false;
-
-  static Alice? alice;
 }
