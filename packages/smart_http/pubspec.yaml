@@ -1,5 +1,5 @@
 name: smart_http
-description: A dart http api wrapper around dio to handle http requests
+description: A dart wrapper around dio to handle http requests along with cancelable api for bloc and repository.
 homepage: https://github.com/asadbaidar/smart
 repository: https://github.com/asadbaidar/smart/tree/master/packages/smart_http
 
