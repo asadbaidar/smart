@@ -1,0 +1,21 @@
+name: smart_http
+description: A dart http api wrapper around dio to handle http requests
+homepage: https://github.com/asadbaidar/smart
+repository: https://github.com/asadbaidar/smart/tree/master/packages/smart_http
+
+version: 0.0.2
+
+environment:
+  sdk: ">=2.19.2 <3.0.0"
+
+dependencies:
+  bloc: ^8.1.1
+  dio: ^5.0.1
+  http_parser: ^4.0.2
+  mime_type: ^1.0.0
+  path: ^1.8.2
+  uuid: ^3.0.7
+
+dev_dependencies:
+  test: ^1.23.1
+  lints: ^2.0.1
