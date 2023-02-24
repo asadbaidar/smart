@@ -34,9 +34,9 @@ class NoDataException extends SmartHttpException {
 }
 
 class InternalServerException extends SmartHttpException {
-  InternalServerException(
-      [String message = 'Unable to make a connection, please try again later.'])
-      : super(message);
+  InternalServerException([String? message])
+      : super(
+            message ?? 'Unable to make a connection, please try again later.');
 }
 
 class NoInternetException extends SmartHttpException {

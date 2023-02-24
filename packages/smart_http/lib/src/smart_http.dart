@@ -404,13 +404,13 @@ class SmartHttp {
         ..baseUrl = baseUrl.endsWith('/') ? baseUrl : '$baseUrl/'
         ..validateStatus = (status) => status == 200 || status == 201;
       if (timeout != null) {
-        dio.options.connectTimeout = timeout.inMilliseconds;
+        dio.options.connectTimeout = timeout;
       }
       if (sendTimeout != null) {
-        dio.options.sendTimeout = sendTimeout.inMilliseconds;
+        dio.options.sendTimeout = sendTimeout;
       }
       if (receiveTimeout != null) {
-        dio.options.receiveTimeout = receiveTimeout.inMilliseconds;
+        dio.options.receiveTimeout = receiveTimeout;
       }
       final cancelToken = _cancelTokens[id] = CancelToken();
       query = query.replaceNullWithEmpty;
@@ -447,13 +447,17 @@ class SmartHttp {
         case DioErrorType.cancel:
           throw CancelException();
 
-        case DioErrorType.connectTimeout:
+        case DioErrorType.connectionTimeout:
         case DioErrorType.sendTimeout:
         case DioErrorType.receiveTimeout:
           throw TimeoutException();
 
-        case DioErrorType.response:
-        case DioErrorType.other:
+        case DioErrorType.connectionError:
+          throw NoInternetException();
+
+        case DioErrorType.badCertificate:
+        case DioErrorType.badResponse:
+        case DioErrorType.unknown:
           throw await _invalidResponse(e);
       }
     } catch (e) {
