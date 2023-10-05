@@ -20,7 +20,7 @@ extension ClipWidget on Widget {
     Key? key,
     bool clip = true,
     bool oval = false,
-    BorderRadius? borderRadius,
+    BorderRadius borderRadius = BorderRadius.zero,
     Clip clipBehavior = Clip.antiAlias,
   }) =>
       clip
