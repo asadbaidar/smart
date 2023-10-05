@@ -441,23 +441,23 @@ class SmartHttp {
       );
       _log(response.data?.runtimeType, 'response.type', enableLogs);
       return _decodeData<T>(response.data);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       _log(e, path, enableLogs);
       switch (e.type) {
-        case DioErrorType.cancel:
+        case DioExceptionType.cancel:
           throw CancelException();
 
-        case DioErrorType.connectionTimeout:
-        case DioErrorType.sendTimeout:
-        case DioErrorType.receiveTimeout:
+        case DioExceptionType.connectionTimeout:
+        case DioExceptionType.sendTimeout:
+        case DioExceptionType.receiveTimeout:
           throw TimeoutException();
 
-        case DioErrorType.connectionError:
+        case DioExceptionType.connectionError:
           throw NoInternetException();
 
-        case DioErrorType.badCertificate:
-        case DioErrorType.badResponse:
-        case DioErrorType.unknown:
+        case DioExceptionType.badCertificate:
+        case DioExceptionType.badResponse:
+        case DioExceptionType.unknown:
           throw await _invalidResponse(e);
       }
     } catch (e) {
@@ -479,7 +479,7 @@ class SmartHttp {
   }
 
   /// HTTP error codes - invalid responses
-  static Future<SmartHttpException> _invalidResponse(DioError e) async {
+  static Future<SmartHttpException> _invalidResponse(DioException e) async {
     final response = e.response;
     final error = e.error;
     final data = response != null ? _decodeData(response.data) : null;

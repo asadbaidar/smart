@@ -1,3 +1,7 @@
+## [0.1.4]
+
+* smart_flutter_utils: 0.1.1
+* smart_flutter_widgets: 0.1.4
 ## [0.1.3]
 
 * smart_flutter_utils: 0.1.0

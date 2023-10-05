@@ -1,3 +1,7 @@
+## [0.1.1]
+
+* Fixed BorderRadius nullable error.
+
 ## [0.1.0]
 
 * Flutter 3.7.0 fixes

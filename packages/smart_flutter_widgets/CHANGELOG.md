@@ -1,3 +1,7 @@
+## [0.1.4]
+
+* Updated to `smart_flutter_utils: 0.1.1`
+
 ## [0.1.3]
 
 * Updated to `smart_flutter_utils: 0.1.0`
