@@ -3,6 +3,7 @@ part of 'widgets.dart';
 
 const kAutocompleteMinOptionHeight = 54.0;
 const kAutocompleteVisibleOptionCount = 5;
+const kAutocompleteOptionsOffset = Offset(0.0, 8.0);
 
 typedef AutocompleteOptionViewBuilder<T extends Object> = Widget Function(
   BuildContext context,
@@ -35,11 +36,12 @@ class SmartAutocomplete<T extends Object> extends StatelessWidget {
     this.alwaysShowOptions = false,
     this.selectOnSubmit = true,
     this.selectOnSubmitIfEmpty = true,
-    this.optionsOffset = const SmartOffset.only(dy: 8.0),
+    this.optionsOffset = kAutocompleteOptionsOffset,
     this.displayStringForOption = SmartRawAutocomplete.defaultStringForOption,
     this.focusNode,
     this.controller,
     this.initialValue,
+    this.onFieldChanged,
   });
 
   final AutocompleteOptions<T> options;
@@ -61,6 +63,7 @@ class SmartAutocomplete<T extends Object> extends StatelessWidget {
   final FocusNode? focusNode;
   final TextEditingController? controller;
   final TextEditingValue? initialValue;
+  final ValueChanged<String>? onFieldChanged;
 
   bool _optionFilter(TextEditingValue textEditingValue, T option) =>
       option.toString().containsIgnoreCase(textEditingValue.text);
@@ -88,6 +91,7 @@ class SmartAutocomplete<T extends Object> extends StatelessWidget {
       focusNode: focusNode,
       controller: controller,
       initialValue: initialValue,
+      onFieldChanged: onFieldChanged,
     );
   }
 
@@ -188,7 +192,8 @@ class SmartRawAutocomplete<T extends Object> extends StatefulWidget {
     this.clearOnSelection = false,
     this.selectOnSubmit = true,
     this.selectOnSubmitIfEmpty = true,
-    this.optionsOffset = const SmartOffset.only(dy: 8.0),
+    this.optionsOffset = kAutocompleteOptionsOffset,
+    this.onFieldChanged,
   })  : assert(displayStringForOption != null),
         assert(
           fieldViewBuilder != null ||
@@ -303,6 +308,7 @@ class SmartRawAutocomplete<T extends Object> extends StatefulWidget {
   final bool selectOnSubmit;
   final bool selectOnSubmitIfEmpty;
   final Offset optionsOffset;
+  final ValueChanged<String>? onFieldChanged;
 
   /// Calls [AutocompleteFieldViewBuilder]'s onFieldSubmitted callback for the
   /// RawAutocomplete widget indicated by the given [GlobalKey].
@@ -375,14 +381,18 @@ class _SmartRawAutocompleteState<T extends Object>
         _options.isNotEmpty;
   }
 
+  Future<void> _updateOptions([TextEditingValue? value]) async {
+    _options = await widget.optionsBuilder(
+      value ?? _textEditingController.value,
+    );
+    _updateHighlight(_highlightedOptionIndex.value);
+  }
+
   // Called when _textEditingController changes.
   Future<void> _onChangedField() async {
     final TextEditingValue value = _textEditingController.value;
-    final Iterable<T> options = await widget.optionsBuilder(
-      value,
-    );
-    _options = options;
-    _updateHighlight(_highlightedOptionIndex.value);
+    widget.onFieldChanged?.call(value.text);
+    await _updateOptions(value);
     if (_selection != null &&
         value.text != widget.displayStringForOption(_selection!)) {
       _selection = null;
