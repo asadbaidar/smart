@@ -4,6 +4,9 @@ extension ColorBrightness on Color {
   /// Returns if the luminance of the color is dark.
   bool get isDark => (299 * red + 587 * green + 114 * blue) / 1000 < 162;
 
+  /// Returns if the luminance of the color is light.
+  bool get isLight => !isDark;
+
   /// Returns the pure white/black color contrast to its luminance.
   Color get contrast => isDark ? Colors.white : Colors.black;
 

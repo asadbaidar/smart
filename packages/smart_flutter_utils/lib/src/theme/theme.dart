@@ -14,7 +14,7 @@ part 'platform.dart';
 part 'bottom_bar.dart';
 part 'button.dart';
 part 'list_tile.dart';
-part 'material_state.dart';
+part 'widget_state.dart';
 part 'text.dart';
 
 extension ThemeContext on BuildContext {
@@ -25,7 +25,7 @@ extension ThemeContext on BuildContext {
   ColorScheme get colorScheme => theme.colorScheme;
 
   /// The background color for primary parts of the app (app bars, tab bars, etc)
-  Color get primaryColor => theme.primaryColor;
+  Color get primaryColor => colorScheme.primary;
 
   /// An accent color that, when used sparingly, calls attention to parts
   /// of your app.
@@ -35,19 +35,8 @@ extension ThemeContext on BuildContext {
   /// [TextField] fields.
   Color get hintColor => theme.hintColor;
 
-  /// The highlight color used during ink splash animations or to
-  /// indicate an item in a menu is selected.
-  Color get highlightColor => theme.highlightColor;
-
-  /// The color of [Divider]s and [PopupMenuDivider]s, also used
-  /// between [ListTile]s, between rows in [DataTable]s, and so forth.
-  Color get dividerColor => theme.dividerColor;
-
-  /// The default color of [MaterialType.canvas] [Material].
-  Color get canvasColor => theme.canvasColor;
-
-  /// A color that typically appears behind scrollable content.
-  Color get backgroundColor => colorScheme.background;
+  /// A recommended color role for a distinct area within the surface.
+  Color get surfaceContainerColor => colorScheme.surfaceContainer;
 
   /// The default color of the [Material] that underlies the [Scaffold]. The
   /// background color for a typical material app or a page within the app.
