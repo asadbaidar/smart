@@ -230,64 +230,64 @@ class SmartDateFormat {
 
   static DateFormat get Y => DateFormat.y();
 
-  static DateFormat get Ed => DateFormat("E d");
+  static DateFormat get Ed => DateFormat('E d');
 
-  static DateFormat get EdHma => Ed.add(Hma, ", ");
+  static DateFormat get EdHma => Ed.add(Hma, ', ');
 
   static DateFormat get EMMMdy => DateFormat.yMMMEd();
 
-  static DateFormat get EMMMdyHma => EMMMdy.add(Hma, ", ");
+  static DateFormat get EMMMdyHma => EMMMdy.add(Hma, ', ');
 
   static DateFormat get EMMMd => DateFormat.MMMEd();
 
-  static DateFormat get EMMMdHma => EMMMd.add(Hma, ", ");
+  static DateFormat get EMMMdHma => EMMMd.add(Hma, ', ');
 
   static DateFormat get EEEEMMMMdy => DateFormat.yMMMMEEEEd();
 
-  static DateFormat get EEEEMMMMdyHma => EEEEMMMMdy.add(Hma, ", ");
+  static DateFormat get EEEEMMMMdyHma => EEEEMMMMdy.add(Hma, ', ');
 
   static DateFormat get EEEEMMMMd => DateFormat.MMMMEEEEd();
 
-  static DateFormat get EEEEMMMMdHma => EEEEMMMMd.add(Hma, ", ");
+  static DateFormat get EEEEMMMMdHma => EEEEMMMMd.add(Hma, ', ');
 
   static DateFormat get MMMMdy => DateFormat.yMMMMd();
 
-  static DateFormat get MMMMdyHma => MMMMdy.add(Hma, ", ");
+  static DateFormat get MMMMdyHma => MMMMdy.add(Hma, ', ');
 
   static DateFormat get MMMMd => DateFormat.MMMMd();
 
-  static DateFormat get MMMMdHma => MMMMd.add(Hma, ", ");
+  static DateFormat get MMMMdHma => MMMMd.add(Hma, ', ');
 
   static DateFormat get MMMdy => DateFormat.yMMMd();
 
-  static DateFormat get MMMdyHma => MMMdy.add(Hma, ", ");
+  static DateFormat get MMMdyHma => MMMdy.add(Hma, ', ');
 
   static DateFormat get MMMd => DateFormat.MMMd();
 
-  static DateFormat get MMMdHma => MMMd.add(Hma, ", ");
+  static DateFormat get MMMdHma => MMMd.add(Hma, ', ');
 
   static DateFormat get Mdy => DateFormat.yMd();
 
-  static DateFormat get MdyHma => Mdy.add(Hma, ", ");
+  static DateFormat get MdyHma => Mdy.add(Hma, ', ');
 
   static DateFormat get Md => DateFormat.Md();
 
-  static DateFormat get MdHma => Md.add(Hma, ", ");
+  static DateFormat get MdHma => Md.add(Hma, ', ');
 
   /// dd-MMM-yyyy
-  static DateFormat get DMMMy => DateFormat("dd-MMM-yyyy");
+  static DateFormat get DMMMy => DateFormat('dd-MMM-yyyy');
 
   static DateFormat get DMMMyHm => DMMMy.add_Hm();
 
-  static DateFormat get DMMy => DateFormat("dd-MM-yyyy");
+  static DateFormat get DMMy => DateFormat('dd-MM-yyyy');
 
   static DateFormat get DMMyHm => DMMy.add_Hm();
 
-  static DateFormat get YMMd => DateFormat("yyyy-MM-dd");
+  static DateFormat get YMMd => DateFormat('yyyy-MM-dd');
 
   static DateFormat get YMMdHms => YMMd.add_Hms();
 
-  static DateFormat get Hma => DateFormat("h:mma");
+  static DateFormat get Hma => DateFormat('h:mma');
 
   static DateFormat get Hm => DateFormat.Hm();
 
