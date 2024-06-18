@@ -1,17 +1,9 @@
 part of 'utils.dart';
 
-extension MapToJsonString<K, V> on Map<K, V> {
-  String get jsonString => jsonEncode(this);
-}
-
-extension ListToJsonString<E> on List<E> {
-  String get jsonString => jsonEncode(this);
-}
-
 extension MapDynamicNullsafe<K> on Map<K, dynamic> {
   Map<K, dynamic> get replaceNullWithEmpty => isEmpty
       ? this
-      : entries.map((e) => MapEntry(e.key, e.value ?? "")).toMap();
+      : entries.map((e) => MapEntry(e.key, e.value ?? '')).toMap();
 }
 
 extension MapEntryIterableToMap<K, V> on Iterable<MapEntry<K, V>> {
@@ -45,7 +37,7 @@ extension IterableSortElement<E extends Comparable<E>> on Iterable<E> {
 }
 
 extension IterableOperations<E> on Iterable<E> {
-  List<E> distinct([Function(E element)? by]) {
+  List<E> distinct([E Function(E element)? by]) {
     final bySet = <dynamic>{};
     return where((x) => bySet.add(by != null ? by(x) : x)).toList();
   }
@@ -71,7 +63,7 @@ extension EnumByNameFromIterable<E extends Enum> on Iterable<E> {
   /// name [name], as reported by [EnumName.name].
   /// Returns the first value with the given name or null if none found.
   E? byNameOrNull(String name, [List<String>? others]) {
-    for (var value in this) {
+    for (final value in this) {
       if (value.name == name || others?.contains(value.name) == true) {
         return value;
       }
@@ -94,4 +86,73 @@ extension SortEnumIterable<T extends Enum> on Iterable<T> {
   List<T> sortedByName() => sorted((a, b) => a.name.compareTo(b.name));
 
   List<T> sortedByIndex() => sorted((a, b) => a.index.compareTo(b.index));
+}
+
+extension IterableTakeSkip<T> on Iterable<T> {
+  Iterable<T> skipLast([int count = 1]) => take(
+        count < 0
+            ? length
+            : count <= length
+                ? length - count
+                : length,
+      );
+
+  Iterable<T> takeLast([int count = 1]) => skip(
+        count < 0
+            ? length
+            : count <= length
+                ? length - count
+                : 0,
+      );
+}
+
+extension ListRemoved<T> on List<T> {
+  List<T> removed(Object? value) {
+    final list = List<T>.from(this);
+    list.remove(value);
+    return list;
+  }
+}
+
+extension MapWithoutBlanks<K> on Map<K, dynamic> {
+  Map<K, dynamic> get nonBlankStringValues => isEmpty
+      ? {}
+      : Map.fromEntries(
+          entries.expand(
+            (e) => e.value != null && e.value.toString().isNotBlank
+                ? [
+                    MapEntry(
+                      e.key,
+                      e.value is Iterable ? e.value : e.value.toString(),
+                    ),
+                  ]
+                : [],
+          ),
+        );
+
+  Map<K, dynamic> get nonBlankValues => isEmpty
+      ? {}
+      : Map.fromEntries(
+          entries
+              .expand((e) => e.value?.toString().notBlank != null ? [e] : []),
+        );
+
+  Map<K, dynamic> get nonNullValues => isEmpty
+      ? {}
+      : Map.fromEntries(
+          entries.expand((e) => e.value != null ? [e] : []),
+        );
+}
+
+extension ListWithoutBlanks<T> on List<T> {
+  List<V> withoutBlanks<V>() => isEmpty
+      ? []
+      : expand((e) => e != null && e.toString().isNotBlank ? [e as V] : <V>[])
+          .toList();
+}
+
+extension IterableWhereNot<T> on Iterable<T> {
+  /// The elements that do not satisfy [test].
+  Iterable<T> whereNot(bool Function(T element) test) =>
+      where((element) => !test(element));
 }
