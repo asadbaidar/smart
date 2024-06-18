@@ -198,7 +198,7 @@ void main() {
         final result = http.post<String>(
           path: mockTest,
         );
-        http.cancel();
+        await http.cancel();
         expect(result, throwsA(isA<CancelException>()));
       });
     });

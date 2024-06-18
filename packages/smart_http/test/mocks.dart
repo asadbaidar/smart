@@ -66,7 +66,7 @@ Future<void> startServer() async {
           ..statusCode = int.tryParse(path.substring(0, 3)) ?? 502
           ..contentLength = content.length
           ..write(content);
-        response.close();
+        unawaited(response.close());
         return;
       }
 
@@ -89,7 +89,7 @@ Future<void> startServer() async {
           ..contentLength = content.length
           ..headers.contentType = ContentType('application', 'json')
           ..write(content);
-        response.close();
+        unawaited(response.close());
         return;
       }
 
@@ -101,9 +101,7 @@ Future<void> startServer() async {
           ..headers.set('content-encoding', 'plain')
           ..write(content);
 
-        Future.delayed(const Duration(milliseconds: 300), () {
-          response.close();
-        });
+        Future.delayed(const Duration(milliseconds: 300), response.close);
         return;
       }
 
@@ -152,7 +150,7 @@ Future<void> startServer() async {
         ..statusCode = statusCode
         ..contentLength = body.length
         ..write(body);
-      response.close();
+      unawaited(response.close());
     });
 }
 

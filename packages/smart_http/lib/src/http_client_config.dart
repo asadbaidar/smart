@@ -50,6 +50,6 @@ class HttpClientConfig {
   final Duration receiveTimeout;
 
   /// Enable logs for the api calls in the project
-  /// Defaults to [false]
+  /// Defaults to `false`
   final bool enableLogs;
 }

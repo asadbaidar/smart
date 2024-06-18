@@ -254,8 +254,6 @@ class HttpClient {
   /// - [onSendProgress] delievers progress updates for uploading requests.
   /// - [onReceiveProgress] delievers progress updates for downloading response.
   /// - [body] sets Map, List or any http supported type as body of the request.
-  /// - [files] List of http files to be automatically converted to multipart files
-  ///   and recieve in [formDataBuilder] for `multipart/form-data` requests.
   /// - [formData] custom form data for `multipart/form-data` requests.
   ///
   /// [baseUrl] defaults to [HttpClientConfig.baseUrl] and can be overidden in

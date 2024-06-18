@@ -11,7 +11,16 @@ linter:
     use_decorated_box: true
     sort_pub_dependencies: false
     avoid_field_initializers_in_const_classes: false
-
+    unawaited_futures: true
+    avoid_bool_literals_in_conditional_expressions: true
+    always_declare_return_types: true
+    eol_at_end_of_file: true
+    implicit_call_tearoffs: true
+    join_return_with_assignment: true
+    prefer_conditional_assignment: true
+    prefer_constructors_over_static_methods: true
+    prefer_if_null_operators: true
+    
 analyzer:
   errors:
     todo: info
