@@ -4,8 +4,8 @@ import 'package:smart_http/smart_http.dart';
 /// A mixin that provides a cancelable http client to cancel all the pending
 /// http requests in the current http client.
 mixin CancelableApiMixin {
-  /// A [SmartHttp] instance that is used to make the http requests.
-  SmartHttp get http;
+  /// A [HttpClient] instance that is used to make the http requests.
+  HttpClient get http;
 
   /// Cancels all the pending http requests in the current http client.
   Future<void> cancel() => http.cancel();
@@ -35,7 +35,7 @@ mixin CancelableBlocMixin {
   /// Provides a helper method to try-catch by separate handling of
   /// [CancelException] with [onCancel] callback.
   Future<void> tryIt(
-    Future Function() task, {
+    Future<dynamic> Function() task, {
     required void Function(dynamic) catchError,
     void Function()? onCancel,
   }) async {
