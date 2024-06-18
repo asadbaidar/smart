@@ -1,19 +1,42 @@
 part of 'models.dart';
 
+typedef HttpFormData = FormData;
+typedef HttpMultipartFile = MultipartFile;
+typedef HttpListFormat = ListFormat;
+
 /// Model for multipart file to be uploaded
-class SmartHttpFile {
-  SmartHttpFile({
+class HttpFile extends Equatable {
+  HttpFile({
     required this.path,
     this.bytes,
     String? name,
     int? size,
-  })  : _name = name,
+  })  : _id = uuid.v4(),
+        _name = name,
         _size = size;
 
+  final String _id;
   final String path;
   final Uint8List? bytes;
   final String? _name;
   final int? _size;
+
+  @override
+  List<Object?> get props => [
+        _id,
+        path,
+        bytes,
+        _name,
+        _size,
+      ];
+
+  @override
+  String toString() => "HttpFile: ${{
+        "id": _id,
+        "path": path,
+        "name": name,
+        "size": size,
+      }}";
 
   String get name => _name ?? path.fileName;
 
@@ -27,11 +50,20 @@ class SmartHttpFile {
 
   bool get isOver2MB => sizeInMb > 2;
 
+  bool get isOver6MB => sizeInMb > 6;
+
   String get type => name.fileType();
 
   MediaType? get mediaType => path.mediaType;
 
-  File get toFile => File(path);
+  File toFile() => File(path);
+
+  HttpFormData toFormData(String key) => HttpFormData.fromMap(
+        {
+          key: bytes == null ? multipartByIOFile() : multipart(),
+        },
+        HttpListFormat.multiCompatible,
+      );
 
   MultipartFile? multipart({Map<String, List<String>>? headers}) =>
       bytes == null
@@ -53,21 +85,14 @@ class SmartHttpFile {
         headers: headers,
       );
 
-  @override
-  String toString() => "$runtimeType: ${{
-        "path": path,
-        "name": name,
-        "size": size,
-      }}";
-
   static Future<List<MultipartFile>> toMultipart(
-    List<SmartHttpFile> files, {
+    List<HttpFile> files, {
     Map<String, List<String>>? headers,
   }) async {
     final multipartFiles = <MultipartFile>[];
     await Future.forEach(
       files,
-      (SmartHttpFile file) async =>
+      (HttpFile file) async =>
           multipartFiles.add(await file.multipartByIOFile(headers: headers)),
     );
     return multipartFiles;

@@ -1,86 +1,42 @@
-import 'package:test/test.dart';
 import 'package:smart_http/smart_http.dart';
+import 'package:test/test.dart';
 
 import '../mocks.dart';
 
 void main() {
-  late SmartHttp http;
+  late HttpClient http;
 
   setUp(() async {
     await startServer();
-    http = SmartHttp();
-    SmartHttpConfig.baseUrl = serverUrl.toString();
-    SmartHttpConfig.headers = mockBaseHeader;
-    SmartHttpConfig.connectTimeout = const Duration(seconds: 1);
-    SmartHttpConfig.receiveTimeout = const Duration(seconds: 5);
-    SmartHttpConfig.enableLogs = true;
+    http = HttpClient(
+      clientConfig: HttpClientConfig(
+        baseUrl: serverUrl.toString(),
+        headers: mockBaseHeader,
+        connectTimeout: const Duration(seconds: 1),
+        receiveTimeout: const Duration(seconds: 5),
+        enableLogs: true,
+      ),
+    );
   });
 
   tearDown(stopServer);
 
-  group('SmartHttp.post() request', () {
+  group('HttpClient.get() request', () {
     group('works with', () {
-      test('json body', () async {
-        final result = await http.post(
-          path: mockTest,
-          body: mockBodyJson,
-        );
-        expect(result, isA<Map<String, dynamic>>());
-        expect(result[pathKey], mockTest);
-        expect(result[statusCodeKey], 200);
-        expect(result[methodKey], SmartHttpMethod.post());
-        expect(result[bodyKey], mockBodyJson);
-      });
-
-      test('list body', () async {
-        final result = await http.post(
-          path: mockTest,
-          body: mockBodyList,
-        );
-        expect(result, isA<Map<String, dynamic>>());
-        expect(result[pathKey], mockTest);
-        expect(result[statusCodeKey], 200);
-        expect(result[methodKey], SmartHttpMethod.post());
-        expect(result[bodyKey], mockBodyList);
-      });
-
-      test('string body', () async {
-        final result = await http.post(
-          path: mockTest,
-          body: mockBodyString,
-        );
-        expect(result, isA<Map<String, dynamic>>());
-        expect(result[pathKey], mockTest);
-        expect(result[statusCodeKey], 200);
-        expect(result[methodKey], SmartHttpMethod.post());
-        expect(result[bodyKey], mockBodyString);
-      });
-
-      test('no body', () async {
-        final result = await http.post(
-          path: mockTest,
-        );
-        expect(result, isA<Map<String, dynamic>>());
-        expect(result[pathKey], mockTest);
-        expect(result[statusCodeKey], 200);
-        expect(result[methodKey], SmartHttpMethod.post());
-        expect(result[bodyKey], null);
-      });
-
       test('query parameters', () async {
-        final result = await http.post(
+        final result = await http.get<JsonObject>(
           path: mockTest,
           query: mockQuery,
         );
-        expect(result, isA<Map<String, dynamic>>());
+        expect(result, isA<JsonObject>());
         expect(result[pathKey], mockTest);
         expect(result[statusCodeKey], 200);
-        expect(result[methodKey], SmartHttpMethod.post());
+        expect(result[methodKey], HttpMethod.get());
         expect(result[queryKey], mockQuery);
       });
 
       test('string response', () async {
-        final result = await http.post(
+        final result = await http.get<String>(
           path: mockSuccess,
         );
         expect(result, isA<String>());
@@ -88,20 +44,20 @@ void main() {
       });
 
       test('list response', () async {
-        final result = await http.post(
+        final result = await http.get<JsonArray>(
           path: mockList,
         );
-        expect(result, isA<List>());
+        expect(result, isA<JsonArray>());
         expect(result, mockBodyList);
       });
     });
 
     group('headers check', () {
       test('passes if default headers are set', () async {
-        final result = await http.post(
+        final result = await http.get<JsonObject>(
           path: mockTest,
         );
-        expect(result, isA<Map<String, dynamic>>());
+        expect(result, isA<JsonObject>());
         expect(
           result[headersKey],
           containsPair(
@@ -113,17 +69,19 @@ void main() {
 
       test('passes if default headers are overriden by provided ones',
           () async {
-        final result = await http.post(
+        final result = await http.get<JsonObject>(
           path: mockTest,
           headers: mockHeader,
         );
-        expect(result, isA<Map<String, dynamic>>());
+        expect(result, isA<JsonObject>());
         expect(
           result[headersKey],
-          isNot(containsPair(
-            mockBaseHeader.keys.first,
-            mockBaseHeader.values.first,
-          )),
+          isNot(
+            containsPair(
+              mockBaseHeader.keys.first,
+              mockBaseHeader.values.first,
+            ),
+          ),
         );
         expect(
           result[headersKey],
@@ -139,7 +97,7 @@ void main() {
       test(
           'throws NoDataException if the '
           'http call completes with an error', () async {
-        final result = http.post(
+        final result = http.get<String>(
           path: mockError,
         );
         expect(result, throwsA(isA<NoDataException>()));
@@ -148,7 +106,7 @@ void main() {
       test(
           'throws BadRequestException if the '
           'http call completes with a 400 error', () async {
-        final result = http.post(
+        final result = http.get<String>(
           path: mockBadRequest,
         );
         expect(result, throwsA(isA<BadRequestException>()));
@@ -157,7 +115,7 @@ void main() {
       test(
           'throws UnauthorisedException if the '
           'http call completes with a 401 error', () async {
-        final result = http.post(
+        final result = http.get<String>(
           path: mockUnauthorized401,
         );
         expect(result, throwsA(isA<UnauthorisedException>()));
@@ -166,7 +124,7 @@ void main() {
       test(
           'throws UnauthorisedException if the '
           'http call completes with a 403 error', () async {
-        final result = http.post(
+        final result = http.get<String>(
           path: mockUnauthorized403,
         );
         expect(result, throwsA(isA<UnauthorisedException>()));
@@ -175,22 +133,22 @@ void main() {
       test(
           'throws NoDataException if the '
           'http call completes with a 404 error', () async {
-        final result = http.post(
+        final result = http.get<String>(
           path: mockNotFound,
         );
         expect(result, throwsA(isA<NoDataException>()));
       });
 
-      test('throws NoDataException if no connection', () async {
-        final result = http.post(
+      test('throws HttpException if invalid arguments', () async {
+        final result = http.get<String>(
           baseUrl: '',
           path: '',
         );
-        expect(result, throwsA(isA<NoDataException>()));
+        expect(result, throwsA(isA<HttpException>()));
       });
 
       test('throws CancelException if cancelled manually', () async {
-        final result = http.post(
+        final result = http.get<String>(
           path: mockTest,
         );
         http.cancel();
@@ -201,7 +159,7 @@ void main() {
     group('timeout check', () {
       test('passess if the http call returns before the given timeout time',
           () async {
-        final result = await http.post(
+        final result = await http.get<String>(
           path: mockTimeout,
           receiveTimeout: const Duration(seconds: 3),
         );
@@ -212,7 +170,7 @@ void main() {
       test(
           'throws TimeoutException if the http '
           'call timesout by the given timeout time', () async {
-        final result = http.post(
+        final result = http.get<String>(
           path: mockTimeout,
           receiveTimeout: const Duration(seconds: 1),
         );
