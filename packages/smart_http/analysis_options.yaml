@@ -11,9 +11,6 @@ linter:
     use_decorated_box: true
     sort_pub_dependencies: false
     avoid_field_initializers_in_const_classes: false
-    # avoid_dynamic_calls: false
-    # avoid_implementing_value_types: false
-    # avoid_classes_with_only_static_members: false
 
 analyzer:
   errors:
