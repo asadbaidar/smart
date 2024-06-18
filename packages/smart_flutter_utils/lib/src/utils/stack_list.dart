@@ -1,12 +1,12 @@
 part of 'utils.dart';
 
 class StackList<E> {
-  final Queue<E> _underlyingQueue;
-
   StackList() : _underlyingQueue = Queue<E>();
 
-  StackList.from(Iterable elements)
+  StackList.from(Iterable<E> elements)
       : _underlyingQueue = Queue<E>.from(elements);
+
+  final Queue<E> _underlyingQueue;
 
   int get length => _underlyingQueue.length;
 
