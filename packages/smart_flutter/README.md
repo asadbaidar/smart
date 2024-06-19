@@ -1,6 +1,6 @@
 # smart_flutter
 
-[![pub package](https://img.shields.io/pub/v/smart_flutter_widgets.svg)](https://pub.dev/packages/smart_flutter_widgets) [![pub package](https://img.shields.io/pub/v/smart_flutter_utils.svg)](https://pub.dev/packages/smart_flutter_utils)
+[![pub package](https://img.shields.io/pub/v/smart_flutter.svg)](https://pub.dev/packages/smart_flutter)
 
 A bundle package for all smart flutter packages including widgets, utils, etc.
 
