@@ -34,10 +34,16 @@ class SmartDetailButton extends StatelessWidget {
         duration: 200.milliseconds,
         transformAlignment: Alignment.center,
         transform: transform ??
-            rotate180?.mapIt((it) => Matrix4.rotationZ(it ? pi : 0)
-              ..rotateY(context.isRTL ? pi : 0)) ??
-            rotate90?.mapIt((it) =>
-                Matrix4.rotationZ(it ? (context.isRTL ? -1 : 1) * pi / 2 : 0)),
+            $mapTo(
+              rotate180,
+              (it) => Matrix4.rotationZ(it ? pi : 0)
+                ..rotateY(context.isRTL ? pi : 0),
+            ) ??
+            $mapTo(
+              rotate90,
+              (it) =>
+                  Matrix4.rotationZ(it ? (context.isRTL ? -1 : 1) * pi / 2 : 0),
+            ),
         child: IconTheme(
           data: IconThemeData(
             color: color,

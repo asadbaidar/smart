@@ -15,14 +15,14 @@ extension ShimmerWidget on Widget {
         ? Builder(
             builder: (context) => Shimmer.fromColors(
               key: key,
-              baseColor: baseColor ?? context.backgroundColor,
+              baseColor: baseColor ?? context.surfaceContainerColor,
               highlightColor:
-                  highlightColor ?? context.backgroundColor.highlighted,
+                  highlightColor ?? context.surfaceContainerColor.highlighted,
               period: period,
               direction: direction,
               loop: loop,
               child: filled
-                  ? Container(
+                  ? ColoredBox(
                       color: Colors.grey,
                       child: this,
                     )

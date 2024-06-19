@@ -109,7 +109,7 @@ class SmartSliverList<T> extends StatelessWidget {
     this.addSemanticIndexes = true,
     this.removeTopPadding = true,
     this.scrollDirection = Axis.vertical,
-    Key? key,
+    super.key,
   })  : assert(children != null),
         assert(
           itemExtent == null || prototypeItem == null,
@@ -125,8 +125,7 @@ class SmartSliverList<T> extends StatelessWidget {
         sectionBuilder = null,
         section = null,
         divider = null,
-        edgeDivider = null,
-        super(key: key);
+        edgeDivider = null;
 
   /// Creates a fixed-length scrollable linear array of list "items" separated
   /// by list item "separators".
@@ -174,17 +173,16 @@ class SmartSliverList<T> extends StatelessWidget {
     this.addSemanticIndexes = true,
     this.removeTopPadding = true,
     this.scrollDirection = Axis.vertical,
-    Key? key,
+    super.key,
   })  : assert(itemBuilder != null),
         itemCount = itemCount ?? items?.length ?? 0,
         children = null,
         itemExtent = null,
-        prototypeItem = null,
-        super(key: key);
+        prototypeItem = null;
 
   final List<Widget>? children;
   final SmartItemBuilder<T>? itemBuilder;
-  final List? items;
+  final List<T>? items;
   final IndexedWidgetBuilder? dividerBuilder;
   final WidgetBuilder? edgeDividerBuilder;
   final WidgetBuilder? headerBuilder;
@@ -223,11 +221,12 @@ class SmartSliverList<T> extends StatelessWidget {
 
   /// computing the actual child count.
   int get _itemCount => max(
-      0,
-      (_hasDivider ? max(0, itemCount * 2 - 1) : itemCount) +
-          (_bottomDivider ? 1 : 0) +
-          (_hasHeader ? 1 : 0) +
-          (_hasFooter ? 1 : 0));
+        0,
+        (_hasDivider ? max(0, itemCount * 2 - 1) : itemCount) +
+            (_bottomDivider ? 1 : 0) +
+            (_hasHeader ? 1 : 0) +
+            (_hasFooter ? 1 : 0),
+      );
 
   bool get _hasDivider => divider != null || dividerBuilder != null;
 
@@ -280,7 +279,7 @@ class SmartSliverList<T> extends StatelessWidget {
   IndexedWidgetBuilder? get __itemBuilder =>
       (context, index) => itemBuilder!(context, index, items?[index]);
 
-  dynamic _itemBuilder(BuildContext context, int index) {
+  Widget _itemBuilder(BuildContext context, int index) {
     final section = _section(index);
     return __itemBuilder!(context, index).column(
       enabled: section != null,
@@ -302,7 +301,7 @@ class SmartSliverList<T> extends StatelessWidget {
         : null;
   }
 
-  Widget _sectionBuilder(BuildContext context, int index, section) =>
+  Widget _sectionBuilder(BuildContext context, int index, dynamic section) =>
       sectionBuilder?.call(context, index, section) ??
       SmartSectionTile(title: section.toString());
 

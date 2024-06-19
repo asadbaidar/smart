@@ -126,7 +126,7 @@ class SmartBoxBorder {
   }) {
     final vBorderColor = color ?? context?.hintColor.dimmed;
     return BoxDecoration(
-      color: boxColor ?? context?.backgroundColor,
+      color: boxColor ?? context?.surfaceContainerColor,
       borderRadius: radius == null ? null : BorderRadius.circular(radius),
       border: vBorderColor == null
           ? null
@@ -187,8 +187,11 @@ extension ScrollToController on ScrollController {
   void scrollToTop() =>
       animateTo(0.0, duration: 200.milliseconds, curve: Curves.ease);
 
-  void scrollToBottom() => animateTo(position.maxScrollExtent,
-      duration: 200.milliseconds, curve: Curves.ease);
+  void scrollToBottom() => animateTo(
+        position.maxScrollExtent,
+        duration: 200.milliseconds,
+        curve: Curves.ease,
+      );
 }
 
 extension EdgeInsetsSTEB on EdgeInsetsGeometry {

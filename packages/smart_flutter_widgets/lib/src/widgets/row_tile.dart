@@ -72,8 +72,8 @@ class SmartRowTile extends StatelessWidget {
     this.alignment = CrossAxisAlignment.center,
     this.onTap,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Row with simple content and cupertino tap effect
   const SmartRowTile.cupertino({
@@ -130,8 +130,8 @@ class SmartRowTile extends StatelessWidget {
     this.alignment = CrossAxisAlignment.center,
     this.onTap,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Row with simple content and dense paddings
   const SmartRowTile.dense({
@@ -188,8 +188,8 @@ class SmartRowTile extends StatelessWidget {
     this.alignment = CrossAxisAlignment.center,
     this.onTap,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Row with simple content and medium paddings
   const SmartRowTile.medium({
@@ -246,8 +246,8 @@ class SmartRowTile extends StatelessWidget {
     this.alignment = CrossAxisAlignment.center,
     this.onTap,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Row with extended content
   const SmartRowTile.extend({
@@ -304,8 +304,8 @@ class SmartRowTile extends StatelessWidget {
     this.alignment = CrossAxisAlignment.start,
     this.onTap,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Row with grouped header content including top/bottom separators
   const SmartRowTile.header({
@@ -362,8 +362,8 @@ class SmartRowTile extends StatelessWidget {
     this.alignment = CrossAxisAlignment.center,
     this.onTap,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Row with grouped header dense content including top/bottom separators
   const SmartRowTile.headerDense({
@@ -420,8 +420,8 @@ class SmartRowTile extends StatelessWidget {
     this.alignment = CrossAxisAlignment.center,
     this.onTap,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Row with dense header content and without top separator to use at
   /// top of the views
@@ -479,8 +479,8 @@ class SmartRowTile extends StatelessWidget {
     this.alignment = CrossAxisAlignment.center,
     this.onTap,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Row with grouped header dense content including bottom separator only
   const SmartRowTile.headerTopDense({
@@ -537,8 +537,8 @@ class SmartRowTile extends StatelessWidget {
     this.alignment = CrossAxisAlignment.center,
     this.onTap,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Row with grouped header content without top/bottom separators
   const SmartRowTile.section({
@@ -595,8 +595,8 @@ class SmartRowTile extends StatelessWidget {
     this.alignment = CrossAxisAlignment.center,
     this.onTap,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Row with grouped header dense content without top/bottom separators
   const SmartRowTile.sectionDense({
@@ -653,8 +653,8 @@ class SmartRowTile extends StatelessWidget {
     this.alignment = CrossAxisAlignment.center,
     this.onTap,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Row with wrapped layout and can be used in the buttons too
   const SmartRowTile.wrap({
@@ -711,8 +711,8 @@ class SmartRowTile extends StatelessWidget {
     this.alignment = CrossAxisAlignment.center,
     this.onTap,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Row with rich content
   const SmartRowTile.rich({
@@ -769,8 +769,8 @@ class SmartRowTile extends StatelessWidget {
     this.alignment = CrossAxisAlignment.center,
     this.onTap,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Row with simple content and layout as [GetTile.simple]
   const SmartRowTile.item({
@@ -827,8 +827,8 @@ class SmartRowTile extends StatelessWidget {
     this.alignment = CrossAxisAlignment.start,
     this.onTap,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Row with simple content and layout as [GetTile.simple]
   const SmartRowTile.itemPad({
@@ -885,8 +885,8 @@ class SmartRowTile extends StatelessWidget {
     this.alignment = CrossAxisAlignment.center,
     this.onTap,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final dynamic leading;
   final Widget? trailing;
@@ -970,7 +970,7 @@ class SmartRowTile extends StatelessWidget {
     final vHighlighted = highlighted ?? checked ?? false;
     final vBackground = vHighlighted
         ? vTintColor.highlighted
-        : backgroundColor ?? (themed ? context.backgroundColor : null);
+        : backgroundColor ?? (themed ? context.surfaceContainerColor : null);
     final vBoxedView = $cast<SmartBox>(leading);
     final isCustomLeading = leading is! Icon &&
         leading is! SmartBox &&
@@ -1014,7 +1014,7 @@ class SmartRowTile extends StatelessWidget {
                               alignment: Alignment.center,
                               padding: leadingMargin,
                               child: isCustomLeading
-                                  ? leading
+                                  ? leading as Widget
                                   : vBoxedView?.custom == true
                                       ? vBoxedView!
                                       : SmartBox(
@@ -1061,26 +1061,30 @@ class SmartRowTile extends StatelessWidget {
                                     ),
                                     children: [
                                       TextSpan(text: vText),
-                                      ...?children?.map((w) =>
-                                          $cast<Text>(w)?.mapTo(
-                                            (Text w) => TextSpan(
-                                              text: w.data,
-                                              style: (w.style ?? vTextStyle)
-                                                  ?.copyWith(
-                                                fontSize: fontSize,
+                                      ...?children?.map(
+                                        (w) =>
+                                            $cast<Text>(w)?.mapTo(
+                                              (Text w) => TextSpan(
+                                                text: w.data,
+                                                style: (w.style ?? vTextStyle)
+                                                    ?.copyWith(
+                                                  fontSize: fontSize,
+                                                ),
+                                              ),
+                                            ) ??
+                                            WidgetSpan(
+                                              alignment:
+                                                  PlaceholderAlignment.middle,
+                                              child: Padding(
+                                                padding: childrenPadding,
+                                                child: w,
                                               ),
                                             ),
-                                          ) ??
-                                          WidgetSpan(
-                                            alignment:
-                                                PlaceholderAlignment.middle,
-                                            child: Padding(
-                                              padding: childrenPadding,
-                                              child: w,
-                                            ),
-                                          ))
-                                    ].applyIf(context.isRTL,
-                                        (it) => it?.reversed.toList()),
+                                      ),
+                                    ].applyIf(
+                                      context.isRTL,
+                                      (it) => it?.reversed.toList(),
+                                    ),
                                   ),
                                   maxLines: expanded ? null : maxLines,
                                   overflow: expanded || maxLines == null
@@ -1116,10 +1120,13 @@ class SmartRowTile extends StatelessWidget {
                               color: vTrailingColor,
                               size: detail ? 14 : trailingSize,
                             ),
-                            child: trailingText?.notEmpty?.mapIt((it) => Text(
-                                      it,
-                                      style: trailingStyle ?? context.bodySmall,
-                                    )) ??
+                            child: $mapTo(
+                                  trailingText?.notEmpty,
+                                  (it) => Text(
+                                    it,
+                                    style: trailingStyle ?? context.bodySmall,
+                                  ),
+                                ) ??
                                 vTrailing ??
                                 0.space,
                           ),
@@ -1165,8 +1172,8 @@ class SmartTileDivider extends StatelessWidget {
     this.thickness = 0.5,
     this.color,
     this.style = DividerStyle.leading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile divider with full edge to edge length
   const SmartTileDivider.full({Key? key})
@@ -1190,7 +1197,7 @@ class SmartTileDivider extends StatelessWidget {
   Widget build(BuildContext context) => style == DividerStyle.none
       ? const Space()
       : Ink(
-          color: context.backgroundColor,
+          color: context.surfaceContainerColor,
           child: SmartDivider(
             indent: indent,
             thickness: thickness,
@@ -1206,8 +1213,8 @@ class SmartDivider extends StatelessWidget {
     this.thickness = 0.5,
     this.color,
     this.style = DividerStyle.full,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Divider with full edge to edge length
   const SmartDivider.full({Key? key})
