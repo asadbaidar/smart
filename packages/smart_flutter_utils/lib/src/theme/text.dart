@@ -4,45 +4,6 @@ extension TextThemeContext on BuildContext {
   /// The text theme for the current theme.
   TextTheme get textTheme => theme.textTheme;
 
-  @Deprecated('Use displayLarge instead')
-  TextStyle? get headline1 => textTheme.displayLarge;
-
-  @Deprecated('Use displayMedium instead')
-  TextStyle? get headline2 => textTheme.displayMedium;
-
-  @Deprecated('Use displaySmall instead')
-  TextStyle? get headline3 => textTheme.displaySmall;
-
-  @Deprecated('Use headlineMedium instead')
-  TextStyle? get headline4 => textTheme.headlineMedium;
-
-  @Deprecated('Use headlineSmall instead')
-  TextStyle? get headline5 => textTheme.headlineSmall;
-
-  @Deprecated('Use headlineLarge instead')
-  TextStyle? get headline6 => textTheme.headlineLarge;
-
-  @Deprecated('Use titleMedium instead')
-  TextStyle? get subtitle1 => textTheme.titleMedium;
-
-  @Deprecated('Use titleSmall instead')
-  TextStyle? get subtitle2 => textTheme.titleSmall;
-
-  @Deprecated('Use bodyLarge instead')
-  TextStyle? get bodyText1 => textTheme.bodyLarge;
-
-  @Deprecated('Use bodyMedium instead')
-  TextStyle? get bodyText2 => textTheme.bodyMedium;
-
-  @Deprecated('Use bodySmall instead')
-  TextStyle? get caption => textTheme.bodySmall;
-
-  @Deprecated('Use labelLarge instead')
-  TextStyle? get button => textTheme.labelLarge;
-
-  @Deprecated('Use labelSmall instead')
-  TextStyle? get overline => textTheme.labelSmall;
-
   /// Largest of the display styles.
   ///
   /// As the largest text on the screen, display styles are reserved for short,
@@ -141,45 +102,6 @@ extension TextThemeContext on BuildContext {
 extension PrimaryTextThemeContext on BuildContext {
   /// A text theme that contrasts with the primary color.
   TextTheme get primaryTextTheme => theme.primaryTextTheme;
-
-  @Deprecated('Use primaryDisplayLarge instead')
-  TextStyle? get primaryHeadline1 => primaryTextTheme.displayLarge;
-
-  @Deprecated('Use primaryDisplayMedium instead')
-  TextStyle? get primaryHeadline2 => primaryTextTheme.displayMedium;
-
-  @Deprecated('Use primaryDisplaySmall instead')
-  TextStyle? get primaryHeadline3 => primaryTextTheme.displaySmall;
-
-  @Deprecated('Use primaryHeadlineMedium instead')
-  TextStyle? get primaryHeadline4 => primaryTextTheme.headlineMedium;
-
-  @Deprecated('Use primaryHeadlineSmall instead')
-  TextStyle? get primaryHeadline5 => primaryTextTheme.headlineSmall;
-
-  @Deprecated('Use primaryTitleLarge instead')
-  TextStyle? get primaryHeadline6 => primaryTextTheme.titleLarge;
-
-  @Deprecated('Use primaryTitleMedium instead')
-  TextStyle? get primarySubtitle1 => primaryTextTheme.titleMedium;
-
-  @Deprecated('Use primaryTitleSmall instead')
-  TextStyle? get primarySubtitle2 => primaryTextTheme.titleSmall;
-
-  @Deprecated('Use primaryBodyLarge instead')
-  TextStyle? get primaryBodyText1 => primaryTextTheme.bodyLarge;
-
-  @Deprecated('Use primaryBodyMedium instead')
-  TextStyle? get primaryBodyText2 => primaryTextTheme.bodyMedium;
-
-  @Deprecated('Use primaryBodySmall instead')
-  TextStyle? get primaryCaption => primaryTextTheme.bodySmall;
-
-  @Deprecated('Use primaryLabelLarge instead')
-  TextStyle? get primaryButton => primaryTextTheme.labelLarge;
-
-  @Deprecated('Use primaryLabelSmall instead')
-  TextStyle? get primaryOverline => primaryTextTheme.labelSmall;
 
   /// Largest of the display styles.
   ///

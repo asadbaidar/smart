@@ -7,19 +7,13 @@ enum MapTravelMode {
   transit('r'),
   ;
 
-  final String value;
   const MapTravelMode([this.value = '']);
+  final String value;
 }
 
 enum MapPreference { google, apple, waze }
 
 class MapNavigation extends Equatable {
-  final MapLocation destination;
-  final MapLocation? origin;
-  final TargetPlatform? platform;
-  final MapTravelMode travelMode;
-  final MapPreference preference;
-
   const MapNavigation({
     required this.destination,
     this.origin,
@@ -27,6 +21,12 @@ class MapNavigation extends Equatable {
     this.travelMode = MapTravelMode.driving,
     this.preference = MapPreference.google,
   });
+
+  final MapLocation destination;
+  final MapLocation? origin;
+  final TargetPlatform? platform;
+  final MapTravelMode travelMode;
+  final MapPreference preference;
 
   MapNavigation copyWith({
     MapLocation? destination,
@@ -130,15 +130,15 @@ class MapNavigation extends Equatable {
 }
 
 class MapLocation extends Equatable {
-  final double? latitude;
-  final double? longitude;
-  final String? address;
-
   const MapLocation({
     this.latitude,
     this.longitude,
     this.address,
   });
+
+  final double? latitude;
+  final double? longitude;
+  final String? address;
 
   bool get isEmpty => latitude == null || longitude == null;
 

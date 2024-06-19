@@ -1,11 +1,22 @@
 part of 'utils.dart';
 
 /// Returns [T] if instance of [T], otherwise null
-T? $cast<T>(value) => value == null
+T? $cast<T>(dynamic value) => value == null
     ? null
     : value is T
         ? value
         : null;
+
+/// Parse [value] to [int] if possible, otherwise null
+int? $castInt(dynamic value) =>
+    value == null ? null : int.tryParse(value.toString());
+
+/// Parse [value] to [bool] if possible, otherwise null
+bool? $castBool(dynamic value) =>
+    value == null ? null : bool.tryParse(value.toString());
+
+/// Parse hex [value] to [Color] if possible, otherwise null
+Color? $castColor(String? value) => value?.notBlank?.toColor();
 
 /// [apply] mapping with [T] as parameter and [R] as return value
 R? $mapTo<T, R>(T? object, R? Function(T it) apply) =>
@@ -15,7 +26,7 @@ R? $mapTo<T, R>(T? object, R? Function(T it) apply) =>
 R? $mapIt<R>(Object? object, R? Function(dynamic it) apply) =>
     object != null ? apply(object) : null;
 
-List<T>? $mapList<T>(list, T Function(dynamic e) apply) =>
+List<T>? $mapList<T>(dynamic list, T Function(dynamic e) apply) =>
     (list as List?)?.map<T>(apply).toList();
 
 List<R>? $mapToList<T, R>(List<T>? list, R Function(T it) apply) =>
@@ -54,5 +65,13 @@ extension GlobalObject on Object {
     T value = this as T;
     n.repeatsForIndexed((i) => value = task(value, i));
     return value;
+  }
+}
+
+extension FocusContext on BuildContext {
+  /// Dismiss keyboard
+  void unfocus() {
+    FocusScope.of(this).requestFocus(FocusNode());
+    FocusManager.instance.primaryFocus?.unfocus();
   }
 }

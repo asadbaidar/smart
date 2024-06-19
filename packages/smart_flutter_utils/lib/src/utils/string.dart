@@ -2,16 +2,16 @@ part of 'utils.dart';
 
 extension StringConcatenation on String {
   String prefix(
-    prefix, {
+    dynamic prefix, {
     int doFor = 1,
     bool doIf = true,
     bool notBlank = true,
-    infix,
-    suffix,
+    dynamic infix,
+    dynamic suffix,
   }) {
-    final vPrefix = prefix?.toString() ?? "";
-    final vInfix = infix?.toString() ?? "";
-    final vSuffix = suffix?.toString() ?? "";
+    final vPrefix = prefix?.toString() ?? '';
+    final vInfix = infix?.toString() ?? '';
+    final vSuffix = suffix?.toString() ?? '';
     final vDoIf = doIf && (!notBlank || isNotBlank) && vPrefix.isNotBlank;
     return applyFor(
       vDoIf ? doFor : 0,
@@ -20,16 +20,16 @@ extension StringConcatenation on String {
   }
 
   String suffix(
-    suffix, {
+    dynamic suffix, {
     int doFor = 1,
     bool doIf = true,
     bool notBlank = true,
-    infix,
-    prefix,
+    dynamic infix,
+    dynamic prefix,
   }) {
-    final vSuffix = suffix?.toString() ?? "";
-    final vInfix = infix?.toString() ?? "";
-    final vPrefix = prefix?.toString() ?? "";
+    final vSuffix = suffix?.toString() ?? '';
+    final vInfix = infix?.toString() ?? '';
+    final vPrefix = prefix?.toString() ?? '';
     final vDoIf = doIf && (!notBlank || isNotBlank) && vSuffix.isNotBlank;
     return applyFor(
       vDoIf ? doFor : 0,
@@ -38,13 +38,13 @@ extension StringConcatenation on String {
   }
 
   String confix(
-    confix, {
+    dynamic confix, {
     int doFor = 1,
     bool doIf = true,
     bool notBlank = true,
-    infix,
-    prefix,
-    suffix,
+    dynamic infix,
+    dynamic prefix,
+    dynamic suffix,
   }) =>
       this
           .prefix(
@@ -71,7 +71,7 @@ extension StringConcatenation on String {
 }
 
 extension StringIntials on String {
-  static const garbage = ["(", ")", "-", "&", "/", "."];
+  static const garbage = ['(', ')', '-', '&', '/', '.'];
 
   String takeInitialsWithoutGarbage(
     int count, {
@@ -91,30 +91,33 @@ extension StringIntials on String {
     bool withoutGarbage = false,
     List<String> garbage = garbage,
   }) {
-    var source = replaceAll(RegExp(r"\s+"), " ").trim();
+    var source = replaceAll(RegExp(r'\s+'), ' ').trim();
     if (source.isNotEmpty) {
       if (withoutGarbage) {
         source = source
             .applyForIndexed<String>(
-                garbage.length,
-                (s, i) => s.replaceAll(
-                      RegExp(r"\s*\" + garbage[i] + r"\s*",
-                          caseSensitive: false),
-                      " ",
-                    ))
+              garbage.length,
+              (s, i) => s.replaceAll(
+                RegExp(
+                  r'\s*\' + garbage[i] + r'\s*',
+                  caseSensitive: false,
+                ),
+                ' ',
+              ),
+            )
             .trim();
       }
-      if (!source.contains(" ")) {
+      if (!source.contains(' ')) {
         return source.take(fill ? count : 1).trim().uppercase;
       }
-      final initials = StringBuffer("");
-      final sourceParts = source.split(" ");
+      final initials = StringBuffer();
+      final sourceParts = source.split(' ');
       for (int i = 0; i < sourceParts.length; i++) {
         if (i == count) break;
         try {
           initials.write(sourceParts[i].trim().take());
         } catch (e) {
-          $debugPrint(e, source);
+          $debugPrint(e, tag: 'takeInitials');
         }
       }
       final vInitials = initials.toString();
@@ -148,7 +151,7 @@ extension StringCharacters on String {
   String skipLastWhile(bool Function(String) predicate) =>
       characters.skipLastWhile(predicate).toString();
 
-  String get afterDot => takeLastWhile((s) => s != ".");
+  String get afterDot => takeLastWhile((s) => s != '.');
 }
 
 extension StringConditionals on String {
@@ -163,17 +166,18 @@ extension StringConditionals on String {
   bool equalsIgnoreCase(String? s) => lowercase == s?.lowercase;
 
   bool containsIgnoreCase(String? s) =>
-      s == null ? false : lowercase.contains(s.lowercase);
+      s != null && lowercase.contains(s.lowercase);
 
   bool isPasswordStrong({int min = 8}) {
     if (isBlank) return false;
 
-    bool hasUppercase = contains(RegExp(r'[A-Z]'));
-    bool hasLowercase = contains(RegExp(r'[a-z]'));
-    bool hasDigits = contains(RegExp(r'[0-9]'));
-    bool hasSpecialCharacters = contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
-    bool hasNoWhitespace = !contains(RegExp(r'[\s]'));
-    bool hasMinLength = length >= min;
+    final bool hasUppercase = contains(RegExp('[A-Z]'));
+    final bool hasLowercase = contains(RegExp('[a-z]'));
+    final bool hasDigits = contains(RegExp('[0-9]'));
+    final bool hasSpecialCharacters =
+        contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
+    final bool hasNoWhitespace = !contains(RegExp(r'[\s]'));
+    final bool hasMinLength = length >= min;
 
     return hasUppercase &&
         hasLowercase &&
@@ -196,7 +200,7 @@ extension StringConversions on String {
   /// Lowercase first letter of string
   /// Example: Your Name => your Name
   String get lowercaseFirst => isBlank == true
-      ? ""
+      ? ''
       : length == 1
           ? lowercase
           : this[0].lowercase + substring(1);
@@ -204,15 +208,15 @@ extension StringConversions on String {
   /// Capitalize each word inside string
   /// Example: your name => Your Name
   String get capitalized => isBlank
-      ? ""
+      ? ''
       : length == 1
           ? uppercase
-          : split(" ").map((s) => s.capitalizedFirst).join(" ");
+          : split(' ').map((s) => s.capitalizedFirst).join(' ');
 
   /// Uppercase first letter inside string and let the others lowercase
   /// Example: your name => Your name
   String get capitalizedFirst => isBlank == true
-      ? ""
+      ? ''
       : length == 1
           ? uppercase
           : this[0].uppercase + substring(1).lowercase;
@@ -227,15 +231,8 @@ extension StringConversions on String {
 
   Uri? get uri => Uri.tryParse(this);
 
-  get json => jsonDecode(this);
-
-  get jsonOrString {
-    try {
-      return jsonDecode(this);
-    } catch (e) {
-      return this;
-    }
-  }
+  /// add ellipsis to the end of the string if it exceeds [max] length
+  String overflow(int max) => length > max ? '${substring(0, max)}…' : this;
 }
 
 extension StringBase64 on String {
@@ -243,7 +240,7 @@ extension StringBase64 on String {
     try {
       return isEmpty ? null : base64Decode(this);
     } catch (e) {
-      $debugPrint(e, "base64Decoded");
+      $debugPrint(e, tag: 'base64Decoded');
       return null;
     }
   }
@@ -253,7 +250,7 @@ extension StringBase64 on String {
       final bytes = toBytes();
       return bytes == null ? this : base64Encode(bytes);
     } catch (e) {
-      $debugPrint(e, "base64Encoded");
+      $debugPrint(e, tag: 'base64Encoded');
       return this;
     }
   }
@@ -264,7 +261,7 @@ extension StringToBytes on String {
     try {
       return utf8.encoder.convert(this);
     } catch (e) {
-      $debugPrint(e, "toBytes");
+      $debugPrint(e, tag: 'toBytes');
       return null;
     }
   }
@@ -273,7 +270,7 @@ extension StringToBytes on String {
     try {
       return utf8.encode(this);
     } catch (e) {
-      $debugPrint(e, "toUTF8");
+      $debugPrint(e, tag: 'toUTF8');
       return null;
     }
   }
@@ -284,7 +281,7 @@ extension StringFromBytes on Uint8List {
     try {
       return isEmpty ? null : base64Encode(this);
     } catch (e) {
-      $debugPrint(e, "base64Encoded");
+      $debugPrint(e, tag: 'base64Encoded');
       return null;
     }
   }
@@ -293,26 +290,37 @@ extension StringFromBytes on Uint8List {
     try {
       return utf8.decoder.convert(this);
     } catch (e) {
-      $debugPrint(e, "toUTF8");
+      $debugPrint(e, tag: 'toUTF8');
       return null;
     }
   }
 }
 
 extension StringToColor on String {
+  /// Parse hex [value] to [Color] if possible, otherwise null
   Color? toColor() {
     try {
-      final hex = replaceAll("#", "");
+      final hex = replaceAll('#', '');
       if (hex.length == 6) {
-        return Color(int.parse("FF$hex", radix: 16));
+        final hexInt = int.tryParse('FF$hex', radix: 16);
+        return hexInt == null ? null : Color(hexInt);
       } else if (hex.length == 8) {
-        return Color(int.parse(hex, radix: 16));
+        final hexInt = int.tryParse(hex, radix: 16);
+        return hexInt == null ? null : Color(hexInt);
       }
     } catch (e) {
-      $debugPrint(e, "toColor");
+      $debugPrint(e, tag: 'toColor');
     }
     return null;
   }
+}
+
+extension ColorToString on Color {
+  /// Convert [Color] to hex string. e.g. `CC000000`
+  String toHex() => value.toRadixString(16).padLeft(8, '0').toUpperCase();
+
+  /// Convert [Color] to hex string. e.g. `#CC000000`
+  String toHexHash() => '#${toHex()}';
 }
 
 extension StringToImageProvider on String {

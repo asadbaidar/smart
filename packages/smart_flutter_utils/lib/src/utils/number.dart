@@ -32,7 +32,7 @@ extension SizeNumber on num {
 }
 
 extension RepeatTaskNumber on num {
-  void repeatsFor<T>(Function apply) {
+  void repeatsFor(void Function() apply) {
     if (this > 0) {
       for (int i = 0; i < this; i++) {
         apply();
@@ -40,7 +40,7 @@ extension RepeatTaskNumber on num {
     }
   }
 
-  void repeatsForIndexed<T>(Function(int i) apply) {
+  void repeatsForIndexed(void Function(int i) apply) {
     if (this > 0) {
       for (int i = 0; i < this; i++) {
         apply(i);
@@ -75,4 +75,22 @@ extension RangeNumber on num {
   bool isRange(num start, num end) => this >= start && this <= end;
 
   bool isInRange(num start, num end) => this > start && this < end;
+}
+
+extension NumArithmetic on num {
+  double? divideBy(double? value) => value == null ? null : this / value;
+
+  double? multiplyBy(double? value) => value == null ? null : this * value;
+
+  double percent(double value) => this * (value / 100);
+
+  double get fifty => percent(50);
+
+  double get fourty => percent(40);
+
+  double get third => percent(33.33);
+
+  double get quarter => percent(25);
+
+  double get fifth => percent(20);
 }

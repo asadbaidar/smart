@@ -1,3 +1,19 @@
+## [1.0.0]
+
+* style: Applied strict lint rules
+* refactor: Breaking Change: Renamed `ApiState` to `DataState`
+* chore: Updated deprecated `backgroundColor` to `surfaceContainerColor`
+* feat: Added new collection extensions: `whereNot`, `withoutBlanks`, `nonNullValues`, `nonBlankValues`, `nonBlankStringValues`, `removed`, `takeLast`, `skipLast`
+* perf: Optimized Debouncer class to use Completer for handling Future completion
+* feat: Added type casting mehods: `$castInt`, `$castBool`, `$castColor`
+* feat: Add JSON utility methods
+* refactor: Breaking Change: renamed and updated parameters of logger methods
+* feat: Added number arithmetic extensions
+* feat: Added `RouteUri` and extension methods for routing
+* feat: Added `Snackbars` utility class for displaying snack bars
+* feat: Added types.dart file with utility typedefs and callbacks
+* feat: Added URL launcher utility methods
+
 ## [0.1.1]
 
 * Fixed BorderRadius nullable error.

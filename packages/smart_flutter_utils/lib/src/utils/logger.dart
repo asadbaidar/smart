@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, no_runtimetype_tostring
 part of 'utils.dart';
 
 abstract class SmartLogger {
@@ -7,63 +7,90 @@ abstract class SmartLogger {
 
   static SmartLogger? instance;
 
-  void logEvent({required String name, Map<String, Object?>? parameters});
+  void eventLog({required String name, Map<String, Object?>? parameters});
 
-  void _logEvent(info, tag, Object? name, {bool debug = false}) => logEvent(
-        name: name?.toString().notEmpty ?? (debug ? "DebugEvent" : "Event"),
+  void _eventLog(
+    dynamic info, {
+    String? tag,
+    StackTrace? stackTrace,
+    bool debug = false,
+  }) =>
+      eventLog(
+        name: tag?.notEmpty ?? (debug ? 'DebugEvent' : 'Event'),
         parameters: {
-          "time": DateTime.now(),
-          "tag": tag?.toString() ?? "null",
-          "info": info?.toString().trim() ?? "null",
+          'time': DateTime.now(),
+          'info': info?.toString().trim() ?? 'null',
+          'stackTrace': stackTrace?.toString() ?? 'null',
         },
       );
 }
 
-void $logDebug([info, tag, Object? name = ""]) {
+void $debugLog(dynamic info, {String? tag, StackTrace? stackTrace}) {
   if (SmartLogger.enableLogs) {
-    _logDebug(info, tag, name);
+    _debuglog(info, tag: tag, stackTrace: stackTrace);
   }
   if (SmartLogger.enableEvents) {
-    SmartLogger.instance?._logEvent(info, tag, name, debug: true);
+    SmartLogger.instance?._eventLog(info, tag: tag, debug: true);
   }
 }
 
-void $logPrint([info, tag, Object? name]) {
+void $printLog(dynamic info, {String? tag, StackTrace? stackTrace}) {
   if (SmartLogger.enableLogs) {
-    _logPrint(info, tag, name);
+    _printLog(info, tag: tag, stackTrace: stackTrace);
   }
   if (SmartLogger.enableEvents) {
-    SmartLogger.instance?._logEvent(info, tag, name);
+    SmartLogger.instance?._eventLog(
+      info,
+      tag: tag,
+      stackTrace: stackTrace,
+      debug: true,
+    );
   }
 }
 
 extension SmartLoggerX<T> on T {
-  void $debugPrint([info, tag]) {
-    $logDebug(
-      info ?? toString(),
-      tag,
-      runtimeType.toString(),
+  void $debugPrint(dynamic info, {String? tag, StackTrace? stackTrace}) {
+    $debugLog(
+      info,
+      tag: '${tag ?? runtimeType}',
+      stackTrace: stackTrace,
     );
   }
 
-  void $print([info, tag]) => $logPrint(
-        info ?? toString(),
-        tag,
-        runtimeType.toString(),
+  void $debugSelf({String? tag, StackTrace? stackTrace}) {
+    $debugLog(
+      this,
+      tag: '${tag ?? runtimeType}',
+      stackTrace: stackTrace,
+    );
+  }
+
+  void $print(dynamic info, {String? tag, StackTrace? stackTrace}) => $printLog(
+        info,
+        tag: '${tag ?? runtimeType}',
+        stackTrace: stackTrace,
+      );
+
+  void $printSelf({String? tag, StackTrace? stackTrace}) => $printLog(
+        this,
+        tag: '${tag ?? runtimeType}',
+        stackTrace: stackTrace,
       );
 }
 
-void _logDebug([info, tag, Object? name = ""]) {
-  final vTag = tag == null ? "" : "$tag: ";
+void _debuglog(dynamic info, {String? tag, StackTrace? stackTrace}) {
   developer.log(
-    "$vTag${info ?? ""}".trim(),
+    info.toString().trim(),
     time: DateTime.now(),
-    name: name?.toString() ?? "",
+    name: tag ?? 'debug.log',
+    stackTrace: stackTrace,
   );
 }
 
-void _logPrint([info, tag, Object? name]) {
-  final vName = name == null ? "" : "[$name] ";
-  final vTag = tag == null ? "" : "$tag: ";
-  print("$vName$vTag${info ?? ""}".trim());
+void _printLog(dynamic info, {String? tag, StackTrace? stackTrace}) {
+  print(
+    '[${tag ?? 'print.log'}] '
+    '${info?.toString().trim() ?? ''}'
+    '${stackTrace == null ? '' : '\n$stackTrace'}',
+  );
 }

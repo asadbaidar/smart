@@ -1,6 +1,8 @@
 part of 'utils.dart';
 
 class TimeAgo {
+  const TimeAgo._();
+
   static String _default = 'en-US';
 
   /// Sets the default [locale]. By default it is `en-US`.
@@ -13,7 +15,7 @@ class TimeAgo {
   static void setDefaultLocale(String locale) {
     timeago.setDefaultLocale(locale);
     _default = locale;
-    $logDebug(locale, 'Default locale set to', TimeAgo);
+    $debugLog(locale, tag: 'TimeAgo: Default locale set to');
   }
 
   /// Sets a [locale] with the provided [lookupMessages] to be available when
@@ -28,7 +30,7 @@ class TimeAgo {
   /// with the desired messages
   ///
   static void setLocaleMessages(String locale, LookupMessages lookupMessages) {
-    $logDebug(locale, 'Added ${lookupMessages.runtimeType} to', TimeAgo);
+    $debugLog(locale, tag: 'TimeAgo: Added Lookup messages to');
     timeago.setLocaleMessages(locale, lookupMessages);
   }
 
@@ -59,7 +61,7 @@ class TimeAgo {
               : date.formatMMMMdy_Y
           : timeago.format(
               date,
-              locale: (locale ?? _default).suffix("_short", doIf: short),
+              locale: (locale ?? _default).suffix('_short', doIf: short),
               clock: now,
               allowFromNow: withFuture,
             );

@@ -10,5 +10,5 @@ extension BottomBarThemeContext on BuildContext {
       theme.bottomNavigationBarTheme;
 
   /// The background color for bottom parts of the app i.e. bottom bars
-  Color get bottomBarColor => bottomBarTheme.color ?? backgroundColor;
+  Color get bottomBarColor => bottomBarTheme.color ?? surfaceContainerColor;
 }
