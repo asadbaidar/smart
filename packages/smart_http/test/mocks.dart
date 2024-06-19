@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:smart_http/smart_http.dart';
 
 /// The current server instance.
 HttpServer? _server;
@@ -193,4 +192,14 @@ class ByteStream extends StreamView<List<int>> {
 
   Stream<String> toStringStream([Encoding encoding = utf8]) =>
       encoding.decoder.bind(this);
+}
+
+extension on String {
+  dynamic get jsonOrString {
+    try {
+      return jsonDecode(this);
+    } catch (e) {
+      return this;
+    }
+  }
 }
