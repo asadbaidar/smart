@@ -90,7 +90,7 @@ class _SmartExpansionListViewState<PanelItem, ListItem>
     }
   }
 
-  void toggleExpanded(int index, [SmartExpansionPanel? panel]) {
+  void toggleExpanded(int index, [SmartExpansionPanel<ListItem>? panel]) {
     if (!widget.allowMultipleExpansion &&
         _lastExpanedIndex >= 0 &&
         _lastExpanedIndex != index) {
@@ -99,7 +99,7 @@ class _SmartExpansionListViewState<PanelItem, ListItem>
     _toggleExpanded(index, panel);
   }
 
-  void _toggleExpanded(int index, [SmartExpansionPanel? panel]) {
+  void _toggleExpanded(int index, [SmartExpansionPanel<ListItem>? panel]) {
     final isExpanded = _expansionStates[index] = !_expansionStates[index];
     panel?.onChangeExpansion?.call(isExpanded);
     if (isExpanded) {
@@ -113,7 +113,7 @@ class _SmartExpansionListViewState<PanelItem, ListItem>
 
   @override
   Widget build(BuildContext context) {
-    return SmartListView.sliver(
+    return SmartListView<dynamic>.sliver(
       topSliverBuilder: widget.topSliverBuilder,
       bottomSliverBuilder: widget.bottomSliverBuilder,
       replacementBuilder: widget.replacementBuilder,
@@ -132,19 +132,20 @@ class _SmartExpansionListViewState<PanelItem, ListItem>
       sliverBuilder: (context) => [
         widget._topPadding.spaceY.sliverBox,
         for (int index = 0; index < widget._itemCount; index++)
-          ...widget
-              .itemBuilder(
-                context,
-                index,
-                widget.items?[index],
-              )
-              .mapTo((SmartExpansionPanel panel) => panel._buildSLivers(
-                    context,
-                    toggleExpanded: () => toggleExpanded(index, panel),
-                    isExpanded: _expansionStates[index],
-                    startPadding: widget._startPadding,
-                    endPadding: widget._endPadding,
-                  )),
+          ...?$mapTo(
+            widget.itemBuilder(
+              context,
+              index,
+              widget.items?[index],
+            ),
+            (panel) => panel._buildSLivers(
+              context,
+              toggleExpanded: () => toggleExpanded(index, panel),
+              isExpanded: _expansionStates[index],
+              startPadding: widget._startPadding,
+              endPadding: widget._endPadding,
+            ),
+          ),
         widget._bottomPadding.spaceY.sliverBox,
       ],
     );
@@ -160,9 +161,13 @@ typedef SmartExpansionWidgetBuilder = Widget Function(
 typedef SmartExpansionCallback = void Function(bool isExpanded);
 
 typedef SmartPageFailureBuilder = Widget Function(
-    BuildContext context, VoidCallback reload);
+  BuildContext context,
+  VoidCallback reload,
+);
 typedef SmartPageButtonBuilder = Widget Function(
-    BuildContext context, VoidCallback load);
+  BuildContext context,
+  VoidCallback load,
+);
 
 /// An expansion panel that can be either expanded or collapsed.
 class SmartExpansionPanel<T> {
@@ -241,9 +246,11 @@ class SmartExpansionPanel<T> {
   void changePage({bool reload = false}) {
     final hasMore = reload || pageHasMore;
     if (canPaginate && hasMore) {
-      onPageChange!(pageInfo!.copyWith(
-        current: pageInfo!.current + (reload ? 0 : 1),
-      ));
+      onPageChange!(
+        pageInfo!.copyWith(
+          current: pageInfo!.current + (reload ? 0 : 1),
+        ),
+      );
     }
   }
 
@@ -332,11 +339,11 @@ class SmartExpansionPanel<T> {
   }
 }
 
-/// A [SmartExpansionPanel] that uses an [ApiState] for [PagingList] to build
+/// A [SmartExpansionPanel] that uses an [DataState] for [PagingList] to build
 ///  its content.
 class SmartExpansionPagingApiStatePanel<T> extends SmartExpansionPanel<T> {
   SmartExpansionPagingApiStatePanel({
-    required ApiState<PagingList<T>> apiState,
+    required DataState<PagingList<T>> dataState,
     required super.expansionBuilder,
     required super.itemBuilder,
     super.dividerBuilder,
@@ -361,17 +368,17 @@ class SmartExpansionPagingApiStatePanel<T> extends SmartExpansionPanel<T> {
     super.onExpand,
     super.onCollapse,
   }) : super(
-          items: apiState.data?.items,
-          replace: replace ?? apiState.isNotReady,
-          pageInfo: apiState.page,
-          pageLoading: apiState.isPageLoading,
-          pageFailure: apiState.isPageFailure,
-          pageReady: apiState.isReady,
+          items: dataState.data?.items,
+          replace: replace ?? dataState.isNotReady,
+          pageInfo: dataState.page,
+          pageLoading: dataState.isPageLoading,
+          pageFailure: dataState.isPageFailure,
+          pageReady: dataState.isReady,
           pageFailureBuilder: (context, reload) {
             return pageFailureBuilder?.call(context, reload) ??
                 SmartPagingButton(
                   onPressed: reload,
-                  text: apiState.errorMessage,
+                  text: dataState.errorMessage,
                 );
           },
         );

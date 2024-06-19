@@ -236,7 +236,7 @@ class SmartCupertinoSliverRefresh extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CupertinoSliverRefreshControl(
-        key: const Key("refresh-control"),
+        key: const Key('refresh-control'),
         refreshTriggerPullDistance: refreshTriggerPullDistance,
         refreshIndicatorExtent: refreshIndicatorExtent,
         builder: builder,

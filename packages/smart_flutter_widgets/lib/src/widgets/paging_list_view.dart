@@ -162,9 +162,11 @@ class SmartPagingListView<T> extends StatelessWidget {
   void changePage({bool reload = false}) {
     final hasMore = reload || pageHasMore;
     if (canPaginate && hasMore) {
-      onPageChange!(pageInfo!.copyWith(
-        current: pageInfo!.current + (reload ? 0 : 1),
-      ));
+      onPageChange!(
+        pageInfo!.copyWith(
+          current: pageInfo!.current + (reload ? 0 : 1),
+        ),
+      );
     }
   }
 
@@ -213,70 +215,71 @@ class SmartPagingListView<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => (itemBuilder != null
-          ? SmartListView<T>.builder(
-              topSliverBuilder: topSliverBuilder,
-              bottomSliverBuilder: _bottomSliverBuilder,
-              replacementBuilder: replacementBuilder,
-              replace: replace,
-              itemBuilder: itemBuilder!,
-              items: items,
-              dividerBuilder: dividerBuilder,
-              edgeDividerBuilder: edgeDividerBuilder,
-              headerBuilder: headerBuilder,
-              footerBuilder: footerBuilder,
-              sectionBuilder: sectionBuilder,
-              section: section,
-              itemCount: itemCount,
-              divider: divider,
-              edgeDivider: edgeDivider,
-              padding: padding,
-              addAutomaticKeepAlives: addAutomaticKeepAlives,
-              addRepaintBoundaries: addRepaintBoundaries,
-              addSemanticIndexes: addSemanticIndexes,
-              removeTopPadding: removeTopPadding,
-              scrollDirection: scrollDirection,
-              reverse: reverse,
-              controller: controller,
-              primary: primary,
-              physics: physics,
-              shrinkWrap: shrinkWrap,
-              cacheExtent: cacheExtent,
-              dragStartBehavior: dragStartBehavior,
-              keyboardDismissBehavior: keyboardDismissBehavior,
-              restorationId: restorationId,
-              clipBehavior: clipBehavior,
-            )
-          : SmartListView<T>.sliver(
-              sliverBuilder: sliverBuilder!,
-              topSliverBuilder: topSliverBuilder,
-              bottomSliverBuilder: _bottomSliverBuilder,
-              replacementBuilder: replacementBuilder,
-              replace: replace,
-              scrollDirection: scrollDirection,
-              reverse: reverse,
-              controller: controller,
-              primary: primary,
-              physics: physics,
-              shrinkWrap: shrinkWrap,
-              cacheExtent: cacheExtent,
-              dragStartBehavior: dragStartBehavior,
-              keyboardDismissBehavior: keyboardDismissBehavior,
-              restorationId: restorationId,
-              clipBehavior: clipBehavior,
-            ))
-      .applyIf(
-          pageWithScrolling && pagingEnabled,
-          (it) => NotificationListener<ScrollNotification>(
-                onNotification: setPagination,
-                child: it,
-              ));
+              ? SmartListView<T>.builder(
+                  topSliverBuilder: topSliverBuilder,
+                  bottomSliverBuilder: _bottomSliverBuilder,
+                  replacementBuilder: replacementBuilder,
+                  replace: replace,
+                  itemBuilder: itemBuilder!,
+                  items: items,
+                  dividerBuilder: dividerBuilder,
+                  edgeDividerBuilder: edgeDividerBuilder,
+                  headerBuilder: headerBuilder,
+                  footerBuilder: footerBuilder,
+                  sectionBuilder: sectionBuilder,
+                  section: section,
+                  itemCount: itemCount,
+                  divider: divider,
+                  edgeDivider: edgeDivider,
+                  padding: padding,
+                  addAutomaticKeepAlives: addAutomaticKeepAlives,
+                  addRepaintBoundaries: addRepaintBoundaries,
+                  addSemanticIndexes: addSemanticIndexes,
+                  removeTopPadding: removeTopPadding,
+                  scrollDirection: scrollDirection,
+                  reverse: reverse,
+                  controller: controller,
+                  primary: primary,
+                  physics: physics,
+                  shrinkWrap: shrinkWrap,
+                  cacheExtent: cacheExtent,
+                  dragStartBehavior: dragStartBehavior,
+                  keyboardDismissBehavior: keyboardDismissBehavior,
+                  restorationId: restorationId,
+                  clipBehavior: clipBehavior,
+                )
+              : SmartListView<T>.sliver(
+                  sliverBuilder: sliverBuilder!,
+                  topSliverBuilder: topSliverBuilder,
+                  bottomSliverBuilder: _bottomSliverBuilder,
+                  replacementBuilder: replacementBuilder,
+                  replace: replace,
+                  scrollDirection: scrollDirection,
+                  reverse: reverse,
+                  controller: controller,
+                  primary: primary,
+                  physics: physics,
+                  shrinkWrap: shrinkWrap,
+                  cacheExtent: cacheExtent,
+                  dragStartBehavior: dragStartBehavior,
+                  keyboardDismissBehavior: keyboardDismissBehavior,
+                  restorationId: restorationId,
+                  clipBehavior: clipBehavior,
+                ))
+          .applyIf(
+        pageWithScrolling && pagingEnabled,
+        (it) => NotificationListener<ScrollNotification>(
+          onNotification: setPagination,
+          child: it,
+        ),
+      );
 }
 
-/// A [SmartListView] that uses a [ApiState] to load data for [PagingList].
+/// A [SmartListView] that uses a [DataState] to load data for [PagingList].
 class SmartApiStatePagingListView<T> extends StatelessWidget {
   const SmartApiStatePagingListView.sliver({
     super.key,
-    required this.apiState,
+    required this.dataState,
     this.onPageChange,
     this.pageButtonBuilder,
     this.pageLoadingBuilder,
@@ -315,7 +318,7 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
 
   const SmartApiStatePagingListView.builder({
     super.key,
-    required this.apiState,
+    required this.dataState,
     this.onPageChange,
     this.pageButtonBuilder,
     this.pageLoadingBuilder,
@@ -352,7 +355,7 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
     this.clipBehavior = Clip.hardEdge,
   }) : sliverBuilder = null;
 
-  final ApiState<PagingList<T>> apiState;
+  final DataState<PagingList<T>> dataState;
   final SmartPagingCallback? onPageChange;
   final SmartPageButtonBuilder? pageButtonBuilder;
   final WidgetBuilder? pageLoadingBuilder;
@@ -393,27 +396,27 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
       pageFailureBuilder?.call(context, reload) ??
       SmartPagingButton(
         onPressed: reload,
-        text: apiState.errorMessage,
+        text: dataState.errorMessage,
       );
 
   @override
   Widget build(BuildContext context) => itemBuilder != null
       ? SmartPagingListView<T>.builder(
-          pageInfo: apiState.page,
+          pageInfo: dataState.page,
           onPageChange: onPageChange,
           pageButtonBuilder: pageButtonBuilder,
           pageLoadingBuilder: pageLoadingBuilder,
           pageFailureBuilder: _pageFailureBuilder,
-          pageLoading: apiState.isPageLoading,
-          pageFailure: apiState.isPageFailure,
-          pageReady: apiState.isReady,
+          pageLoading: dataState.isPageLoading,
+          pageFailure: dataState.isPageFailure,
+          pageReady: dataState.isReady,
           pageWithScrolling: pageWithScrolling,
           topSliverBuilder: topSliverBuilder,
           bottomSliverBuilder: bottomSliverBuilder,
           replacementBuilder: replacementBuilder,
-          replace: replace ?? apiState.isNotReady,
+          replace: replace ?? dataState.isNotReady,
           itemBuilder: itemBuilder!,
-          items: apiState.data?.items,
+          items: dataState.data?.items,
           dividerBuilder: dividerBuilder,
           edgeDividerBuilder: edgeDividerBuilder,
           headerBuilder: headerBuilder,
@@ -440,19 +443,19 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
           clipBehavior: clipBehavior,
         )
       : SmartPagingListView<T>.sliver(
-          pageInfo: apiState.page,
+          pageInfo: dataState.page,
           onPageChange: onPageChange,
           pageLoadingBuilder: pageLoadingBuilder,
           pageFailureBuilder: _pageFailureBuilder,
-          pageLoading: apiState.isPageLoading,
-          pageFailure: apiState.isPageFailure,
-          pageReady: apiState.isReady,
+          pageLoading: dataState.isPageLoading,
+          pageFailure: dataState.isPageFailure,
+          pageReady: dataState.isReady,
           pageWithScrolling: pageWithScrolling,
           sliverBuilder: sliverBuilder!,
           topSliverBuilder: topSliverBuilder,
           bottomSliverBuilder: bottomSliverBuilder,
           replacementBuilder: replacementBuilder,
-          replace: replace ?? apiState.isNotReady,
+          replace: replace ?? dataState.isNotReady,
           scrollDirection: scrollDirection,
           reverse: reverse,
           controller: controller,

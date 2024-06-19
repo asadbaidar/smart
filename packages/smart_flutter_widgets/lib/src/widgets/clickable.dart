@@ -9,11 +9,10 @@ class Clickable extends MouseRegion {
     double pressedOpacity = 0.4,
     VoidCallback? onTap,
     Widget? child,
-    Key? key,
+    super.key,
   }) : super(
-          key: key,
           cursor: enabled && onTap != null
-              ? MaterialStateMouseCursor.clickable
+              ? WidgetStateMouseCursor.clickable
               : SystemMouseCursors.basic,
           child: cupertino
               ? CupertinoButton(

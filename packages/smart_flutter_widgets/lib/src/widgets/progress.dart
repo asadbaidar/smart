@@ -7,16 +7,16 @@ class SmartLinearProgress extends StatelessWidget {
     this.height = 1.7,
     this.color,
     this.value,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   const SmartLinearProgress.standard({
     this.visible = true,
     this.height = 2.4,
     this.color,
     this.value,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final bool visible;
   final Color? color;
@@ -110,7 +110,8 @@ class SmartProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = this.color ?? context.primaryColor;
-    final backgroundColor = this.backgroundColor ?? context.backgroundColor;
+    final backgroundColor =
+        this.backgroundColor ?? context.surfaceContainerColor;
     final borderRadius = this.borderRadius ?? height;
     return SizedBox(
       width: width,

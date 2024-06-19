@@ -25,8 +25,9 @@ extension DateTimePickerContext on BuildContext {
       routeSettings: routeSettings,
     );
     if (time != null) {
-      onPick(withTime?.setting(timeOfDay: time) ??
-          SmartDate.from(timeOfDay: time));
+      onPick(
+        withTime?.setting(timeOfDay: time) ?? SmartDate.from(timeOfDay: time),
+      );
     } else {
       onCancel?.call();
     }
@@ -136,10 +137,14 @@ extension DateTimePickerContext on BuildContext {
               ),
     );
     if (range != null) {
-      onPick(withRange?.apply(() => withRange
-            ..start.setting(date: range.start)
-            ..end.setting(date: range.end)) ??
-          range);
+      onPick(
+        withRange?.apply(
+              () => withRange
+                ..start.setting(date: range.start)
+                ..end.setting(date: range.end),
+            ) ??
+            range,
+      );
     } else {
       onCancel?.call();
     }

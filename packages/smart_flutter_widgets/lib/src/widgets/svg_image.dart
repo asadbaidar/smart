@@ -17,12 +17,10 @@ abstract class SmartSvgProvider {
 class SmartSvgAsset extends SmartSvgProvider {
   SmartSvgAsset(
     String assetName, {
-    AssetBundle? bundle,
-    String? package,
+    super.bundle,
+    super.package,
   }) : super(
           assetName: assetName,
-          bundle: bundle,
-          package: package,
         );
 }
 

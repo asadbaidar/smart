@@ -77,7 +77,6 @@ class SmartBottomSheet<T> extends StatelessWidget {
     bool addSemanticIndexes = true,
     Axis scrollDirection = Axis.vertical,
     bool reverse = false,
-    ScrollController? controller,
     bool? primary,
     ScrollPhysics? physics = const AlwaysBouncingScrollPhysics(),
     bool shrinkWrap = false,
@@ -131,7 +130,6 @@ class SmartBottomSheet<T> extends StatelessWidget {
               keyboardDismissBehavior: keyboardDismissBehavior,
               restorationId: restorationId,
               clipBehavior: clipBehavior,
-              removeTopPadding: true,
             ));
 
   /// Creates a bottom sheet with a sliver list of items.
@@ -144,7 +142,6 @@ class SmartBottomSheet<T> extends StatelessWidget {
     required SmartSliverBuilder sliverBuilder,
     Axis scrollDirection = Axis.vertical,
     bool reverse = false,
-    ScrollController? controller,
     bool? primary,
     ScrollPhysics? physics = const AlwaysBouncingScrollPhysics(),
     bool shrinkWrap = false,
@@ -219,7 +216,7 @@ class SmartBottomSheet<T> extends StatelessWidget {
     ScrollController? scrollController,
   ) {
     return Material(
-      color: backgroundColor ?? context.backgroundColor,
+      color: backgroundColor ?? context.surfaceContainerColor,
       shape: shape,
       clipBehavior: Clip.antiAlias,
       child: MediaQuery.removePadding(

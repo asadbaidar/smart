@@ -119,8 +119,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile without fixed styles for easy customization.
   const SmartListTile.center({
@@ -205,8 +205,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile without fixed styles for easy customization & caupertino tap effect.
   const SmartListTile.cupertino({
@@ -291,8 +291,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile with detail accessory
   const SmartListTile.detail({
@@ -377,8 +377,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile with detail accessory and no filled leading
   const SmartListTile.detailNoFill({
@@ -463,8 +463,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile with detail accessory and should be used if have extended content
   const SmartListTile.detailExtend({
@@ -549,8 +549,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile with no accessory
   const SmartListTile.simple({
@@ -635,8 +635,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile with no accessory and no filled leading
   const SmartListTile.noFill({
@@ -721,8 +721,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile with no accessory and should be used if have extended content
   const SmartListTile.extend({
@@ -807,8 +807,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile with no accessory and dense paddings
   const SmartListTile.dense({
@@ -893,8 +893,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile with no accessory and medium paddings
   const SmartListTile.medium({
@@ -979,8 +979,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile with no accessory and centered content alignment
   const SmartListTile.simpleCenter({
@@ -1065,8 +1065,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile with no accessory and centered content alignment and no paddings
   const SmartListTile.noPad({
@@ -1151,8 +1151,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile with no accessory, w500 title and simple centered content alignment
   const SmartListTile.center500({
@@ -1237,8 +1237,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile having rich features with no accessory and top leading
   const SmartListTile.rich({
@@ -1323,8 +1323,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile having row features with no accessory and centered leading
   const SmartListTile.row({
@@ -1409,8 +1409,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile having row features with no accessory and top leading
   const SmartListTile.rowRich({
@@ -1495,8 +1495,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile having row features with no accessory and anchored leading at top
   const SmartListTile.rowExtend({
@@ -1581,8 +1581,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile with no accessory, no background and not filled but oval leading
   const SmartListTile.plain({
@@ -1667,8 +1667,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile with no accessory, no background, no side paddings, and not filled
   /// but oval leading.
@@ -1755,8 +1755,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile with no accessory, no background and no filled leading and
   /// have tinted accessory, and horizontal padding of 4dp.
@@ -1842,8 +1842,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Tile with no accessory, no background and no filled leading and
   /// have tinted accessory, and standard horizontal padding.
@@ -1929,8 +1929,8 @@ class SmartListTile extends StatelessWidget {
     this.onTap,
     this.onTapHead,
     this.onTapLeading,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final dynamic leading;
   final String? title;
@@ -2016,7 +2016,7 @@ class SmartListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final vTintAble = destructive == true ? true : (tintAble ?? false);
+    final vTintAble = destructive == true || (tintAble ?? false);
     final tintColor = destructive == true
         ? Colors.red
         : color ?? context.tileIconColor ?? context.secondaryColor;
@@ -2055,15 +2055,17 @@ class SmartListTile extends StatelessWidget {
     final vHighlighted = highlighted ?? checked ?? false;
     final vBackgroundColor = vHighlighted
         ? tintColor.highlighted
-        : backgroundColor ?? context.backgroundColor;
+        : backgroundColor ?? context.surfaceContainerColor;
     final vShowTrailing = isTrailingTop ||
         isTrailingBottom ||
         isTrailingTitle ||
         isTrailingSubtitle;
-    final vTrailingPadding =
-        trailingPadding?.mapIt((it) => EdgeInsetsDirectional.only(start: it)) ??
-            kRowTileTrailingPadding;
-    final vTitleStyle = (titleStyle ?? context.bodyMedium);
+    final vTrailingPadding = $mapTo(
+          trailingPadding,
+          (it) => EdgeInsetsDirectional.only(start: it),
+        ) ??
+        kRowTileTrailingPadding;
+    final vTitleStyle = titleStyle ?? context.bodyMedium;
     final vTitleColor =
         titleColor ?? (vTintAble ? tintColor : vTitleStyle?.color);
     final vSubtitleStyle = subtitleStyle ?? context.bodyMedium;
@@ -2133,7 +2135,6 @@ class SmartListTile extends StatelessWidget {
                   trailingPadding: vTrailingPadding,
                   trailing: vShowAccessory || isTrailingTop || isTrailingBottom
                       ? Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             if (trailingPadding != null)
@@ -2144,13 +2145,16 @@ class SmartListTile extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   if (isTrailingTop)
-                                    trailingTopChild?.mapIt((it) => IconTheme(
-                                              data: IconThemeData(
-                                                color: vTrailingColor,
-                                                size: trailingSize,
-                                              ),
-                                              child: it!,
-                                            )) ??
+                                    $mapTo(
+                                          trailingTopChild,
+                                          (it) => IconTheme(
+                                            data: IconThemeData(
+                                              color: vTrailingColor,
+                                              size: trailingSize,
+                                            ),
+                                            child: it,
+                                          ),
+                                        ) ??
                                         Text(
                                           trailingTop!,
                                           style: trailingStyle ??
@@ -2159,14 +2163,16 @@ class SmartListTile extends StatelessWidget {
                                   if (isTrailingTop && isTrailingBottom)
                                     const Space.y(1.5),
                                   if (isTrailingBottom)
-                                    trailingBottomChild
-                                            ?.mapIt((it) => IconTheme(
-                                                  data: IconThemeData(
-                                                    color: vTrailingColor,
-                                                    size: trailingSize,
-                                                  ),
-                                                  child: it!,
-                                                )) ??
+                                    $mapTo(
+                                          trailingBottomChild,
+                                          (it) => IconTheme(
+                                            data: IconThemeData(
+                                              color: vTrailingColor,
+                                              size: trailingSize,
+                                            ),
+                                            child: it,
+                                          ),
+                                        ) ??
                                         Text(
                                           trailingBottom!,
                                           style: trailingStyle ??
@@ -2179,7 +2185,8 @@ class SmartListTile extends StatelessWidget {
                                 padding: isTrailingTop || isTrailingBottom
                                     ? (detail
                                         ? const EdgeInsetsDirectional.only(
-                                            start: 2)
+                                            start: 2,
+                                          )
                                         : vTrailingPadding)
                                     : EdgeInsets.zero,
                                 child: IconTheme(
@@ -2193,69 +2200,71 @@ class SmartListTile extends StatelessWidget {
                           ],
                         )
                       : null,
-                  child: Column(children: [
-                    SmartRowTile.simple(
-                      child: titleChild,
-                      children: titleChildren,
-                      childrenPadding: titleChildrenPadding,
-                      text: title?.notEmpty,
-                      textStyle: vTitleStyle,
-                      textColor: vTitleColor?.applyIf(
-                        titleSubbed,
-                        (it) => it?.subbed,
+                  child: Column(
+                    children: [
+                      SmartRowTile.simple(
+                        child: titleChild,
+                        children: titleChildren,
+                        childrenPadding: titleChildrenPadding,
+                        text: title?.notEmpty,
+                        textStyle: vTitleStyle,
+                        textColor: vTitleColor?.applyIf(
+                          titleSubbed,
+                          (it) => it?.subbed,
+                        ),
+                        fontWeight: titleWeight,
+                        fontSize: titleSize,
+                        hint: titleHint,
+                        trailingText: trailingTitle,
+                        trailingStyle: trailingStyle,
+                        trailing: trailingTitleChild,
+                        trailingPadding: vTrailingPadding,
+                        trailingColor: trailingColor,
+                        trailingSize: trailingSize,
+                        color: tintColor,
+                        maxLines: titleMaxLines,
+                        expanded: titleExpanded,
+                        alignment: alignment == CrossAxisAlignment.center
+                            ? alignment
+                            : CrossAxisAlignment.baseline,
+                        enabled: enabled,
+                        cupertino: cupertino,
+                        padding: EdgeInsets.zero,
+                        onTap: onTapTitle,
                       ),
-                      fontWeight: titleWeight,
-                      fontSize: titleSize,
-                      hint: titleHint,
-                      trailingText: trailingTitle,
-                      trailingStyle: trailingStyle,
-                      trailing: trailingTitleChild,
-                      trailingPadding: vTrailingPadding,
-                      trailingColor: trailingColor,
-                      trailingSize: trailingSize,
-                      color: tintColor,
-                      maxLines: titleMaxLines,
-                      expanded: titleExpanded,
-                      alignment: alignment == CrossAxisAlignment.center
-                          ? alignment
-                          : CrossAxisAlignment.baseline,
-                      enabled: enabled,
-                      cupertino: cupertino,
-                      padding: EdgeInsets.zero,
-                      onTap: onTapTitle,
-                    ),
-                    if (vIsTitle && vIsSubtitle) verticalSpacing.spaceY,
-                    SmartRowTile.simple(
-                      child: subtitleChild,
-                      children: subtitleChildren,
-                      childrenPadding: subtitleChildrenPadding,
-                      text: subtitle?.notEmpty,
-                      textStyle: vSubtitleStyle,
-                      textColor: vSubtitleColor?.applyIf(
-                        subtitleSubbed,
-                        (it) => it?.subbed,
+                      if (vIsTitle && vIsSubtitle) verticalSpacing.spaceY,
+                      SmartRowTile.simple(
+                        child: subtitleChild,
+                        children: subtitleChildren,
+                        childrenPadding: subtitleChildrenPadding,
+                        text: subtitle?.notEmpty,
+                        textStyle: vSubtitleStyle,
+                        textColor: vSubtitleColor?.applyIf(
+                          subtitleSubbed,
+                          (it) => it?.subbed,
+                        ),
+                        fontWeight: subtitleWeight,
+                        fontSize: subtitleSize,
+                        hint: subtitleHint,
+                        trailingText: trailingSubtitle,
+                        trailingStyle: trailingStyle,
+                        trailing: trailingSubtitleChild,
+                        trailingPadding: vTrailingPadding,
+                        trailingColor: trailingColor,
+                        trailingSize: trailingSize,
+                        color: tintColor,
+                        maxLines: subtitleMaxLines,
+                        expanded: subtitleExpanded,
+                        alignment: alignment == CrossAxisAlignment.center
+                            ? alignment
+                            : CrossAxisAlignment.baseline,
+                        enabled: enabled,
+                        cupertino: cupertino,
+                        padding: EdgeInsets.zero,
+                        onTap: onTapSubtitle,
                       ),
-                      fontWeight: subtitleWeight,
-                      fontSize: subtitleSize,
-                      hint: subtitleHint,
-                      trailingText: trailingSubtitle,
-                      trailingStyle: trailingStyle,
-                      trailing: trailingSubtitleChild,
-                      trailingPadding: vTrailingPadding,
-                      trailingColor: trailingColor,
-                      trailingSize: trailingSize,
-                      color: tintColor,
-                      maxLines: subtitleMaxLines,
-                      expanded: subtitleExpanded,
-                      alignment: alignment == CrossAxisAlignment.center
-                          ? alignment
-                          : CrossAxisAlignment.baseline,
-                      enabled: enabled,
-                      cupertino: cupertino,
-                      padding: EdgeInsets.zero,
-                      onTap: onTapSubtitle,
-                    )
-                  ]),
+                    ],
+                  ),
                 ),
                 ...rows ?? [],
                 if (padding == null) SizedBox(height: vBottomPadding.half),

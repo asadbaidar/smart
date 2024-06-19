@@ -53,7 +53,7 @@ class SmartAppBar {
       preferredSize: Size.fromHeight(vToolbarHeight + vBottomHeight),
       child: SmartBuilder((context) {
         final vShowLeading = showLeading ?? Navigator.canPop(context);
-        var vLeadingWidth = leadingWidth ?? (leading == null ? 40.0 : null);
+        final vLeadingWidth = leadingWidth ?? (leading == null ? 40.0 : null);
         final vLeading = vShowLeading
             ? Flexible(
                 child: SizedBox(
@@ -93,9 +93,11 @@ class SmartAppBar {
             ),
           ),
           actions: vActions
-              ?.map((action) => action.paddingOnly(
-                    end: actionPadding,
-                  ))
+              ?.map(
+                (action) => action.paddingOnly(
+                  end: actionPadding,
+                ),
+              )
               .toList(),
         );
       }),
@@ -158,7 +160,7 @@ class SmartAppBar {
     double? leadingPadding,
     SmartRefreshCallback? onRefresh,
   }) {
-    if (!pinned) floating = true;
+    final vFloating = !pinned || floating;
     final vActions = interactive
         ? mergeActions && travelActions
             ? actions ?? largeActions
@@ -221,7 +223,7 @@ class SmartAppBar {
 
     double getFloatingBottomHeight({double visibility = 1.0}) {
       return vBottomHeight +
-          (floating || !smallTitle ? vLargeTitleHeight * visibility : 0.0);
+          (vFloating || !smallTitle ? vLargeTitleHeight * visibility : 0.0);
     }
 
     TextStyle? getTitleTextStyle(BuildContext context, {bool large = false}) {
@@ -256,8 +258,7 @@ class SmartAppBar {
               style: vStyle,
             ).widgetSpan(),
           ...?largeTitleActions
-              ?.map((e) => e.paddingOnly(start: 6).widgetSpan())
-              .toList()
+              ?.map((e) => e.paddingOnly(start: 6).widgetSpan()),
         ];
         vLargeTitle = RichText(
           key: const Key('title-large'),
@@ -290,64 +291,69 @@ class SmartAppBar {
     }
 
     return [
-      SliverLayoutBuilder(builder: (context, constraints) {
-        final appBarElevation = elevation ?? context.appBarElevation;
-        final vShowLeading = showLeading ?? Navigator.canPop(context);
-        final vToolbarHeight = toolbarHeight ?? context.toolbarHeight;
-        final vOffsetHeight = floating
-            ? vToolbarHeight
-            : smallTitle
-                ? vLargeTitleHeight
-                : vProgressHeight;
-        final vOffset = constraints.scrollOffset - refreshHeight;
-        final vElevation =
-            ((vOffset * 1.01) - vOffsetHeight).clamp(0.0, appBarElevation);
-        final vBlur = ((vOffset * 1.01) - vOffsetHeight).clamp(0.0, 6.0);
-        final vOpacity = ((vOffset - 15) / 15).clamp(0.0, 1.0);
-        final vDy = ((vOffset * -1.01) + 30).clamp(0.0, 14.0);
-        final vVisibility =
-            smallTitle ? ((25 - vOffset) / 25).clamp(0.0, 1.0) : 1.0;
-        final vOverlapping = vOffset >= vOffsetHeight;
-        var vLeadingWidth = leadingWidth ?? (leading == null ? 40.0 : null);
-        var vTitleSpacing = titleSpacing ??
-            (vShowLeading ? _kHorizontalPadding.half : _kHorizontalPadding);
-        final vLeading = vShowLeading
-            ? Flexible(
-                child: SizedBox(
-                  width: vLeadingWidth,
-                  child: (leading ?? const SmartBackButton()).paddingOnly(
-                    start: leadingPadding ?? (context.isIOS ? 9 : 2),
+      SliverLayoutBuilder(
+        builder: (context, constraints) {
+          final appBarElevation = elevation ?? context.appBarElevation;
+          final vShowLeading = showLeading ?? Navigator.canPop(context);
+          final vToolbarHeight = toolbarHeight ?? context.toolbarHeight;
+          final vOffsetHeight = vFloating
+              ? vToolbarHeight
+              : smallTitle
+                  ? vLargeTitleHeight
+                  : vProgressHeight;
+          final vOffset = constraints.scrollOffset - refreshHeight;
+          final vElevation =
+              ((vOffset * 1.01) - vOffsetHeight).clamp(0.0, appBarElevation);
+          final vBlur = ((vOffset * 1.01) - vOffsetHeight).clamp(0.0, 6.0);
+          final vOpacity = ((vOffset - 15) / 15).clamp(0.0, 1.0);
+          final vDy = ((vOffset * -1.01) + 30).clamp(0.0, 14.0);
+          final vVisibility =
+              smallTitle ? ((25 - vOffset) / 25).clamp(0.0, 1.0) : 1.0;
+          final vOverlapping = vOffset >= vOffsetHeight;
+          final vLeadingWidth = leadingWidth ?? (leading == null ? 40.0 : null);
+          final vTitleSpacing = titleSpacing ??
+              (vShowLeading ? _kHorizontalPadding.half : _kHorizontalPadding);
+          final vLeading = vShowLeading
+              ? Flexible(
+                  child: SizedBox(
+                    width: vLeadingWidth,
+                    child: (leading ?? const SmartBackButton()).paddingOnly(
+                      start: leadingPadding ?? (context.isIOS ? 9 : 2),
+                    ),
                   ),
-                ),
-              ).row()
-            : null;
+                ).row()
+              : null;
 
-        final Color? vBackgroundColor =
-            (backgroundColor ?? context.appBarBackgroundColor)
-                .applyIf(translucent && vBlur > 0, (it) => it?.translucent);
+          final Color? vBackgroundColor =
+              (backgroundColor ?? context.appBarBackgroundColor)
+                  .applyIf(translucent && vBlur > 0, (it) => it?.translucent);
 
-        final Color vForegroundColor =
-            foregroundColor ?? context.appBarForegroundColor;
+          final Color vForegroundColor =
+              foregroundColor ?? context.appBarForegroundColor;
 
-        final vTitle = customTitle ??
-            title?.mapIt((it) => !hasLargeTitle
-                ? Text(
-                    it,
-                    key: const Key("title-small-without-large"),
-                  )
-                : smallTitle
-                    ? Transform.translate(
-                        key: const Key("title-small-with-large"),
-                        offset: SmartOffset.only(dy: vDy),
-                        child: Opacity(
-                          opacity: vOpacity,
-                          child: Text(it),
-                        ),
+          final vTitle = customTitle ??
+              $mapTo(
+                title,
+                (it) => !hasLargeTitle
+                    ? Text(
+                        it,
+                        key: const Key('title-small-without-large'),
                       )
-                    : null);
+                    : smallTitle
+                        ? Transform.translate(
+                            key: const Key('title-small-with-large'),
+                            offset: SmartOffset.only(dy: vDy),
+                            child: Opacity(
+                              opacity: vOpacity,
+                              child: Text(it),
+                            ),
+                          )
+                        : null,
+              );
 
-        final nActions = vActions
-            ?.map((action) => Padding(
+          final nActions = vActions
+              ?.map(
+                (action) => Padding(
                   padding: EdgeInsetsDirectional.only(
                     end: actionPadding,
                   ),
@@ -360,80 +366,82 @@ class SmartAppBar {
                           ),
                         )
                       : action,
-                ))
-            .toList();
+                ),
+              )
+              .toList();
 
-        PreferredSize buildBottom() => PreferredSize(
-              key: const Key("bottom-fixed"),
-              preferredSize: Size.fromHeight(
-                getFloatingBottomHeight(visibility: vVisibility),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if ((floating || !smallTitle) && hasLargeTitle)
-                    SizedBox(
-                      height: vLargeTitleHeight * vVisibility,
-                      child: Opacity(
-                        opacity: vVisibility,
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.only(
-                            top: vLargeTitleTopPadding,
-                            start: vStartPadding,
-                            end: vEndPadding,
-                            bottom: vLargeTitleBottomPadding,
-                          ),
-                          child: buildLargeTitle(
-                            context,
-                            visibility: vVisibility,
+          PreferredSize buildBottom() => PreferredSize(
+                key: const Key('bottom-fixed'),
+                preferredSize: Size.fromHeight(
+                  getFloatingBottomHeight(visibility: vVisibility),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if ((vFloating || !smallTitle) && hasLargeTitle)
+                      SizedBox(
+                        height: vLargeTitleHeight * vVisibility,
+                        child: Opacity(
+                          opacity: vVisibility,
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.only(
+                              top: vLargeTitleTopPadding,
+                              start: vStartPadding,
+                              end: vEndPadding,
+                              bottom: vLargeTitleBottomPadding,
+                            ),
+                            child: buildLargeTitle(
+                              context,
+                              visibility: vVisibility,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  if (bottom != null)
-                    Padding(
-                      padding: EdgeInsetsDirectional.only(
-                        top: vTopPadding.half.half,
-                        bottom: vBottomPadding - 2,
-                        start: vStartPadding,
-                        end: vEndPadding,
+                    if (bottom != null)
+                      Padding(
+                        padding: EdgeInsetsDirectional.only(
+                          top: vTopPadding.half.half,
+                          bottom: vBottomPadding - 2,
+                          start: vStartPadding,
+                          end: vEndPadding,
+                        ),
+                        child: bottom,
                       ),
-                      child: bottom,
-                    ),
-                  if (belowBottom != null) ...belowBottom,
-                  if (vProgress != null &&
-                      (!(floating || !smallTitle) || vOverlapping))
-                    vProgress,
-                ],
-              ),
-            );
+                    if (belowBottom != null) ...belowBottom,
+                    if (vProgress != null &&
+                        (!(vFloating || !smallTitle) || vOverlapping))
+                      vProgress,
+                  ],
+                ),
+              );
 
-        final vBottom = floating || !smallTitle || vOverlapping && pinned
-            ? buildBottom()
-            : null;
-        return SliverAppBar(
-          leadingWidth: vLeadingWidth,
-          titleSpacing: vTitleSpacing,
-          automaticallyImplyLeading: false,
-          leading: vLeading,
-          centerTitle:
-              context.appBarCenterTitle(centerTitle, actions: nActions),
-          backgroundColor: vBackgroundColor,
-          foregroundColor: vForegroundColor,
-          title: vTitle,
-          titleTextStyle: getTitleTextStyle(context),
-          toolbarTextStyle: toolbarTextStyle ?? context.toolbarTextStyle,
-          actions: nActions,
-          elevation: vElevation,
-          toolbarHeight: vToolbarHeight,
-          shape: shape,
-          flexibleSpace: flexibleSpace,
-          //Blur(blur: _blur)
-          floating: floating,
-          pinned: pinned,
-          bottom: vBottom,
-        );
-      }),
+          final vBottom = vFloating || !smallTitle || vOverlapping && pinned
+              ? buildBottom()
+              : null;
+          return SliverAppBar(
+            leadingWidth: vLeadingWidth,
+            titleSpacing: vTitleSpacing,
+            automaticallyImplyLeading: false,
+            leading: vLeading,
+            centerTitle:
+                context.appBarCenterTitle(centerTitle, actions: nActions),
+            backgroundColor: vBackgroundColor,
+            foregroundColor: vForegroundColor,
+            title: vTitle,
+            titleTextStyle: getTitleTextStyle(context),
+            toolbarTextStyle: toolbarTextStyle ?? context.toolbarTextStyle,
+            actions: nActions,
+            elevation: vElevation,
+            toolbarHeight: vToolbarHeight,
+            shape: shape,
+            flexibleSpace: flexibleSpace,
+            //Blur(blur: _blur)
+            floating: vFloating,
+            pinned: pinned,
+            bottom: vBottom,
+          );
+        },
+      ),
       sliverRefresh ??
           Builder(
             builder: (context) => SmartCupertinoSliverRefresh.primary(
@@ -442,83 +450,86 @@ class SmartAppBar {
               backgroundColor: backgroundColor ?? context.appBarBackgroundColor,
             ),
           ),
-      SliverLayoutBuilder(builder: (context, constraints) {
-        final vElevation = elevation ?? context.appBarElevation;
-        final vToolbarHeight = toolbarHeight ?? context.toolbarHeight;
-        final vOffsetHeight = floating
-            ? vToolbarHeight
-            : smallTitle
-                ? vLargeTitleHeight
-                : vProgressHeight;
-        final vOffset = constraints.scrollOffset == 0
-            ? constraints.overlap
-            : constraints.scrollOffset;
-        final vOpacity = ((25 - vOffset) / 25).clamp(0.0, 1.0);
-        final vDy = vOffset.clamp(0.0, 20.0);
-        final vOverlapping = constraints.overlap >= vOffsetHeight;
-        final vHideBottom = floating ||
-            !(hasLargeTitle && smallTitle ||
-                !vOverlapping && bottom != null && belowBottom != null);
-        return SliverToBoxAdapter(
-          child: Material(
-            color: backgroundColor ?? context.appBarTheme.backgroundColor,
-            shadowColor: context.appBarTheme.shadowColor,
-            elevation: elevateAlways ? vElevation * 0.8 : 0,
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                vHideBottom
-                    ? Container(
-                        color: Colors.transparent,
-                        height: vElevation +
-                            (floating || !smallTitle ? 0 : vLargeTitleHeight),
-                      )
-                    : Column(
-                        key: const Key("bottom-animated"),
-                        children: [
-                          Container(
-                            padding: EdgeInsetsDirectional.only(
-                              start: vStartPadding,
-                              end: vEndPadding,
-                              bottom: vBottomPadding.half + 1,
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                if (hasLargeTitle && smallTitle)
-                                  Transform.translate(
-                                    offset: SmartOffset.only(dy: -vDy),
-                                    child: Opacity(
-                                      opacity: vOpacity,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                          top: vLargeTitleTopPadding,
-                                        ),
-                                        child: buildLargeTitle(context),
-                                      ),
-                                    ),
-                                  ),
-                                if (!vOverlapping && bottom != null)
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      top: vTopPadding.half,
-                                      bottom: vBottomPadding.half,
-                                    ),
-                                    child: bottom,
-                                  ),
-                              ],
-                            ),
+      SliverLayoutBuilder(
+        builder: (context, constraints) {
+          final vElevation = elevation ?? context.appBarElevation;
+          final vToolbarHeight = toolbarHeight ?? context.toolbarHeight;
+          final vOffsetHeight = vFloating
+              ? vToolbarHeight
+              : smallTitle
+                  ? vLargeTitleHeight
+                  : vProgressHeight;
+          final vOffset = constraints.scrollOffset == 0
+              ? constraints.overlap
+              : constraints.scrollOffset;
+          final vOpacity = ((25 - vOffset) / 25).clamp(0.0, 1.0);
+          final vDy = vOffset.clamp(0.0, 20.0);
+          final vOverlapping = constraints.overlap >= vOffsetHeight;
+          final vHideBottom = vFloating ||
+              !(hasLargeTitle && smallTitle ||
+                  !vOverlapping && bottom != null && belowBottom != null);
+          return SliverToBoxAdapter(
+            child: Material(
+              color: backgroundColor ?? context.appBarTheme.backgroundColor,
+              shadowColor: context.appBarTheme.shadowColor,
+              elevation: elevateAlways ? vElevation * 0.8 : 0,
+              child: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  if (vHideBottom)
+                    Container(
+                      color: Colors.transparent,
+                      height: vElevation +
+                          (vFloating || !smallTitle ? 0 : vLargeTitleHeight),
+                    )
+                  else
+                    Column(
+                      key: const Key('bottom-animated'),
+                      children: [
+                        Container(
+                          padding: EdgeInsetsDirectional.only(
+                            start: vStartPadding,
+                            end: vEndPadding,
+                            bottom: vBottomPadding.half + 1,
                           ),
-                          if (!vOverlapping && belowBottom != null)
-                            ...belowBottom,
-                        ],
-                      ),
-                if (!vOverlapping && vProgress != null) vProgress,
-              ],
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              if (hasLargeTitle && smallTitle)
+                                Transform.translate(
+                                  offset: SmartOffset.only(dy: -vDy),
+                                  child: Opacity(
+                                    opacity: vOpacity,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        top: vLargeTitleTopPadding,
+                                      ),
+                                      child: buildLargeTitle(context),
+                                    ),
+                                  ),
+                                ),
+                              if (!vOverlapping && bottom != null)
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    top: vTopPadding.half,
+                                    bottom: vBottomPadding.half,
+                                  ),
+                                  child: bottom,
+                                ),
+                            ],
+                          ),
+                        ),
+                        if (!vOverlapping && belowBottom != null)
+                          ...belowBottom,
+                      ],
+                    ),
+                  if (!vOverlapping && vProgress != null) vProgress,
+                ],
+              ),
             ),
-          ),
-        );
-      }),
+          );
+        },
+      ),
       ...?belowSlivers,
     ];
   }
@@ -639,7 +650,7 @@ class SmartAppBar {
       largeActions: largeActions,
       largeTitleActions: largeTitleActions,
       progress: progress,
-      customTitle: customTitle ?? title?.mapIt((it) => Text(it)),
+      customTitle: customTitle ?? $mapTo(title, (it) => Text(it)),
       customLargeTitle: customLargeTitle,
       title: title,
       titleStyle: titleStyle,
@@ -710,29 +721,31 @@ class SmartBackButton extends StatelessWidget {
     return SmartBuilder((context) {
       final vColor = color ?? context.appBarTheme.foregroundColor;
       return CupertinoButton(
-        key: const Key("back-button"),
+        key: const Key('back-button'),
         onPressed: onPressed ?? () => Navigator.maybePop(context),
         padding: padding,
         minSize: 0,
-        child: Row(children: [
-          IconTheme(
-            data: IconThemeData(
-              size: iconSize,
-              color: vColor,
-            ),
-            child: icon ??
-                Icon(context.isIOS ? Icons.arrow_back_ios : Icons.arrow_back),
-          ),
-          if (text != null)
-            Flexible(
-              child: Text(
-                text!,
-                style: textStyle?.copyWith(color: vColor),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
+        child: Row(
+          children: [
+            IconTheme(
+              data: IconThemeData(
+                size: iconSize,
+                color: vColor,
               ),
+              child: icon ??
+                  Icon(context.isIOS ? Icons.arrow_back_ios : Icons.arrow_back),
             ),
-        ]),
+            if (text != null)
+              Flexible(
+                child: Text(
+                  text!,
+                  style: textStyle?.copyWith(color: vColor),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ),
+          ],
+        ),
       );
     });
   }

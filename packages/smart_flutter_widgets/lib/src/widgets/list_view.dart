@@ -11,7 +11,10 @@ class AlwaysBouncingScrollPhysics extends BouncingScrollPhysics {
 }
 
 typedef SmartItemBuilder<T> = Widget Function(
-    BuildContext context, int index, T? data);
+  BuildContext context,
+  int index,
+  T? data,
+);
 typedef SmartSliverBuilder = List<Widget> Function(BuildContext context);
 typedef SmartSectionBuilder = Widget Function(
   BuildContext context,
@@ -110,20 +113,19 @@ class SmartListView<T> extends ScrollView {
     bool addRepaintBoundaries = true,
     bool addSemanticIndexes = true,
     bool removeTopPadding = true,
-    Axis scrollDirection = Axis.vertical,
-    bool reverse = false,
-    ScrollController? controller,
-    bool? primary,
-    ScrollPhysics? physics = const AlwaysBouncingScrollPhysics(),
-    bool shrinkWrap = false,
-    double? cacheExtent,
-    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
-    ScrollViewKeyboardDismissBehavior keyboardDismissBehavior =
-        ScrollViewKeyboardDismissBehavior.manual,
-    String? restorationId,
-    Clip clipBehavior = Clip.hardEdge,
+    super.scrollDirection,
+    super.reverse,
+    super.controller,
+    super.primary,
+    super.physics = const AlwaysBouncingScrollPhysics(),
+    super.shrinkWrap,
+    super.cacheExtent,
+    super.dragStartBehavior,
+    super.keyboardDismissBehavior,
+    super.restorationId,
+    super.clipBehavior,
   })  : sliverBuilder = ((_) => [
-              SmartSliverList(
+              SmartSliverList<T>(
                 itemExtent: itemExtent,
                 prototypeItem: prototypeItem,
                 padding: padding,
@@ -133,21 +135,10 @@ class SmartListView<T> extends ScrollView {
                 removeTopPadding: removeTopPadding,
                 scrollDirection: scrollDirection,
                 children: children,
-              )
+              ),
             ]),
         super(
-          scrollDirection: scrollDirection,
-          reverse: reverse,
-          controller: controller,
-          primary: primary,
-          physics: physics,
-          shrinkWrap: shrinkWrap,
-          cacheExtent: cacheExtent,
           semanticChildCount: children.length,
-          dragStartBehavior: dragStartBehavior,
-          keyboardDismissBehavior: keyboardDismissBehavior,
-          restorationId: restorationId,
-          clipBehavior: clipBehavior,
         );
 
   SmartListView.builder({
@@ -172,21 +163,20 @@ class SmartListView<T> extends ScrollView {
     bool addRepaintBoundaries = true,
     bool addSemanticIndexes = true,
     bool removeTopPadding = true,
-    Axis scrollDirection = Axis.vertical,
-    bool reverse = false,
-    ScrollController? controller,
-    bool? primary,
-    ScrollPhysics? physics = const AlwaysBouncingScrollPhysics(),
-    bool shrinkWrap = false,
-    double? cacheExtent,
-    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
-    ScrollViewKeyboardDismissBehavior keyboardDismissBehavior =
-        ScrollViewKeyboardDismissBehavior.manual,
-    String? restorationId,
-    Clip clipBehavior = Clip.hardEdge,
+    super.scrollDirection,
+    super.reverse,
+    super.controller,
+    super.primary,
+    super.physics = const AlwaysBouncingScrollPhysics(),
+    super.shrinkWrap,
+    super.cacheExtent,
+    super.dragStartBehavior,
+    super.keyboardDismissBehavior,
+    super.restorationId,
+    super.clipBehavior,
   })  : assert(itemBuilder != null),
         sliverBuilder = ((_) => [
-              SmartSliverList.builder(
+              SmartSliverList<T>.builder(
                 itemBuilder: itemBuilder,
                 items: items,
                 dividerBuilder: dividerBuilder,
@@ -204,21 +194,10 @@ class SmartListView<T> extends ScrollView {
                 addSemanticIndexes: addSemanticIndexes,
                 removeTopPadding: removeTopPadding,
                 scrollDirection: scrollDirection,
-              )
+              ),
             ]),
         super(
-          scrollDirection: scrollDirection,
-          reverse: reverse,
-          controller: controller,
-          primary: primary,
-          physics: physics,
-          shrinkWrap: shrinkWrap,
-          cacheExtent: cacheExtent,
           semanticChildCount: itemCount ?? items?.length,
-          dragStartBehavior: dragStartBehavior,
-          keyboardDismissBehavior: keyboardDismissBehavior,
-          restorationId: restorationId,
-          clipBehavior: clipBehavior,
         );
 
   const SmartListView.sliver({
@@ -228,32 +207,18 @@ class SmartListView<T> extends ScrollView {
     this.bottomSliverBuilder,
     this.replacementBuilder,
     this.replace = false,
-    Axis scrollDirection = Axis.vertical,
-    bool reverse = false,
-    ScrollController? controller,
-    bool? primary,
-    ScrollPhysics? physics = const AlwaysBouncingScrollPhysics(),
-    bool shrinkWrap = false,
-    double? cacheExtent,
-    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
-    ScrollViewKeyboardDismissBehavior keyboardDismissBehavior =
-        ScrollViewKeyboardDismissBehavior.manual,
-    String? restorationId,
-    Clip clipBehavior = Clip.hardEdge,
-  })  : assert(sliverBuilder != null),
-        super(
-          scrollDirection: scrollDirection,
-          reverse: reverse,
-          controller: controller,
-          primary: primary,
-          physics: physics,
-          shrinkWrap: shrinkWrap,
-          cacheExtent: cacheExtent,
-          dragStartBehavior: dragStartBehavior,
-          keyboardDismissBehavior: keyboardDismissBehavior,
-          restorationId: restorationId,
-          clipBehavior: clipBehavior,
-        );
+    super.scrollDirection,
+    super.reverse,
+    super.controller,
+    super.primary,
+    super.physics = const AlwaysBouncingScrollPhysics(),
+    super.shrinkWrap,
+    super.cacheExtent,
+    super.dragStartBehavior,
+    super.keyboardDismissBehavior,
+    super.restorationId,
+    super.clipBehavior,
+  }) : assert(sliverBuilder != null);
 
   final SmartSliverBuilder sliverBuilder;
   final SmartSliverBuilder? topSliverBuilder;

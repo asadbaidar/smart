@@ -1,8 +1,6 @@
 part of 'widgets.dart';
 
 class SmartBox extends StatelessWidget {
-  static const double kBoxSize = 30;
-
   const SmartBox({
     required this.child,
     this.color,
@@ -18,8 +16,8 @@ class SmartBox extends StatelessWidget {
     this.iconSize,
     this.margin = const EdgeInsets.symmetric(horizontal: 5),
     this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   const SmartBox.custom({
     required this.child,
@@ -36,8 +34,8 @@ class SmartBox extends StatelessWidget {
     this.iconSize,
     this.margin,
     this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   const SmartBox.zero({
     required this.child,
@@ -54,8 +52,8 @@ class SmartBox extends StatelessWidget {
     this.iconSize,
     this.margin,
     this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   const SmartBox.wrap({
     required this.child,
@@ -72,8 +70,8 @@ class SmartBox extends StatelessWidget {
     this.iconSize,
     this.margin,
     this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   const SmartBox.oval({
     required this.child,
@@ -90,8 +88,10 @@ class SmartBox extends StatelessWidget {
     this.iconSize,
     this.margin,
     this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
+
+  static const double kBoxSize = 30;
 
   final dynamic child;
   final Color? color;
@@ -150,16 +150,17 @@ class SmartBox extends StatelessWidget {
 
   double? get _size => filled ? boxSize : null;
 
-  Widget? _text() => $cast<Text>(child is! Widget &&
-                  child is! ImageProvider &&
-                  child is! SmartSvgProvider &&
-                  child is! IconData &&
-                  child?.toString().isNotEmpty == true
-              ? Text(child.toString())
-              : child)
-          ?.mapTo(
+  Widget? _text() => $cast<Text>(
+        child is! Widget &&
+                child is! ImageProvider &&
+                child is! SmartSvgProvider &&
+                child is! IconData &&
+                child?.toString().isNotEmpty == true
+            ? Text(child.toString())
+            : child,
+      )?.mapTo(
         (Text it) => Text(
-          it.data?.take(boxSize > kBoxSize ? 3 : 2).uppercase ?? "",
+          it.data?.take(boxSize > kBoxSize ? 3 : 2).uppercase ?? '',
           textAlign: TextAlign.center,
           style: GoogleFonts.voltaire(
             fontSize: fontSize ??
@@ -179,22 +180,23 @@ class SmartBox extends StatelessWidget {
       );
 
   Widget? _icon() => $cast<Icon>(
-          $cast<IconData>(child)?.mapTo((IconData it) => Icon(it)) ?? child)
-      ?.mapTo((Icon it) => IconTheme(
-            data: IconThemeData(
-              size: it.size ??
-                  iconSize ??
-                  (filled
-                      ? 18
-                      : small == true
-                          ? 24
-                          : 30),
-              color: tinted
-                  ? it.color ?? (filled ? color?.contrast : color)
-                  : null,
-            ),
-            child: it,
-          ));
+        $cast<IconData>(child)?.mapTo((IconData it) => Icon(it)) ?? child,
+      )?.mapTo(
+        (Icon it) => IconTheme(
+          data: IconThemeData(
+            size: it.size ??
+                iconSize ??
+                (filled
+                    ? 18
+                    : small == true
+                        ? 24
+                        : 30),
+            color:
+                tinted ? it.color ?? (filled ? color?.contrast : color) : null,
+          ),
+          child: it,
+        ),
+      );
 
   double get _iconSize =>
       iconSize ??
@@ -204,29 +206,35 @@ class SmartBox extends StatelessWidget {
               ? 24
               : boxSize);
 
-  Widget? _image() => $cast<ImageProvider>(child)?.mapIt((it) => Image(
-        image: it,
-        height: _iconSize,
-        width: _iconSize,
-        color: tinted
-            ? filled
-                ? color?.contrast
-                : color
-            : null,
-        fit: BoxFit.cover,
-      ));
+  Widget? _image() => $mapTo(
+        $cast<ImageProvider>(child),
+        (it) => Image(
+          image: it,
+          height: _iconSize,
+          width: _iconSize,
+          color: tinted
+              ? filled
+                  ? color?.contrast
+                  : color
+              : null,
+          fit: BoxFit.cover,
+        ),
+      );
 
-  Widget? _svg() => $cast<SmartSvgAsset>(child)?.mapIt((it) => SmartSvgImage(
-        it,
-        height: _iconSize,
-        width: _iconSize,
-        color: tinted
-            ? filled
-                ? color?.contrast
-                : color
-            : null,
-        fit: BoxFit.cover,
-      ));
+  Widget? _svg() => $mapTo(
+        $cast<SmartSvgAsset>(child),
+        (it) => SmartSvgImage(
+          it,
+          height: _iconSize,
+          width: _iconSize,
+          color: tinted
+              ? filled
+                  ? color?.contrast
+                  : color
+              : null,
+          fit: BoxFit.cover,
+        ),
+      );
 
   Widget? _child() => $cast<Widget>(child);
 }
