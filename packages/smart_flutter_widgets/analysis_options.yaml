@@ -15,7 +15,7 @@ linter:
     avoid_bool_literals_in_conditional_expressions: true
     always_declare_return_types: true
     eol_at_end_of_file: true
-    implicit_call_tearoffs: true
+    implicit_call_tearoffs: false
     join_return_with_assignment: true
     prefer_conditional_assignment: true
     prefer_constructors_over_static_methods: true

@@ -13,7 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  smart_flutter_utils: ^1.0.0
+  smart_flutter_utils: ^1.0.0+1
   auto_size_text: ^3.0.0
   google_fonts: ^6.2.1
   flutter_svg: ^2.0.10+1
