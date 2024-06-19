@@ -1,3 +1,7 @@
+## [1.0.0+1]
+
+* refactor: Restored mocks for testing
+
 ## [1.0.0]
 
 * style: Applied strict lint rules

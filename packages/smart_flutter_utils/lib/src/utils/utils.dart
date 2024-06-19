@@ -28,3 +28,4 @@ part 'types.dart';
 part 'url_launcher.dart';
 part 'snack_bars.dart';
 part 'route.dart';
+part 'mocks.dart';

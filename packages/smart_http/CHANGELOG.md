@@ -1,3 +1,7 @@
+## [1.0.0+1]
+
+* refactor: Hide private extension methods. 
+
 ## [1.0.0]
 
 * Initial stable release.
