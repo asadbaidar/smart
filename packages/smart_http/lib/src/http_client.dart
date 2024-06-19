@@ -452,7 +452,7 @@ extension ListDynamic on List<dynamic> {
       isEmpty ? this : map((e) => e ?? '').toList();
 }
 
-extension JsonString on String {
+extension on String {
   dynamic get jsonOrString {
     try {
       return jsonDecode(this);
