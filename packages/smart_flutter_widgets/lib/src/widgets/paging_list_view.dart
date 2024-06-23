@@ -275,11 +275,11 @@ class SmartPagingListView<T> extends StatelessWidget {
       );
 }
 
-/// A [SmartListView] that uses a [DataState] to load data for [PagingList].
+/// A [SmartListView] that uses a [Data] to load value for [PagingList].
 class SmartApiStatePagingListView<T> extends StatelessWidget {
   const SmartApiStatePagingListView.sliver({
     super.key,
-    required this.dataState,
+    required this.data,
     this.onPageChange,
     this.pageButtonBuilder,
     this.pageLoadingBuilder,
@@ -318,7 +318,7 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
 
   const SmartApiStatePagingListView.builder({
     super.key,
-    required this.dataState,
+    required this.data,
     this.onPageChange,
     this.pageButtonBuilder,
     this.pageLoadingBuilder,
@@ -355,7 +355,7 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
     this.clipBehavior = Clip.hardEdge,
   }) : sliverBuilder = null;
 
-  final DataState<PagingList<T>> dataState;
+  final Data<PagingList<T>> data;
   final SmartPagingCallback? onPageChange;
   final SmartPageButtonBuilder? pageButtonBuilder;
   final WidgetBuilder? pageLoadingBuilder;
@@ -396,27 +396,27 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
       pageFailureBuilder?.call(context, reload) ??
       SmartPagingButton(
         onPressed: reload,
-        text: dataState.errorMessage,
+        text: data.errorMessage,
       );
 
   @override
   Widget build(BuildContext context) => itemBuilder != null
       ? SmartPagingListView<T>.builder(
-          pageInfo: dataState.page,
+          pageInfo: data.page,
           onPageChange: onPageChange,
           pageButtonBuilder: pageButtonBuilder,
           pageLoadingBuilder: pageLoadingBuilder,
           pageFailureBuilder: _pageFailureBuilder,
-          pageLoading: dataState.isPageLoading,
-          pageFailure: dataState.isPageFailure,
-          pageReady: dataState.isReady,
+          pageLoading: data.isPageLoading,
+          pageFailure: data.isPageFailure,
+          pageReady: data.isReady,
           pageWithScrolling: pageWithScrolling,
           topSliverBuilder: topSliverBuilder,
           bottomSliverBuilder: bottomSliverBuilder,
           replacementBuilder: replacementBuilder,
-          replace: replace ?? dataState.isNotReady,
+          replace: replace ?? data.isNotReady,
           itemBuilder: itemBuilder!,
-          items: dataState.data?.items,
+          items: data.value?.items,
           dividerBuilder: dividerBuilder,
           edgeDividerBuilder: edgeDividerBuilder,
           headerBuilder: headerBuilder,
@@ -443,19 +443,19 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
           clipBehavior: clipBehavior,
         )
       : SmartPagingListView<T>.sliver(
-          pageInfo: dataState.page,
+          pageInfo: data.page,
           onPageChange: onPageChange,
           pageLoadingBuilder: pageLoadingBuilder,
           pageFailureBuilder: _pageFailureBuilder,
-          pageLoading: dataState.isPageLoading,
-          pageFailure: dataState.isPageFailure,
-          pageReady: dataState.isReady,
+          pageLoading: data.isPageLoading,
+          pageFailure: data.isPageFailure,
+          pageReady: data.isReady,
           pageWithScrolling: pageWithScrolling,
           sliverBuilder: sliverBuilder!,
           topSliverBuilder: topSliverBuilder,
           bottomSliverBuilder: bottomSliverBuilder,
           replacementBuilder: replacementBuilder,
-          replace: replace ?? dataState.isNotReady,
+          replace: replace ?? data.isNotReady,
           scrollDirection: scrollDirection,
           reverse: reverse,
           controller: controller,
