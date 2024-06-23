@@ -1,3 +1,8 @@
+## [1.0.0+1]
+
+* `smart_flutter_utils: ">=1.0.0 <2.0.0"`
+* `smart_flutter_widgets: ">=1.0.0 <2.0.0"`
+
 ## [1.0.0]
 
 * smart_flutter_utils: 1.0.0+1
