@@ -1,3 +1,7 @@
+## [1.0.0+1]
+
+* Updated to `smart_flutter_utils: 1.0.0+2`
+
 ## [1.0.0]
 
 * style: Applied strict lint rules

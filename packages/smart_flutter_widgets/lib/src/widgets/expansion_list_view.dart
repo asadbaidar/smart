@@ -339,11 +339,11 @@ class SmartExpansionPanel<T> {
   }
 }
 
-/// A [SmartExpansionPanel] that uses an [DataState] for [PagingList] to build
+/// A [SmartExpansionPanel] that uses an [Data] for [PagingList] to build
 ///  its content.
 class SmartExpansionPagingApiStatePanel<T> extends SmartExpansionPanel<T> {
   SmartExpansionPagingApiStatePanel({
-    required DataState<PagingList<T>> dataState,
+    required Data<PagingList<T>> data,
     required super.expansionBuilder,
     required super.itemBuilder,
     super.dividerBuilder,
@@ -368,17 +368,17 @@ class SmartExpansionPagingApiStatePanel<T> extends SmartExpansionPanel<T> {
     super.onExpand,
     super.onCollapse,
   }) : super(
-          items: dataState.data?.items,
-          replace: replace ?? dataState.isNotReady,
-          pageInfo: dataState.page,
-          pageLoading: dataState.isPageLoading,
-          pageFailure: dataState.isPageFailure,
-          pageReady: dataState.isReady,
+          items: data.value?.items,
+          replace: replace ?? data.isNotReady,
+          pageInfo: data.page,
+          pageLoading: data.isPageLoading,
+          pageFailure: data.isPageFailure,
+          pageReady: data.isReady,
           pageFailureBuilder: (context, reload) {
             return pageFailureBuilder?.call(context, reload) ??
                 SmartPagingButton(
                   onPressed: reload,
-                  text: dataState.errorMessage,
+                  text: data.errorMessage,
                 );
           },
         );
