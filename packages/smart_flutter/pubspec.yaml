@@ -3,7 +3,7 @@ description: A bundle package for all smart flutter packages including widgets, 
 homepage: https://github.com/asadbaidar/smart
 repository: https://github.com/asadbaidar/smart/tree/master/packages/smart_flutter
 
-version: 1.0.0
+version: 1.0.0+1
 
 environment:
   sdk: ">=3.4.0 <4.0.0"
@@ -13,8 +13,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  smart_flutter_utils: ^1.0.0+1
-  smart_flutter_widgets: ^1.0.0
+  smart_flutter_utils: ">=1.0.0 <2.0.0"
+  smart_flutter_widgets: ">=1.0.0 <2.0.0"
   
 dev_dependencies:
   flutter_test:
