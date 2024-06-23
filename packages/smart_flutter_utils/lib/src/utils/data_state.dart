@@ -1,6 +1,6 @@
 part of 'utils.dart';
 
-enum DataStatus {
+enum DataState {
   initial,
   loading,
   reloading,
@@ -12,246 +12,246 @@ enum DataStatus {
   pageFailure,
   ;
 
-  bool get isInitial => this == DataStatus.initial;
+  bool get isInitial => this == DataState.initial;
 
   bool get isNotInitial => !isInitial;
 
-  bool get isLoading => this == DataStatus.loading;
+  bool get isLoading => this == DataState.loading;
 
   bool get isNotLoading => !isLoading;
 
-  bool get isReloading => this == DataStatus.reloading;
+  bool get isReloading => this == DataState.reloading;
 
   bool get isNotReloading => !isReloading;
 
-  bool get isPageLoading => this == DataStatus.pageLoading;
+  bool get isPageLoading => this == DataState.pageLoading;
 
   bool get isNotPageLoading => !isPageLoading;
 
-  bool get isSearching => this == DataStatus.searching;
+  bool get isSearching => this == DataState.searching;
 
   bool get isNotSearching => !isSearching;
 
-  bool get isLoaded => this == DataStatus.loaded;
+  bool get isLoaded => this == DataState.loaded;
 
   bool get isNotLoaded => !isLoaded;
 
-  bool get isCanceled => this == DataStatus.canceled;
+  bool get isCanceled => this == DataState.canceled;
 
   bool get isNotCanceled => !isCanceled;
 
-  bool get isFailure => this == DataStatus.failure;
+  bool get isFailure => this == DataState.failure;
 
   bool get isNotFailure => !isFailure;
 
-  bool get isPageFailure => this == DataStatus.pageFailure;
+  bool get isPageFailure => this == DataState.pageFailure;
 
   bool get isNotPageFailure => !isPageFailure;
 
-  DataStatus toFailure() =>
-      isPageLoading ? DataStatus.pageFailure : DataStatus.failure;
+  DataState toFailure() =>
+      isPageLoading ? DataState.pageFailure : DataState.failure;
 }
 
-class DataState<T> extends Equatable {
-  const DataState({
+class Data<T> extends Equatable {
+  const Data({
     this.key = '',
-    this.data,
+    this.value,
     JsonObject? extras,
-    this.status = DataStatus.initial,
+    this.state = DataState.initial,
     this.error,
   }) : extras = extras ?? const {};
 
-  const DataState.initial({
+  const Data.initial({
     this.key = '',
-    this.data,
+    this.value,
     JsonObject? extras,
     this.error,
-  })  : status = DataStatus.initial,
+  })  : state = DataState.initial,
         extras = extras ?? const {};
 
-  const DataState.loading({
+  const Data.loading({
     this.key = '',
-    this.data,
+    this.value,
     JsonObject? extras,
     this.error,
-  })  : status = DataStatus.loading,
+  })  : state = DataState.loading,
         extras = extras ?? const {};
 
-  const DataState.reloading({
+  const Data.reloading({
     this.key = '',
-    this.data,
+    this.value,
     JsonObject? extras,
     this.error,
-  })  : status = DataStatus.reloading,
+  })  : state = DataState.reloading,
         extras = extras ?? const {};
 
-  const DataState.pageLoading({
+  const Data.pageLoading({
     this.key = '',
-    this.data,
+    this.value,
     JsonObject? extras,
     this.error,
-  })  : status = DataStatus.pageLoading,
+  })  : state = DataState.pageLoading,
         extras = extras ?? const {};
 
-  const DataState.searching({
+  const Data.searching({
     this.key = '',
-    this.data,
+    this.value,
     JsonObject? extras,
     this.error,
-  })  : status = DataStatus.searching,
+  })  : state = DataState.searching,
         extras = extras ?? const {};
 
-  const DataState.loaded({
+  const Data.loaded({
     this.key = '',
-    this.data,
+    this.value,
     JsonObject? extras,
     this.error,
-  })  : status = DataStatus.loaded,
+  })  : state = DataState.loaded,
         extras = extras ?? const {};
 
-  const DataState.canceled({
+  const Data.canceled({
     this.key = '',
-    this.data,
+    this.value,
     JsonObject? extras,
     this.error,
-  })  : status = DataStatus.canceled,
+  })  : state = DataState.canceled,
         extras = extras ?? const {};
 
-  const DataState.failure({
+  const Data.failure({
     this.key = '',
-    this.data,
+    this.value,
     JsonObject? extras,
     this.error,
-  })  : status = DataStatus.failure,
+  })  : state = DataState.failure,
         extras = extras ?? const {};
 
-  const DataState.pageFailure({
+  const Data.pageFailure({
     this.key = '',
-    this.data,
+    this.value,
     JsonObject? extras,
     this.error,
-  })  : status = DataStatus.pageFailure,
+  })  : state = DataState.pageFailure,
         extras = extras ?? const {};
 
   final String key;
-  final T? data;
+  final T? value;
   final JsonObject extras;
-  final DataStatus status;
+  final DataState state;
   final dynamic error;
 
-  DataState<T> copyWith({
+  Data<T> copyWith({
     String? key,
-    T? data,
+    T? value,
     JsonObject? extras,
-    DataStatus? status,
+    DataState? state,
     dynamic error,
   }) {
-    return DataState<T>(
+    return Data<T>(
       key: key ?? this.key,
-      data:
-          data != null && this.status.isPageLoading && status?.isLoaded == true
-              ? ($cast<PagingList<dynamic>>(this.data)
-                      ?.mergeWith(data as PagingList) ??
-                  data) as T
-              : data ?? this.data,
+      value:
+          value != null && this.state.isPageLoading && state?.isLoaded == true
+              ? ($cast<PagingList<dynamic>>(this.value)
+                      ?.mergeWith(value as PagingList) ??
+                  value) as T
+              : value ?? this.value,
       extras: extras ?? this.extras,
-      status: status ?? this.status,
-      error: status?.isLoaded == true ? null : error ?? this.error,
+      state: state ?? this.state,
+      error: state?.isLoaded == true ? null : error ?? this.error,
     );
   }
 
-  DataState<T> toLoading({
+  Data<T> toLoading({
     String? key,
-    T? data,
+    T? value,
     JsonObject? extras,
   }) =>
       copyWith(
         key: key,
-        data: data,
+        value: value,
         extras: extras,
-        status: DataStatus.loading,
+        state: DataState.loading,
       );
 
-  DataState<T> toReloading({
+  Data<T> toReloading({
     String? key,
-    T? data,
+    T? value,
     JsonObject? extras,
   }) =>
       copyWith(
         key: key,
-        data: data,
+        value: value,
         extras: extras,
-        status: DataStatus.reloading,
+        state: DataState.reloading,
       );
 
-  DataState<T> toPageLoading({
+  Data<T> toPageLoading({
     String? key,
-    T? data,
+    T? value,
     JsonObject? extras,
   }) =>
       copyWith(
         key: key,
-        data: data,
+        value: value,
         extras: extras,
-        status: DataStatus.pageLoading,
+        state: DataState.pageLoading,
       );
 
-  DataState<T> toSearching({
+  Data<T> toSearching({
     String? key,
-    T? data,
+    T? value,
     JsonObject? extras,
   }) =>
       copyWith(
         key: key,
-        data: data,
+        value: value,
         extras: extras,
-        status: DataStatus.searching,
+        state: DataState.searching,
       );
 
-  DataState<T> toLoaded({
+  Data<T> toLoaded({
     String? key,
-    T? data,
+    T? value,
     JsonObject? extras,
   }) =>
       copyWith(
         key: key,
-        data: data,
+        value: value,
         extras: extras,
-        status: DataStatus.loaded,
+        state: DataState.loaded,
       );
 
-  DataState<T> toCanceled({
+  Data<T> toCanceled({
     String? key,
     dynamic error,
   }) =>
       copyWith(
         key: key,
         error: error,
-        status: DataStatus.canceled,
+        state: DataState.canceled,
       );
 
-  DataState<T> toFailure({
+  Data<T> toFailure({
     String? key,
     dynamic error,
   }) =>
       copyWith(
         key: key,
         error: error,
-        status: DataStatus.failure,
+        state: DataState.failure,
       );
 
-  DataState<T> toPageFailure({
+  Data<T> toPageFailure({
     String? key,
     dynamic error,
   }) =>
       copyWith(
         key: key,
         error: error,
-        status: DataStatus.pageFailure,
+        state: DataState.pageFailure,
       );
 
   PageInfo get page =>
-      data is PagingList ? (data! as PagingList).page : const PageInfo();
+      value is PagingList ? (value! as PagingList).page : const PageInfo();
 
   String get errorMessage {
     final e = error;
@@ -262,47 +262,47 @@ class DataState<T> extends Equatable {
         : '';
   }
 
-  bool get isInitial => status.isInitial;
+  bool get isInitial => state.isInitial;
 
-  bool get isNotInitial => status.isNotInitial;
+  bool get isNotInitial => state.isNotInitial;
 
-  bool get isLoading => status.isLoading;
+  bool get isLoading => state.isLoading;
 
-  bool get isNotLoading => status.isNotLoading;
+  bool get isNotLoading => state.isNotLoading;
 
-  bool get isReloading => status.isReloading;
+  bool get isReloading => state.isReloading;
 
-  bool get isNotReloading => status.isNotReloading;
+  bool get isNotReloading => state.isNotReloading;
 
-  bool get isPageLoading => status.isPageLoading;
+  bool get isPageLoading => state.isPageLoading;
 
-  bool get isNotPageLoading => status.isNotPageLoading;
+  bool get isNotPageLoading => state.isNotPageLoading;
 
-  bool get isSearching => status.isSearching;
+  bool get isSearching => state.isSearching;
 
-  bool get isNotSearching => status.isNotSearching;
+  bool get isNotSearching => state.isNotSearching;
 
-  bool get isLoaded => status.isLoaded;
+  bool get isLoaded => state.isLoaded;
 
-  bool get isNotLoaded => status.isNotLoaded;
+  bool get isNotLoaded => state.isNotLoaded;
 
-  bool get isCanceled => status.isCanceled;
+  bool get isCanceled => state.isCanceled;
 
-  bool get isNotCanceled => status.isNotCanceled;
+  bool get isNotCanceled => state.isNotCanceled;
 
-  bool get isFailure => status.isFailure;
+  bool get isFailure => state.isFailure;
 
-  bool get isNotFailure => status.isNotFailure;
+  bool get isNotFailure => state.isNotFailure;
 
-  bool get isPageFailure => status.isPageFailure;
+  bool get isPageFailure => state.isPageFailure;
 
-  bool get isNotPageFailure => status.isNotPageFailure;
+  bool get isNotPageFailure => state.isNotPageFailure;
 
   bool get isEmpty {
-    final vData = data;
-    return vData == null ||
-        vData is List && vData.isEmpty ||
-        vData is String && vData.isEmpty;
+    final value = this.value;
+    return value == null ||
+        value is List && value.isEmpty ||
+        value is String && value.isEmpty;
   }
 
   bool get isNotEmpty => !isEmpty;
@@ -332,9 +332,47 @@ class DataState<T> extends Equatable {
   @override
   List<Object?> get props => [
         key,
-        data,
+        value,
         extras,
-        status,
+        state,
         error,
       ];
+}
+
+typedef OnData<T, R> = R Function(T data);
+
+extension DataWhenState<T> on Data<T> {
+  R when<R>({
+    OnData<Data<T>, R>? initial,
+    OnData<Data<T>, R>? loading,
+    OnData<Data<T>, R>? reloading,
+    OnData<Data<T>, R>? pageLoading,
+    OnData<Data<T>, R>? searching,
+    OnData<Data<T>, R>? loaded,
+    OnData<Data<T>, R>? canceled,
+    OnData<Data<T>, R>? failure,
+    OnData<Data<T>, R>? pageFailure,
+    required OnData<Data<T>, R> otherwise,
+  }) {
+    switch (state) {
+      case DataState.initial:
+        return initial?.call(this) ?? otherwise(this);
+      case DataState.loading:
+        return loading?.call(this) ?? otherwise(this);
+      case DataState.reloading:
+        return reloading?.call(this) ?? otherwise(this);
+      case DataState.pageLoading:
+        return pageLoading?.call(this) ?? otherwise(this);
+      case DataState.searching:
+        return searching?.call(this) ?? otherwise(this);
+      case DataState.loaded:
+        return loaded?.call(this) ?? otherwise(this);
+      case DataState.canceled:
+        return canceled?.call(this) ?? otherwise(this);
+      case DataState.failure:
+        return failure?.call(this) ?? otherwise(this);
+      case DataState.pageFailure:
+        return pageFailure?.call(this) ?? otherwise(this);
+    }
+  }
 }
