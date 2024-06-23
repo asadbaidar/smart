@@ -1,3 +1,10 @@
+## [1.0.0+2]
+
+* feat: Added `Data.when` extension method
+Breaking Change:
+* refactor: Renamed `DataState` to `Data`
+* refactor: Renamed `DataStatus` to `DataState`
+
 ## [1.0.0+1]
 
 * refactor: Restored mocks for testing
