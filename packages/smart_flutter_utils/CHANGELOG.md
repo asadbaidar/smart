@@ -1,3 +1,7 @@
+## [1.0.1+1]
+
+* chore: Formatted the code and updated dependencies
+
 ## [1.0.1]
 
 * feat: Added validators:

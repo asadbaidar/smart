@@ -3,7 +3,7 @@ description: Utility wrappers and extensions to make flutter easy and smart.
 homepage: https://github.com/asadbaidar/smart
 repository: https://github.com/asadbaidar/smart/tree/master/packages/smart_flutter_utils
 
-version: 1.0.1
+version: 1.0.1+1
 
 environment:
   sdk: ">=3.4.4 <4.0.0"
@@ -13,7 +13,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  smart_http: ^1.0.0+1
+  smart_http: ">=1.0.0 <2.0.0"
+
   equatable: ^2.0.5
   collection: ^1.18.0
   timeago: ^3.7.0

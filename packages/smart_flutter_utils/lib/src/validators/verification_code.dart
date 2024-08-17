@@ -1,4 +1,3 @@
-
 import 'package:smart_flutter_utils/src/validators/validators.dart';
 
 enum VerificationCodeValidationError { empty, small }
