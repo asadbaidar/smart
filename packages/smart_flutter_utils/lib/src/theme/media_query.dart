@@ -20,5 +20,5 @@ extension MediaQueryContext on BuildContext {
   double get screenHeight => screenSize.height;
 
   /// similar to [MediaQuery.sizeOf(context).shortestSide]
-  double get screenShortestSide => screenSize.shortestSide; 
+  double get screenShortestSide => screenSize.shortestSide;
 }
