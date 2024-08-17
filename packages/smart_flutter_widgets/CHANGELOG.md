@@ -1,3 +1,8 @@
+## [1.0.0+2]
+
+* refacor: renamed `SmartApiStatePagingListView` to `SmartDataPagingListView`
+* chore: updated `smart_flutter_utils: 1.0.1`
+
 ## [1.0.0+1]
 
 * Updated to `smart_flutter_utils: 1.0.0+2`

@@ -276,8 +276,8 @@ class SmartPagingListView<T> extends StatelessWidget {
 }
 
 /// A [SmartListView] that uses a [Data] to load value for [PagingList].
-class SmartApiStatePagingListView<T> extends StatelessWidget {
-  const SmartApiStatePagingListView.sliver({
+class SmartDataPagingListView<T> extends StatelessWidget {
+  const SmartDataPagingListView.sliver({
     super.key,
     required this.data,
     this.onPageChange,
@@ -314,11 +314,13 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
         itemBuilder = null,
         section = null,
         sectionBuilder = null,
-        padding = null;
+        padding = null,
+        items = null;
 
-  const SmartApiStatePagingListView.builder({
+  const SmartDataPagingListView.builder({
     super.key,
     required this.data,
+    this.items,
     this.onPageChange,
     this.pageButtonBuilder,
     this.pageLoadingBuilder,
@@ -356,6 +358,7 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
   }) : sliverBuilder = null;
 
   final Data<PagingList<T>> data;
+  final List<T>? items;
   final SmartPagingCallback? onPageChange;
   final SmartPageButtonBuilder? pageButtonBuilder;
   final WidgetBuilder? pageLoadingBuilder;
@@ -416,7 +419,7 @@ class SmartApiStatePagingListView<T> extends StatelessWidget {
           replacementBuilder: replacementBuilder,
           replace: replace ?? data.isNotReady,
           itemBuilder: itemBuilder!,
-          items: data.value?.items,
+          items: items ?? data.value?.items,
           dividerBuilder: dividerBuilder,
           edgeDividerBuilder: edgeDividerBuilder,
           headerBuilder: headerBuilder,
