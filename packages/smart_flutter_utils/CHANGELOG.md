@@ -1,3 +1,24 @@
+## [1.0.1]
+
+* feat: Added validators:
+    - `email.dart`
+    - `file.dart`
+    - `form_input.dart`
+    - `password.dart`
+    - `phone_number.dart`
+    - `positive_int.dart`
+    - `text_input.dart`
+    - `validators.dart`
+    - `verification_code.dart`
+
+* feat: Added cache helpers:
+    - `cache_storage.dart`
+    - `cache.dart`
+    - `cached_bloc.dart`
+    - `secure_storage.dart`
+
+* refactor: route utils
+
 ## [1.0.0+2]
 
 * feat: Added `Data.when` extension method

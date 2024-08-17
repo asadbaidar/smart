@@ -39,6 +39,10 @@ extension GlobalObject on Object {
   /// [apply] mapping with dynamic parameter and [R] as return value
   R mapIt<R>(R Function(dynamic it) apply) => apply(this);
 
+  /// [apply] mapping on current list and [R] as return type of list elements
+  List<R>? mapToList<T, R>(R Function(T it) apply) =>
+      $cast<List<T>>(this)?.map<R>(apply).toList();
+
   /// Lets [apply] with [T] as parameter
   T let<T>(T Function(T) apply) => apply(this as T);
 
