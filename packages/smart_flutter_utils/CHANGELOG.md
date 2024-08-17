@@ -1,3 +1,7 @@
+## [1.0.1+2]
+
+* chore: exported cache files
+
 ## [1.0.1+1]
 
 * chore: Formatted the code and updated dependencies
