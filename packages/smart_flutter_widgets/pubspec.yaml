@@ -3,7 +3,7 @@ description: Widget components and extensions to make flutter easy and smart.
 homepage: https://github.com/asadbaidar/smart
 repository: https://github.com/asadbaidar/smart/tree/master/packages/smart_flutter_widgets
 
-version: 1.0.0+2
+version: 1.0.0+3
 
 environment:
   sdk: ">=3.4.0 <4.0.0"
@@ -13,7 +13,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  smart_flutter_utils: ^1.0.1
+  smart_flutter_utils: ">=1.0.0 <2.0.0"
+
   auto_size_text: ^3.0.0
   google_fonts: ^6.2.1
   flutter_svg: ^2.0.10+1

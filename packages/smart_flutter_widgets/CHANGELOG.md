@@ -1,3 +1,7 @@
+## [1.0.0+3]
+
+* chore: updated dependencies
+
 ## [1.0.0+2]
 
 * refacor: renamed `SmartApiStatePagingListView` to `SmartDataPagingListView`
