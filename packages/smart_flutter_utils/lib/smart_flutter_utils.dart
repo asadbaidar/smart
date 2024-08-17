@@ -6,3 +6,4 @@ export 'package:url_launcher/url_launcher.dart';
 
 export 'src/theme/theme.dart';
 export 'src/utils/utils.dart';
+export 'src/validators/validators.dart';
