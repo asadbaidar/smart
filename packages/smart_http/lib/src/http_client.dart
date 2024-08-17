@@ -396,12 +396,10 @@ class HttpClient {
   Future<HttpException> decodeError<T>(DioException error) async {
     final response = error.response;
     final originalError = error.error;
+    final statusCode = response?.statusCode ?? 0;
     final data = response != null ? await decodeData<T>(response.data) : null;
-    final message =
-        data is Map<String, dynamic> ? data['message']?.toString() : null;
-    final messageOrError = message ?? error.message;
-    final statusCode = response?.statusCode;
-    switch (statusCode ?? 0) {
+    final messageOrError = decodeErrorMessage(data, statusCode) ?? error.message;
+    switch (statusCode) {
       case 400:
         return BadRequestException(messageOrError);
       case 401:
@@ -415,9 +413,24 @@ class HttpClient {
           return const NoInternetException();
         }
         return NoDataException(
-          statusCode != null ? '$statusCode: ' : '',
+          statusCode != 0 ? '$statusCode: ' : '',
         );
     }
+  }
+
+  /// decode error messages from the response data
+  String? decodeErrorMessage(dynamic data, int statusCode) {
+    if (data is Map<String, dynamic> && data.isNotEmpty) {
+      final message = data['message'];
+      if (message is String && message.trim().isNotEmpty) {
+        return message;
+      }
+      final error = data['error'];
+      if (error is String && error.trim().isNotEmpty) {
+        return error;
+      }
+    }
+    return null;
   }
 
   /// Used to cancel a request with a specific key or the default id

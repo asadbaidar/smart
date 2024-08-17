@@ -1,3 +1,7 @@
+## [1.0.1]
+
+* chore: made `decodeErrorMessage` public.
+
 ## [1.0.0+3]
 
 * chore: updated dependencies.
