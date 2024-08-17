@@ -299,7 +299,7 @@ class HttpClient {
 
       dio.options
         ..baseUrl = baseUrl.endsWith('/') ? baseUrl : '$baseUrl/'
-        ..validateStatus = (status) => status == 200 || status == 201;
+        ..validateStatus = (status) => successCodes.contains(status);
 
       dio.options.connectTimeout = timeout;
       dio.options.sendTimeout = sendTimeout;
@@ -349,6 +349,10 @@ class HttpClient {
       _cancelTokens.remove(id);
     }
   }
+
+  /// List of success status codes
+  List<int> get successCodes =>
+      [200, 201, 202, 203, 204, 205, 206, 207, 208, 226];
 
   /// decode valid/invalid responses based on their types
   Future<T> decodeData<T>(dynamic data, {Type t = Map<String, dynamic>}) async {

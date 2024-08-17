@@ -1,3 +1,7 @@
+## [1.0.0+2]
+
+* chore: made `HttpClient.successCodes` public.
+
 ## [1.0.0+1]
 
 * refactor: Hide private extension methods. 
