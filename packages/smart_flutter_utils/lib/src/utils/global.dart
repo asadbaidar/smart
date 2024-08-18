@@ -70,6 +70,9 @@ extension GlobalObject on Object {
     n.repeatsForIndexed((i) => value = task(value, i));
     return value;
   }
+
+  /// Returns random integer seeded with [hashCode] and less than [max]
+  int random(int max) => Random(hashCode).nextInt(max);
 }
 
 extension FocusContext on BuildContext {
