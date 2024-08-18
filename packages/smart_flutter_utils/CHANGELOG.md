@@ -1,3 +1,7 @@
+## [1.0.1+3]
+
+* chore: added `colorScheme` extensions on `BuildContext`
+
 ## [1.0.1+2]
 
 * chore: exported cache files

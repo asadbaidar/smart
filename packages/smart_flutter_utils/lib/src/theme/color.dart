@@ -7,6 +7,9 @@ extension ColorBrightness on Color {
   /// Returns if the luminance of the color is light.
   bool get isLight => !isDark;
 
+  /// Returns the color if luminance of the color is dark. Null otherwise.
+  Color? get notDark => isDark ? null : this;
+
   /// Returns the pure white/black color contrast to its luminance.
   Color get contrast => isDark ? Colors.white : Colors.black;
 
@@ -68,4 +71,178 @@ extension MaterialColors on Color {
 extension BorderSideColor on Color {
   /// Returns the border side with the color.
   BorderSide? get borderSide => BorderSide(color: this);
+}
+
+extension ContextColorScheme on BuildContext {
+  Color get primary => colorScheme.primary;
+  Color get surfaceTint => colorScheme.surfaceTint;
+  Color get onPrimary => colorScheme.onPrimary;
+  Color get primaryContainer => colorScheme.primaryContainer;
+  Color get onPrimaryContainer => colorScheme.onPrimaryContainer;
+  Color get secondary => colorScheme.secondary;
+  Color get onSecondary => colorScheme.onSecondary;
+  Color get secondaryContainer => colorScheme.secondaryContainer;
+  Color get onSecondaryContainer => colorScheme.onSecondaryContainer;
+  Color get tertiary => colorScheme.tertiary;
+  Color get onTertiary => colorScheme.onTertiary;
+  Color get tertiaryContainer => colorScheme.tertiaryContainer;
+  Color get onTertiaryContainer => colorScheme.onTertiaryContainer;
+  Color get error => colorScheme.error;
+  Color get onError => colorScheme.onError;
+  Color get errorContainer => colorScheme.errorContainer;
+  Color get onErrorContainer => colorScheme.onErrorContainer;
+  Color get surface => colorScheme.surface;
+  Color get onSurface => colorScheme.onSurface;
+  Color get onSurfaceVariant => colorScheme.onSurfaceVariant;
+  Color get outline => colorScheme.outline;
+  Color get outlineVariant => colorScheme.outlineVariant;
+  Color get shadow => colorScheme.shadow;
+  Color get scrim => colorScheme.scrim;
+  Color get inverseSurface => colorScheme.inverseSurface;
+  Color get onInverseSurface => colorScheme.onInverseSurface;
+  Color get inversePrimary => colorScheme.inversePrimary;
+  Color get primaryFixed => colorScheme.primaryFixed;
+  Color get onPrimaryFixed => colorScheme.onPrimaryFixed;
+  Color get primaryFixedDim => colorScheme.primaryFixedDim;
+  Color get onPrimaryFixedVariant => colorScheme.onPrimaryFixedVariant;
+  Color get secondaryFixed => colorScheme.secondaryFixed;
+  Color get onSecondaryFixed => colorScheme.onSecondaryFixed;
+  Color get secondaryFixedDim => colorScheme.secondaryFixedDim;
+  Color get onSecondaryFixedVariant => colorScheme.onSecondaryFixedVariant;
+  Color get tertiaryFixed => colorScheme.tertiaryFixed;
+  Color get onTertiaryFixed => colorScheme.onTertiaryFixed;
+  Color get tertiaryFixedDim => colorScheme.tertiaryFixedDim;
+  Color get onTertiaryFixedVariant => colorScheme.onTertiaryFixedVariant;
+  Color get surfaceDim => colorScheme.surfaceDim;
+  Color get surfaceBright => colorScheme.surfaceBright;
+  Color get surfaceContainerLowest => colorScheme.surfaceContainerLowest;
+  Color get surfaceContainerLow => colorScheme.surfaceContainerLow;
+  Color get surfaceContainer => colorScheme.surfaceContainer;
+  Color get surfaceContainerHigh => colorScheme.surfaceContainerHigh;
+  Color get surfaceContainerHighest => colorScheme.surfaceContainerHighest;
+}
+
+extension TextStyleColor on TextStyle {
+  TextStyle withColor(Color? color) => copyWith(color: color);
+
+  TextStyle primary(BuildContext context) => withColor(context.primary);
+
+  TextStyle onPrimary(BuildContext context) => withColor(context.onPrimary);
+
+  TextStyle primaryContainer(BuildContext context) =>
+      withColor(context.primaryContainer);
+
+  TextStyle onPrimaryContainer(BuildContext context) =>
+      withColor(context.onPrimaryContainer);
+
+  TextStyle secondary(BuildContext context) => withColor(context.secondary);
+
+  TextStyle onSecondary(BuildContext context) => withColor(context.onSecondary);
+
+  TextStyle secondaryContainer(BuildContext context) =>
+      withColor(context.secondaryContainer);
+
+  TextStyle onSecondaryContainer(BuildContext context) =>
+      withColor(context.onSecondaryContainer);
+
+  TextStyle tertiary(BuildContext context) => withColor(context.tertiary);
+
+  TextStyle onTertiary(BuildContext context) => withColor(context.onTertiary);
+
+  TextStyle tertiaryContainer(BuildContext context) =>
+      withColor(context.tertiaryContainer);
+
+  TextStyle onTertiaryContainer(BuildContext context) =>
+      withColor(context.onTertiaryContainer);
+
+  TextStyle error(BuildContext context) => withColor(context.error);
+
+  TextStyle onError(BuildContext context) => withColor(context.onError);
+
+  TextStyle errorContainer(BuildContext context) =>
+      withColor(context.errorContainer);
+
+  TextStyle onErrorContainer(BuildContext context) =>
+      withColor(context.onErrorContainer);
+
+  TextStyle surface(BuildContext context) => withColor(context.surface);
+
+  TextStyle onSurface(BuildContext context) => withColor(context.onSurface);
+
+  TextStyle onSurfaceVariant(BuildContext context) =>
+      withColor(context.onSurfaceVariant);
+
+  TextStyle outline(BuildContext context) => withColor(context.outline);
+
+  TextStyle outlineVariant(BuildContext context) =>
+      withColor(context.outlineVariant);
+
+  TextStyle shadow(BuildContext context) => withColor(context.shadow);
+
+  TextStyle scrim(BuildContext context) => withColor(context.scrim);
+
+  TextStyle inverseSurface(BuildContext context) =>
+      withColor(context.inverseSurface);
+
+  TextStyle onInverseSurface(BuildContext context) =>
+      withColor(context.onInverseSurface);
+
+  TextStyle inversePrimary(BuildContext context) =>
+      withColor(context.inversePrimary);
+
+  TextStyle primaryFixed(BuildContext context) =>
+      withColor(context.primaryFixed);
+
+  TextStyle onPrimaryFixed(BuildContext context) =>
+      withColor(context.onPrimaryFixed);
+
+  TextStyle primaryFixedDim(BuildContext context) =>
+      withColor(context.primaryFixedDim);
+
+  TextStyle onPrimaryFixedVariant(BuildContext context) =>
+      withColor(context.onPrimaryFixedVariant);
+
+  TextStyle secondaryFixed(BuildContext context) =>
+      withColor(context.secondaryFixed);
+
+  TextStyle onSecondaryFixed(BuildContext context) =>
+      withColor(context.onSecondaryFixed);
+
+  TextStyle secondaryFixedDim(BuildContext context) =>
+      withColor(context.secondaryFixedDim);
+
+  TextStyle onSecondaryFixedVariant(BuildContext context) =>
+      withColor(context.onSecondaryFixedVariant);
+
+  TextStyle tertiaryFixed(BuildContext context) =>
+      withColor(context.tertiaryFixed);
+
+  TextStyle onTertiaryFixed(BuildContext context) =>
+      withColor(context.onTertiaryFixed);
+
+  TextStyle tertiaryFixedDim(BuildContext context) =>
+      withColor(context.tertiaryFixedDim);
+
+  TextStyle onTertiaryFixedVariant(BuildContext context) =>
+      withColor(context.onTertiaryFixedVariant);
+
+  TextStyle surfaceDim(BuildContext context) => withColor(context.surfaceDim);
+
+  TextStyle surfaceBright(BuildContext context) =>
+      withColor(context.surfaceBright);
+
+  TextStyle surfaceContainerLowest(BuildContext context) =>
+      withColor(context.surfaceContainerLowest);
+
+  TextStyle surfaceContainerLow(BuildContext context) =>
+      withColor(context.surfaceContainerLow);
+
+  TextStyle surfaceContainer(BuildContext context) =>
+      withColor(context.surfaceContainer);
+
+  TextStyle surfaceContainerHigh(BuildContext context) =>
+      withColor(context.surfaceContainerHigh);
+
+  TextStyle surfaceContainerHighest(BuildContext context) =>
+      withColor(context.surfaceContainerHighest);
 }
