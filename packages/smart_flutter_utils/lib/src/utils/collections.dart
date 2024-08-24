@@ -62,7 +62,9 @@ extension EnumByNameFromIterable<E extends Enum> on Iterable<E> {
   /// Goes through this collection looking for an enum with
   /// name [name], as reported by [EnumName.name].
   /// Returns the first value with the given name or null if none found.
-  E? byNameOrNull(String name, [List<String>? others]) {
+  E? byNameOrNull(String? name, [List<String>? others]) {
+    if (name == null && others == null) return null;
+
     for (final value in this) {
       if (value.name == name || others?.contains(value.name) == true) {
         return value;

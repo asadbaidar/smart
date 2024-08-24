@@ -16,7 +16,7 @@ class TextInput extends FormsInput<String, TextInputValidationError> {
   bool get isNotEmpty => !isEmpty;
 }
 
-extension GeneralFromString on String {
+extension TextInputFromString on String {
   TextInput toTextInput() => TextInput.dirty(this);
 
   TextInput toOptionalTextInput() {
@@ -25,4 +25,15 @@ extension GeneralFromString on String {
   }
 
   TextInput toPureTextInput() => TextInput.pure(this);
+}
+
+extension TextInputFromStringNullable on String? {
+  TextInput toTextInput([String fallback = '']) =>
+      (this ?? fallback).toTextInput();
+
+  TextInput toOptionalTextInput([String fallback = '']) =>
+      (this ?? fallback).toOptionalTextInput();
+
+  TextInput toPureTextInput([String fallback = '']) =>
+      (this ?? fallback).toPureTextInput();
 }
