@@ -26,3 +26,13 @@ extension ZipCodeFromString on String {
 
   ZipCode toPureZipCode() => ZipCode.pure(this);
 }
+
+extension ZipCodeFromStringNullable on String? {
+  ZipCode toZipCode([String fallback = '']) => (this ?? fallback).toZipCode();
+
+  ZipCode toOptionalZipCode([String fallback = '']) =>
+      (this ?? fallback).toOptionalZipCode();
+
+  ZipCode toPureZipCode([String fallback = '']) =>
+      (this ?? fallback).toPureZipCode();
+}

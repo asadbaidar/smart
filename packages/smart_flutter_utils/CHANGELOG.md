@@ -1,3 +1,8 @@
+## [1.0.2]
+
+* chore: added `validator` extensions
+* chore: added `fromJson`, `toJson` in `Data` class to support serialization
+
 ## [1.0.1+3]
 
 * chore: added `colorScheme` extensions on `BuildContext`

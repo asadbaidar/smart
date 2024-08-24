@@ -133,6 +133,17 @@ class Data<T> extends Equatable {
   })  : state = DataState.pageFailure,
         extras = extras ?? const {};
 
+  factory Data.fromJson(JsonObject json, T Function(Object?) fromJsonT) {
+    return Data(
+      key: $cast(json['key']) ?? '',
+      value: fromJsonT(json['value']),
+      extras: $cast(json['extras']),
+      state: DataState.values.byNameOrNull($cast(json['state']) ?? '') ??
+          DataState.initial,
+      error: json['error'],
+    );
+  }
+
   final String key;
   final T? value;
   final JsonObject extras;
@@ -337,6 +348,14 @@ class Data<T> extends Equatable {
         state,
         error,
       ];
+
+  JsonObject toJson() => {
+        'key': key,
+        'value': value,
+        'extras': extras,
+        'state': state.name,
+        'error': errorMessage,
+      };
 }
 
 typedef OnData<T, R> = R Function(T data);

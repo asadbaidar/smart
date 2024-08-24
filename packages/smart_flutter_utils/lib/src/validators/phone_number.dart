@@ -39,7 +39,7 @@ class USPhoneNumber extends FormsInput<String, PhoneNumberValidationError> {
   }
 }
 
-extension USPhoneNumberFromString on String {
+extension PhoneNumberFromString on String {
   PhoneNumber toPhoneNumber() => PhoneNumber.dirty(this);
 
   PhoneNumber toOptionalPhoneNumber() {
@@ -48,7 +48,9 @@ extension USPhoneNumberFromString on String {
   }
 
   PhoneNumber toPurePhoneNumber() => PhoneNumber.pure(this);
+}
 
+extension USPhoneNumberFromString on String {
   USPhoneNumber toUSPhoneNumber() => USPhoneNumber.dirty(this);
 
   USPhoneNumber toOptionalUSPhoneNumber() {
@@ -57,4 +59,26 @@ extension USPhoneNumberFromString on String {
   }
 
   USPhoneNumber toPureUSPhoneNumber() => USPhoneNumber.pure(this);
+}
+
+extension PhoneNumberFromStringNullable on String? {
+  PhoneNumber toPhoneNumber([String fallback = '']) =>
+      (this ?? fallback).toPhoneNumber();
+
+  PhoneNumber toOptionalPhoneNumber([String fallback = '']) =>
+      (this ?? fallback).toOptionalPhoneNumber();
+
+  PhoneNumber toPurePhoneNumber([String fallback = '']) =>
+      (this ?? fallback).toPurePhoneNumber();
+}
+
+extension USPhoneNumberFromStringNullable on String? {
+  USPhoneNumber toUSPhoneNumber([String fallback = '']) =>
+      (this ?? fallback).toUSPhoneNumber();
+
+  USPhoneNumber toOptionalUSPhoneNumber([String fallback = '']) =>
+      (this ?? fallback).toOptionalUSPhoneNumber();
+
+  USPhoneNumber toPureUSPhoneNumber([String fallback = '']) =>
+      (this ?? fallback).toPureUSPhoneNumber();
 }

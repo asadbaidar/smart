@@ -87,3 +87,10 @@ extension FormFileFromHttpFile on HttpFile {
   FormFile toFormFile() => FormFile.dirty(this);
   FormFile toPureFormFile() => FormFile.pure(this);
 }
+
+extension FormFileFromHttpFileNullable on HttpFile? {
+  FormFile toFormFile([HttpFile? fallback]) => (this ?? fallback).toFormFile();
+  
+  FormFile toPureFormFile([HttpFile? fallback]) =>
+      (this ?? fallback).toPureFormFile();
+}
