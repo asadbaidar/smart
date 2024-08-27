@@ -1,3 +1,10 @@
+## [1.0.2]
+
+* chore: made `HttpClient.decodeErrorData` public.
+* chore: moved `CancelableBlocMixin.tryIt` to extension method.
+* chore: made `HttpClientConfig` equatable.
+* fix: handled type casting issue in `HttpClient.decodeData` which will throw a `TypeMismatchException` with the data that was unable to cast.
+
 ## [1.0.1]
 
 * chore: made `decodeErrorMessage` public.
