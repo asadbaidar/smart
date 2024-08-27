@@ -1,4 +1,4 @@
-part of 'utils.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 extension MapDynamicNullsafe<K> on Map<K, dynamic> {
   Map<K, dynamic> get replaceNullWithEmpty => isEmpty

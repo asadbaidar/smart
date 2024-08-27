@@ -1,48 +1,9 @@
-part of 'utils.dart';
+import 'dart:math';
 
-/// Returns [T] if instance of [T], otherwise null
-T? $cast<T>(dynamic value) => value == null
-    ? null
-    : value is T
-        ? value
-        : null;
-
-/// Parse [value] to [int] if possible, otherwise null
-int? $castInt(dynamic value) =>
-    value == null ? null : int.tryParse(value.toString());
-
-/// Parse [value] to [bool] if possible, otherwise null
-bool? $castBool(dynamic value) =>
-    value == null ? null : bool.tryParse(value.toString());
-
-/// Parse hex [value] to [Color] if possible, otherwise null
-Color? $castColor(String? value) => value?.notBlank?.toColor();
-
-/// [apply] mapping with [T] as parameter and [R] as return value
-R? $mapTo<T, R>(T? object, R? Function(T it) apply) =>
-    object != null ? apply(object) : null;
-
-/// [apply] mapping with dynamic parameter and [R] as return value
-R? $mapIt<R>(Object? object, R? Function(dynamic it) apply) =>
-    object != null ? apply(object) : null;
-
-List<T>? $mapList<T>(dynamic list, T Function(dynamic e) apply) =>
-    (list as List?)?.map<T>(apply).toList();
-
-List<R>? $mapToList<T, R>(List<T>? list, R Function(T it) apply) =>
-    list?.map<R>(apply).toList();
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 extension GlobalObject on Object {
-  /// [apply] mapping with [T] as parameter and [R] as return value
-  R mapTo<T, R>(R Function(T it) apply) => apply(this as T);
-
-  /// [apply] mapping with dynamic parameter and [R] as return value
-  R mapIt<R>(R Function(dynamic it) apply) => apply(this);
-
-  /// [apply] mapping on current list and [R] as return type of list elements
-  List<R>? mapToList<T, R>(R Function(T it) apply) =>
-      $cast<List<T>>(this)?.map<R>(apply).toList();
-
   /// Lets [apply] with [T] as parameter
   T let<T>(T Function(T) apply) => apply(this as T);
 

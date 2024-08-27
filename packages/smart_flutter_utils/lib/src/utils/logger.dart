@@ -1,5 +1,8 @@
 // ignore_for_file: avoid_print, no_runtimetype_tostring
-part of 'utils.dart';
+import 'dart:developer' as developer;
+
+import 'package:flutter/foundation.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 abstract class SmartLogger {
   static bool enableLogs = kDebugMode;

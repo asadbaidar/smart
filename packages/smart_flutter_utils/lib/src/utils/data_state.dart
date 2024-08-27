@@ -1,4 +1,5 @@
-part of 'utils.dart';
+import 'package:equatable/equatable.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 enum DataState {
   initial,
@@ -313,6 +314,8 @@ class Data<T> extends Equatable {
     final value = this.value;
     return value == null ||
         value is List && value.isEmpty ||
+        value is Map && value.isEmpty ||
+        value is Set && value.isEmpty ||
         value is String && value.isEmpty;
   }
 
@@ -368,30 +371,33 @@ extension DataWhenState<T> on Data<T> {
     OnData<Data<T>, R>? pageLoading,
     OnData<Data<T>, R>? searching,
     OnData<Data<T>, R>? loaded,
+    OnData<Data<T>, R>? empty,
     OnData<Data<T>, R>? canceled,
     OnData<Data<T>, R>? failure,
     OnData<Data<T>, R>? pageFailure,
-    required OnData<Data<T>, R> otherwise,
+    required OnData<Data<T>, R> orElse,
   }) {
     switch (state) {
       case DataState.initial:
-        return initial?.call(this) ?? otherwise(this);
+        return initial?.call(this) ?? orElse(this);
       case DataState.loading:
-        return loading?.call(this) ?? otherwise(this);
+        return loading?.call(this) ?? orElse(this);
       case DataState.reloading:
-        return reloading?.call(this) ?? otherwise(this);
+        return reloading?.call(this) ?? orElse(this);
       case DataState.pageLoading:
-        return pageLoading?.call(this) ?? otherwise(this);
+        return pageLoading?.call(this) ?? orElse(this);
       case DataState.searching:
-        return searching?.call(this) ?? otherwise(this);
+        return searching?.call(this) ?? orElse(this);
       case DataState.loaded:
-        return loaded?.call(this) ?? otherwise(this);
+        return isEmpty && empty != null
+            ? empty(this)
+            : loaded?.call(this) ?? orElse(this);
       case DataState.canceled:
-        return canceled?.call(this) ?? otherwise(this);
+        return canceled?.call(this) ?? orElse(this);
       case DataState.failure:
-        return failure?.call(this) ?? otherwise(this);
+        return failure?.call(this) ?? orElse(this);
       case DataState.pageFailure:
-        return pageFailure?.call(this) ?? otherwise(this);
+        return pageFailure?.call(this) ?? orElse(this);
     }
   }
 }

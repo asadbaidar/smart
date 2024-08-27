@@ -1,4 +1,4 @@
-part of 'utils.dart';
+import 'dart:collection';
 
 class StackList<E> {
   StackList() : _underlyingQueue = Queue<E>();

@@ -1,4 +1,4 @@
-part of 'utils.dart';
+import 'dart:convert';
 
 typedef MapObject = Map<dynamic, dynamic>;
 typedef JsonObject = Map<String, dynamic>;

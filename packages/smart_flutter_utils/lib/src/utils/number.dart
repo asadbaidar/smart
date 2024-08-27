@@ -1,4 +1,5 @@
-part of 'utils.dart';
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 extension SizeNumber on num {
   double get half => this * 0.5;

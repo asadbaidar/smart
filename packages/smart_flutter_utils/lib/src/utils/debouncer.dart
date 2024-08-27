@@ -1,4 +1,6 @@
-part of 'utils.dart';
+import 'dart:async';
+
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 /// {@template debouncer}
 /// Creates a debouncer that will [run] a callback after [duration] has passed

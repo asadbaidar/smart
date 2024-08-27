@@ -90,7 +90,7 @@ extension FormFileFromHttpFile on HttpFile {
 
 extension FormFileFromHttpFileNullable on HttpFile? {
   FormFile toFormFile([HttpFile? fallback]) => (this ?? fallback).toFormFile();
-  
+
   FormFile toPureFormFile([HttpFile? fallback]) =>
       (this ?? fallback).toPureFormFile();
 }

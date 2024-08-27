@@ -1,4 +1,6 @@
-part of 'theme.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 extension AppBarThemeContext on BuildContext {
   AppBarTheme get appBarTheme => theme.appBarTheme;
@@ -23,44 +25,7 @@ extension AppBarThemeContext on BuildContext {
   double get systemToolbarHeight =>
       isIOS ? kMinInteractiveDimensionCupertino : kToolbarHeight;
 
-  /// [AppBar.elevation]. Defaults to 1.0.
-  double get appBarElevation => appBarTheme.elevation ?? 1.0;
-
   /// [AppBar.toolbarHeight].
   /// Depending on platform, Defaults to [systemToolbarHeight].
   double get toolbarHeight => appBarTheme.toolbarHeight ?? systemToolbarHeight;
-
-  /// [AppBar.shadowColor]. Defaults to [Colors.black].
-  Color get appBarShadowColor => appBarTheme.shadowColor ?? Colors.black;
-
-  /// [AppBar.backgroundColor]. Defaults to [Colors.white].
-  Color get appBarBackgroundColor =>
-      appBarTheme.backgroundColor ?? Colors.white;
-
-  /// [AppBar.foregroundColor]. Defaults to [primaryColor].
-  Color get appBarForegroundColor =>
-      appBarTheme.foregroundColor ?? primaryColor;
-
-  /// [AppBar.titleTextStyle]. Defaults to [primaryTitleLarge].
-  TextStyle? get titleTextStyle =>
-      appBarTheme.titleTextStyle ??
-      primaryTitleLarge?.copyWith(color: Colors.black);
-
-  /// [AppBar.toolbarTextStyle]. Defaults to [primaryBodyLarge].
-  TextStyle? get toolbarTextStyle =>
-      appBarTheme.toolbarTextStyle ??
-      primaryBodyLarge?.copyWith(color: primaryColor);
-
-  /// An icon theme that contrasts with the primary color.
-  IconThemeData get primaryIconTheme => theme.primaryIconTheme;
-
-  /// The default color for primary icons.
-  Color? get primaryIconColor => primaryIconTheme.color;
-
-  /// An action icon theme that contrasts with the primary color.
-  IconThemeData get primaryActionIconTheme =>
-      appBarTheme.actionsIconTheme ?? primaryIconTheme;
-
-  /// The default color for primary action icons.
-  Color? get primaryActionIconColor => primaryActionIconTheme.color;
 }
