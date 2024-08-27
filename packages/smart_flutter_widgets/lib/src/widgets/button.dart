@@ -1,4 +1,7 @@
-part of 'widgets.dart';
+import 'dart:math';
+
+import 'package:flutter/cupertino.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 /// An animated button that mimics the behavior of expanding and collapsing
 /// with easy to customize animations.

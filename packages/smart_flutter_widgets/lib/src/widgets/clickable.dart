@@ -1,4 +1,4 @@
-part of 'widgets.dart';
+import 'package:flutter/cupertino.dart';
 
 /// A widget that combines [CupertinoButton] and [GestureDetector] to provide
 /// a clickable widget with a custom cursor.

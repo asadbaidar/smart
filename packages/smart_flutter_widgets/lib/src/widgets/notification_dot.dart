@@ -1,4 +1,6 @@
-part of 'widgets.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 /// A widget that shows a dot on top of another widget. It can be used to show
 /// notifications.

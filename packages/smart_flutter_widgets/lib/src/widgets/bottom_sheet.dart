@@ -1,4 +1,8 @@
-part of 'widgets.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart' as bottom_sheet;
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
+import 'package:smart_flutter_widgets/smart_flutter_widgets.dart';
 
 const kSmartBottomSheetInitialSize = 0.5;
 const kSmartBottomSheetMaxSize = 0.93;
@@ -11,6 +15,10 @@ const ShapeBorder kSmartBottomSheetRoundedshape = RoundedRectangleBorder(
 );
 
 typedef SmartCupertinoScafold = bottom_sheet.CupertinoScaffold;
+typedef SmartBarBottomSheet = bottom_sheet.BarBottomSheet;
+typedef SmartModalSheetRoute<T> = bottom_sheet.ModalSheetRoute<T>;
+typedef SmartCupertinoModalSheetRoute<T>
+    = bottom_sheet.CupertinoModalBottomSheetRoute<T>;
 
 /// A bottom sheet that can be expanded, collapsed, and snapped
 /// to a specific size.
@@ -216,7 +224,7 @@ class SmartBottomSheet<T> extends StatelessWidget {
     ScrollController? scrollController,
   ) {
     return Material(
-      color: backgroundColor ?? context.surfaceContainerColor,
+      color: backgroundColor ?? context.surfaceContainer,
       shape: shape,
       clipBehavior: Clip.antiAlias,
       child: MediaQuery.removePadding(

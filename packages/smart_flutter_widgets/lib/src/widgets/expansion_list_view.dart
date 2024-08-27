@@ -1,4 +1,8 @@
-part of 'widgets.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
+import 'package:smart_flutter_widgets/smart_flutter_widgets.dart';
 
 typedef SmartExpansionPanelBuilder<PanelItem, ListItem>
     = SmartExpansionPanel<ListItem> Function(

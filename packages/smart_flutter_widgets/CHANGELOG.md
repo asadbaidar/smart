@@ -1,3 +1,8 @@
+## [1.0.1]
+
+* refactor: changed part files into standalone files for auto barrel generation
+* refactor: replaced removed colors from utils with their alternative ones
+
 ## [1.0.0+3]
 
 * chore: updated dependencies

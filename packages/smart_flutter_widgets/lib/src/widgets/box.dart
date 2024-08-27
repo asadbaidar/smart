@@ -1,4 +1,9 @@
-part of 'widgets.dart';
+import 'dart:math';
+
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
+import 'package:smart_flutter_widgets/smart_flutter_widgets.dart';
 
 class SmartBox extends StatelessWidget {
   const SmartBox({

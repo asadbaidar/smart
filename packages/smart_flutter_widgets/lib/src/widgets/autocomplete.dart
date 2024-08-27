@@ -1,5 +1,11 @@
 // ignore_for_file: unnecessary_null_comparison
-part of 'widgets.dart';
+import 'dart:math';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
+import 'package:smart_flutter_widgets/smart_flutter_widgets.dart';
 
 const kAutocompleteMinOptionHeight = 54.0;
 const kAutocompleteVisibleOptionCount = 5;
