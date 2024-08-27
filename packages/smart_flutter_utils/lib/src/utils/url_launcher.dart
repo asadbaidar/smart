@@ -1,4 +1,7 @@
-part of 'utils.dart';
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 extension LaunchUrlNullableString on String? {
   Future<void> launchURL({

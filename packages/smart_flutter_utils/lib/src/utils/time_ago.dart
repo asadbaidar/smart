@@ -1,4 +1,5 @@
-part of 'utils.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class TimeAgo {
   const TimeAgo._();

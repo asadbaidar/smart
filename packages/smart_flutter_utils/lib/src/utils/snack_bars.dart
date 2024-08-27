@@ -1,4 +1,5 @@
-part of 'utils.dart';
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 class Snackbars {
   const Snackbars._();

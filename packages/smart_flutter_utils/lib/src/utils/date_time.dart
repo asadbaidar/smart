@@ -1,6 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
-part of 'utils.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 class SmartDate {
   SmartDate._();

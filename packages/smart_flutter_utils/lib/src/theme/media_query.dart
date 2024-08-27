@@ -1,8 +1,12 @@
-part of 'theme.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 extension MediaQueryContext on BuildContext {
   /// Returns the [MediaQueryData] for the current [BuildContext].
   MediaQueryData get mediaQuery => MediaQuery.of(this);
+
+  /// similar to [MediaQuery.paddingOf(context)]
+  EdgeInsets get padding => MediaQuery.paddingOf(this);
 
   /// similar to [MediaQuery.viewPaddingOf(context)]
   EdgeInsets get viewPadding => MediaQuery.viewPaddingOf(this);

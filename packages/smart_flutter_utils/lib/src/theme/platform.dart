@@ -1,4 +1,7 @@
-part of 'theme.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 extension PlatformContext on BuildContext {
   TargetPlatform get platform => theme.platform;

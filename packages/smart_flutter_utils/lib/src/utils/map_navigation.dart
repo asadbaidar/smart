@@ -1,4 +1,9 @@
-part of 'utils.dart';
+import 'dart:async';
+
+import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 enum MapTravelMode {
   driving('d'),

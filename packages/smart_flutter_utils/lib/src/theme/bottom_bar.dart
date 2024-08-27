@@ -1,4 +1,5 @@
-part of 'theme.dart';
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 extension BottomBarThemeContext on BuildContext {
   /// A theme for customizing the shape, elevation, and color of a [BottomAppBar].
@@ -8,7 +9,4 @@ extension BottomBarThemeContext on BuildContext {
   /// widgets.
   BottomNavigationBarThemeData get bottomNavBarTheme =>
       theme.bottomNavigationBarTheme;
-
-  /// The background color for bottom parts of the app i.e. bottom bars
-  Color get bottomBarColor => bottomBarTheme.color ?? surfaceContainerColor;
 }

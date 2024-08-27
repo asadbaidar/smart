@@ -1,3 +1,8 @@
+## [1.0.3]
+
+* feat: added `BuildContext.getPosition`, `BuildContext.getTextLines`, `BlocBase.when`
+* refactor: changed all part files into standalone files for auto barrel generation
+
 ## [1.0.2]
 
 * chore: added `validator` extensions

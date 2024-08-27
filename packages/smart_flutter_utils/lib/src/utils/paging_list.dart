@@ -1,4 +1,5 @@
-part of 'utils.dart';
+import 'package:equatable/equatable.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 class PagingList<E> extends DelegatingList<E> {
   PagingList({

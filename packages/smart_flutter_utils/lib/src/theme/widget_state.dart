@@ -1,4 +1,5 @@
-part of 'theme.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 extension WidgetStates<T> on WidgetStateProperty<T> {
   T? get normal => resolve({});

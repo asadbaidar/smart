@@ -1,4 +1,4 @@
-part of 'theme.dart';
+import 'package:flutter/material.dart';
 
 extension SmartBrightness on Brightness {
   Brightness get inverse =>

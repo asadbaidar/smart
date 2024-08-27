@@ -1,4 +1,4 @@
-part of 'utils.dart';
+import 'dart:async';
 
 /// Signature for function that return updated value [T] from the
 /// [previous] value of same type passed.

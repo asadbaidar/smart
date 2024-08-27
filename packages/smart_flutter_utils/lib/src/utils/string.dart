@@ -1,4 +1,8 @@
-part of 'utils.dart';
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 extension StringConcatenation on String {
   String prefix(

@@ -1,4 +1,5 @@
-part of 'theme.dart';
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 extension TextThemeContext on BuildContext {
   /// The text theme for the current theme.

@@ -1,4 +1,4 @@
-part of 'utils.dart';
+import 'dart:async';
 
 mixin MockCallback {
   int _counter = 0;
