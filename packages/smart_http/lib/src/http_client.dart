@@ -398,21 +398,33 @@ class HttpClient {
     final data = response != null ? await decodeErrorData(response.data) : null;
     final messageOrError =
         decodeErrorMessage(data, statusCode) ?? error.message;
+    return mapError(originalError, messageOrError, statusCode);
+  }
+
+  /// Map errors to subtypes of HttpException
+  Future<HttpException> mapError(
+    Object? originalError,
+    String? errorMessage,
+    int statusCode,
+  ) async {
     switch (statusCode) {
       case 400:
-        return BadRequestException(messageOrError);
+        return BadRequestException(errorMessage);
+      case 404:
+        return NotFoundException(errorMessage);
       case 401:
       case 403:
       case 405:
-        return UnauthorisedException(messageOrError);
+        return UnauthorisedException(statusCode, errorMessage);
       case 500:
-        return InternalServerException(messageOrError);
+        return InternalServerException(errorMessage);
       default:
         if (originalError is SocketException) {
           return const NoInternetException();
         }
         return NoDataException(
-          statusCode != 0 ? '$statusCode: ' : '',
+          statusCode,
+          statusCode != 0 ? errorMessage : null,
         );
     }
   }
