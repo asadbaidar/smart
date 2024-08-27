@@ -31,24 +31,6 @@ mixin CancelableBlocMixin {
 
   /// Cancels all the pending data requests in the current repository.
   Future<void> cancel() => repository.cancel();
-
-  /// Provides a helper method to try-catch by separate handling of
-  /// [CancelException] with [onCancel] callback.
-  Future<void> tryIt(
-    Future<dynamic> Function() task, {
-    required void Function(dynamic) catchError,
-    void Function()? onCancel,
-  }) async {
-    try {
-      await task();
-    } catch (e) {
-      if (e is CancelException) {
-        onCancel?.call();
-        return;
-      }
-      catchError(e);
-    }
-  }
 }
 
 /// An abstraction that enables cancelable cubit to cancel the pending data
@@ -82,5 +64,25 @@ abstract class CancelableBloc<Event, State> extends Bloc<Event, State>
   Future<void> close() async {
     await cancel();
     return super.close();
+  }
+}
+
+extension CancelableBlocTry<State> on BlocBase<State> {
+  /// Provides a helper method to try-catch by separate handling of
+  /// [CancelException] with [onCancel] callback.
+  Future<void> tryIt(
+    Future<dynamic> Function() task, {
+    required void Function(dynamic) catchError,
+    void Function()? onCancel,
+  }) async {
+    try {
+      await task();
+    } catch (e) {
+      if (e is CancelException) {
+        onCancel?.call();
+        return;
+      }
+      catchError(e);
+    }
   }
 }

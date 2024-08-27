@@ -340,7 +340,7 @@ class HttpClient {
     } on DioException catch (e) {
       _log(e, path, enableLogs);
       final error = await catchError(e);
-      throw error ?? await decodeError<T>(e);
+      throw error ?? await decodeError(e);
     } catch (e) {
       _log(e, path, enableLogs);
       throw HttpException(e.toString());
@@ -354,24 +354,22 @@ class HttpClient {
   List<int> get successCodes =>
       [200, 201, 202, 203, 204, 205, 206, 207, 208, 226];
 
-  /// decode valid/invalid responses based on their types
-  Future<T> decodeData<T>(dynamic data, {Type t = Map<String, dynamic>}) async {
+  /// Decode data based on its type
+  Future<T> decodeData<T>(dynamic data) async {
     final result = data is String
         ? data.jsonOrString
         : data is Map<dynamic, dynamic>
             ? data.map((key, value) => MapEntry(key.toString(), value))
             : data;
-    if (T == Map<String, dynamic>) {
-      return result as T? ?? (throw const NoDataException());
-    } else if (T == List<dynamic>) {
-      return result as T? ?? (throw const NoDataException());
-    } else if (T == String) {
-      return result?.toString() as T? ?? (throw const NoDataException());
-    }
-    return result as T;
+    return (result == null
+            ? null
+            : result is T
+                ? result
+                : null) ??
+        (throw TypeMismatchException(result));
   }
 
-  /// catch errors based on their types
+  /// Catch errors based on their types
   Future<HttpException?> catchError(DioException error) async {
     switch (error.type) {
       case DioExceptionType.cancel:
@@ -392,13 +390,14 @@ class HttpClient {
     }
   }
 
-  /// decode error responses based on their status codes
-  Future<HttpException> decodeError<T>(DioException error) async {
+  /// Decode error responses based on their status codes
+  Future<HttpException> decodeError(DioException error) async {
     final response = error.response;
     final originalError = error.error;
     final statusCode = response?.statusCode ?? 0;
-    final data = response != null ? await decodeData<T>(response.data) : null;
-    final messageOrError = decodeErrorMessage(data, statusCode) ?? error.message;
+    final data = response != null ? await decodeErrorData(response.data) : null;
+    final messageOrError =
+        decodeErrorMessage(data, statusCode) ?? error.message;
     switch (statusCode) {
       case 400:
         return BadRequestException(messageOrError);
@@ -418,8 +417,19 @@ class HttpClient {
     }
   }
 
-  /// decode error messages from the response data
+  /// Decode error data based on its type
+  Future<dynamic> decodeErrorData(dynamic data) async {
+    return data is String
+        ? data.jsonOrString
+        : data is Map<dynamic, dynamic>
+            ? data.map((key, value) => MapEntry(key.toString(), value))
+            : data;
+  }
+
+  /// Decode error messages from the response data
   String? decodeErrorMessage(dynamic data, int statusCode) {
+    if (data is String && data.trim().isNotEmpty) return data;
+
     if (data is Map<String, dynamic> && data.isNotEmpty) {
       final message = data['message'];
       if (message is String && message.trim().isNotEmpty) {

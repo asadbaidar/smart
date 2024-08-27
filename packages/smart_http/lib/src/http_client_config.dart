@@ -1,9 +1,11 @@
+import 'package:equatable/equatable.dart';
+
 /// Configure Http properties to be used later on
 /// thoroughout Http calls
 ///
 /// Though for a specific use case these can also be
 /// overriden in http request functions
-class HttpClientConfig {
+class HttpClientConfig extends Equatable {
   const HttpClientConfig({
     this.baseUrl = '',
     this.headers,
@@ -52,4 +54,14 @@ class HttpClientConfig {
   /// Enable logs for the api calls in the project
   /// Defaults to `false`
   final bool enableLogs;
+
+  @override
+  List<Object?> get props => [
+        baseUrl,
+        headers,
+        connectTimeout,
+        sendTimeout,
+        receiveTimeout,
+        enableLogs,
+      ];
 }
