@@ -1,3 +1,9 @@
+## [1.0.3]
+
+* chore: made `HttpClient.mapError` public.
+* chore: added `HttpException.code` to set http status codes.
+* fix: used the original http error message when passing to `HttpException` instead of a default message
+
 ## [1.0.2]
 
 * chore: made `HttpClient.decodeErrorData` public.
