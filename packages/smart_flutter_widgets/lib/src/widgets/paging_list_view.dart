@@ -1,5 +1,10 @@
 // ignore_for_file: unnecessary_null_comparison
-part of 'widgets.dart';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
+import 'package:smart_flutter_widgets/smart_flutter_widgets.dart';
 
 const kSmartPagingControlsHeight = 60.0;
 const kSmartPagingControlsConstraints = BoxConstraints(minHeight: 60);
@@ -509,7 +514,7 @@ class SmartPagingButton extends StatelessWidget {
             child: Text(
               text ?? 'Show more',
               style: (style ?? context.bodyLarge)?.copyWith(
-                color: color ?? (primary ? context.primaryColor : null),
+                color: color ?? (primary ? context.primary : null),
               ),
               textAlign: TextAlign.center,
             ),

@@ -1,4 +1,5 @@
-part of 'widgets.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 /// [SizedBox] clear implimentation for adding fixed spaces.
 class Space extends StatelessWidget {

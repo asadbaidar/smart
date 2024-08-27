@@ -1,4 +1,6 @@
-part of 'widgets.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 /// {@template smart_sliver_header}
 /// Builder for the widget to place inside the [SmartSliverHeader].

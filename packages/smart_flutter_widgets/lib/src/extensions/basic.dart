@@ -1,4 +1,8 @@
-part of 'extensions.dart';
+import 'dart:ui' as ui;
+
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
+import 'package:smart_flutter_widgets/smart_flutter_widgets.dart';
 
 extension BasicWidget on Widget {
   PreferredSizeWidget prefferedSize(
@@ -126,7 +130,7 @@ class SmartBoxBorder {
   }) {
     final vBorderColor = color ?? context?.hintColor.dimmed;
     return BoxDecoration(
-      color: boxColor ?? context?.surfaceContainerColor,
+      color: boxColor ?? context?.surfaceContainer,
       borderRadius: radius == null ? null : BorderRadius.circular(radius),
       border: vBorderColor == null
           ? null

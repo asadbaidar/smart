@@ -1,4 +1,7 @@
-part of 'widgets.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
+import 'package:smart_flutter_widgets/smart_flutter_widgets.dart';
 
 const kRefreshTriggerPullDistance = 100.0;
 const kRefreshIndicatorExtent = 60.0;

@@ -1,4 +1,7 @@
-part of 'widgets.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
+import 'package:smart_flutter_widgets/smart_flutter_widgets.dart';
 
 const kRowTileLeadingMargin = EdgeInsets.zero;
 const kRowTileLeadingPadding =
@@ -946,7 +949,7 @@ class SmartRowTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final String? vText =
         (text ?? hint)?.applyIf(allCaps, (it) => it?.uppercase);
-    final vColor = context.tileIconColor ?? context.secondaryColor;
+    final vColor = context.tileIconColor ?? context.secondary;
     final vTintColor = destructive == true ? Colors.red : color ?? vColor;
     final vTintAble = destructive == true || tintAble;
     final vTrailingColor = trailingColor ??
@@ -954,7 +957,7 @@ class SmartRowTile extends StatelessWidget {
             ? context.hintColor
             : vTintAble
                 ? vTintColor
-                : context.iconColor ?? context.secondaryColor);
+                : context.iconColor ?? context.secondary);
     final vTextColor = textColor ?? (vTintAble ? vTintColor : textStyle?.color);
     final vTextStyle = (textStyle ?? context.bodySmall)
         ?.copyWith(fontWeight: fontWeight, color: vTextColor);
@@ -970,7 +973,7 @@ class SmartRowTile extends StatelessWidget {
     final vHighlighted = highlighted ?? checked ?? false;
     final vBackground = vHighlighted
         ? vTintColor.highlighted
-        : backgroundColor ?? (themed ? context.surfaceContainerColor : null);
+        : backgroundColor ?? (themed ? context.surfaceContainer : null);
     final vBoxedView = $cast<SmartBox>(leading);
     final isCustomLeading = leading is! Icon &&
         leading is! SmartBox &&
@@ -1197,7 +1200,7 @@ class SmartTileDivider extends StatelessWidget {
   Widget build(BuildContext context) => style == DividerStyle.none
       ? const Space()
       : Ink(
-          color: context.surfaceContainerColor,
+          color: context.surfaceContainer,
           child: SmartDivider(
             indent: indent,
             thickness: thickness,
@@ -1293,7 +1296,7 @@ class SmartSectionTile extends StatelessWidget {
       padding: padding,
       title: title,
       titleChildren: titleChildren,
-      titleStyle: titleStyle ?? context.appBarTheme.titleTextStyle,
+      titleStyle: titleStyle ?? context.titleLarge,
       leading: leading,
       trailingTopChild: trailing,
       accessory: accessory,

@@ -1,4 +1,4 @@
-part of 'widgets.dart';
+import 'package:flutter/material.dart';
 
 /// A stateless utility widget whose [build] method uses its
 /// [builder] callback to create the widget's child and apply the [theme] on

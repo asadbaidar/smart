@@ -1,4 +1,6 @@
-part of 'widgets.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 /// Base SVG provider
 abstract class SmartSvgProvider {

@@ -1,4 +1,7 @@
-part of 'extensions.dart';
+import 'dart:ui' as ui;
+
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 extension DateTimePickerContext on BuildContext {
   Future<void> timePicker({

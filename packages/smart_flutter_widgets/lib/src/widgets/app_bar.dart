@@ -1,4 +1,9 @@
-part of 'widgets.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
+import 'package:smart_flutter_widgets/smart_flutter_widgets.dart';
 
 typedef SmartSimpleAppBar = PreferredSizeWidget;
 typedef SmartSliverAppBar = List<Widget>;
@@ -68,7 +73,7 @@ class SmartAppBar {
           centerTitle:
               context.appBarCenterTitle(centerTitle, actions: vActions),
           titleTextStyle: titleStyle?.copyWith(
-            color: context.appBarTheme.titleTextStyle?.color,
+            color: context.appBarTheme.foregroundColor,
           ),
           flexibleSpace: flexibleSpace,
           shape: shape,
@@ -227,7 +232,10 @@ class SmartAppBar {
     }
 
     TextStyle? getTitleTextStyle(BuildContext context, {bool large = false}) {
-      final vThemeTitleStyle = context.titleTextStyle;
+      final vThemeTitleStyle = context.appBarTheme.titleTextStyle ??
+          context.titleLarge?.copyWith(
+            color: context.appBarTheme.foregroundColor,
+          );
       final vTitleStyle = large
           ? largeTitleStyle ??
               vThemeTitleStyle?.copyWith(
@@ -293,7 +301,8 @@ class SmartAppBar {
     return [
       SliverLayoutBuilder(
         builder: (context, constraints) {
-          final appBarElevation = elevation ?? context.appBarElevation;
+          final appBarElevation =
+              elevation ?? context.appBarTheme.elevation ?? 1.0;
           final vShowLeading = showLeading ?? Navigator.canPop(context);
           final vToolbarHeight = toolbarHeight ?? context.toolbarHeight;
           final vOffsetHeight = vFloating
@@ -325,11 +334,11 @@ class SmartAppBar {
               : null;
 
           final Color? vBackgroundColor =
-              (backgroundColor ?? context.appBarBackgroundColor)
-                  .applyIf(translucent && vBlur > 0, (it) => it?.translucent);
+              (backgroundColor ?? context.appBarTheme.backgroundColor)
+                  ?.applyIf(translucent && vBlur > 0, (it) => it?.translucent);
 
-          final Color vForegroundColor =
-              foregroundColor ?? context.appBarForegroundColor;
+          final Color? vForegroundColor =
+              foregroundColor ?? context.appBarTheme.foregroundColor;
 
           final vTitle = customTitle ??
               $mapTo(
@@ -429,7 +438,7 @@ class SmartAppBar {
             foregroundColor: vForegroundColor,
             title: vTitle,
             titleTextStyle: getTitleTextStyle(context),
-            toolbarTextStyle: toolbarTextStyle ?? context.toolbarTextStyle,
+            toolbarTextStyle: toolbarTextStyle,
             actions: nActions,
             elevation: vElevation,
             toolbarHeight: vToolbarHeight,
@@ -447,12 +456,13 @@ class SmartAppBar {
             builder: (context) => SmartCupertinoSliverRefresh.primary(
               onRefresh: onRefresh,
               onRefreshStateChange: onRefreshStateChange,
-              backgroundColor: backgroundColor ?? context.appBarBackgroundColor,
+              backgroundColor:
+                  backgroundColor ?? context.appBarTheme.backgroundColor,
             ),
           ),
       SliverLayoutBuilder(
         builder: (context, constraints) {
-          final vElevation = elevation ?? context.appBarElevation;
+          final vElevation = elevation ?? context.appBarTheme.elevation ?? 1.0;
           final vToolbarHeight = toolbarHeight ?? context.toolbarHeight;
           final vOffsetHeight = vFloating
               ? vToolbarHeight

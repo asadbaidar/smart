@@ -1,4 +1,6 @@
-part of 'widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
+import 'package:smart_flutter_widgets/smart_flutter_widgets.dart';
 
 extension ShimmerWidget on Widget {
   Widget shimmer({
@@ -15,9 +17,9 @@ extension ShimmerWidget on Widget {
         ? Builder(
             builder: (context) => Shimmer.fromColors(
               key: key,
-              baseColor: baseColor ?? context.surfaceContainerColor,
+              baseColor: baseColor ?? context.surfaceContainer,
               highlightColor:
-                  highlightColor ?? context.surfaceContainerColor.highlighted,
+                  highlightColor ?? context.surfaceContainer.highlighted,
               period: period,
               direction: direction,
               loop: loop,

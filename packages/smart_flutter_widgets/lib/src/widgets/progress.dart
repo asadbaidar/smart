@@ -1,4 +1,5 @@
-part of 'widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
 /// Linear progress indicator with cross fade animation.
 class SmartLinearProgress extends StatelessWidget {
@@ -109,9 +110,8 @@ class SmartProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = this.color ?? context.primaryColor;
-    final backgroundColor =
-        this.backgroundColor ?? context.surfaceContainerColor;
+    final color = this.color ?? context.primary;
+    final backgroundColor = this.backgroundColor ?? context.surfaceContainer;
     final borderRadius = this.borderRadius ?? height;
     return SizedBox(
       width: width,

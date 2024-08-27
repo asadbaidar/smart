@@ -1,4 +1,4 @@
-part of 'extensions.dart';
+import 'package:flutter/material.dart';
 
 extension MultiChildWidget on Widget {
   Widget stack({

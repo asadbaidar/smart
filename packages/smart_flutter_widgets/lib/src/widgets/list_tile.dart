@@ -1,4 +1,7 @@
-part of 'widgets.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:smart_flutter_utils/smart_flutter_utils.dart';
+import 'package:smart_flutter_widgets/smart_flutter_widgets.dart';
 
 const kDensePadding = 8.0;
 const kDensePaddingX = 8.0;
@@ -2019,10 +2022,10 @@ class SmartListTile extends StatelessWidget {
     final vTintAble = destructive == true || (tintAble ?? false);
     final tintColor = destructive == true
         ? Colors.red
-        : color ?? context.tileIconColor ?? context.secondaryColor;
+        : color ?? context.tileIconColor ?? context.secondary;
     final vTrailingColor = vTintAble
         ? tintColor
-        : trailingColor ?? context.iconColor ?? context.secondaryColor;
+        : trailingColor ?? context.iconColor ?? context.secondary;
     final vAccessoryColor = tintAccessory == true
         ? tintColor
         : detail
@@ -2055,7 +2058,7 @@ class SmartListTile extends StatelessWidget {
     final vHighlighted = highlighted ?? checked ?? false;
     final vBackgroundColor = vHighlighted
         ? tintColor.highlighted
-        : backgroundColor ?? context.surfaceContainerColor;
+        : backgroundColor ?? context.surfaceContainer;
     final vShowTrailing = isTrailingTop ||
         isTrailingBottom ||
         isTrailingTitle ||
