@@ -1,3 +1,7 @@
+## [1.0.4]
+
+* chore: bumped versions of dependencies.
+
 ## [1.0.3]
 
 * feat: added `BuildContext.getPosition`, `BuildContext.getTextLines`, `BlocBase.when`
