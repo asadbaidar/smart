@@ -56,8 +56,6 @@ class HttpFile extends Equatable {
 
   MediaType? get mediaType => path.mediaType;
 
-  File toFile() => File(path);
-
   HttpFormData toFormData(String key) => HttpFormData.fromMap(
         {
           key: bytes == null ? multipartByIOFile() : multipart(),
