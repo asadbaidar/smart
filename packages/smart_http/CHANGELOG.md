@@ -1,3 +1,7 @@
+## [1.0.5]
+
+* fix: path version incompatiblility with flutter_test.
+
 ## [1.0.4]
 
 * chore: bumped versions of dependencies.
