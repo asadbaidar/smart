@@ -1,3 +1,8 @@
+## [1.0.4]
+
+* chore: bumped versions of dependencies.
+* fix: removed `dart:io` dependency to make it compatible with web.
+
 ## [1.0.3]
 
 * chore: made `HttpClient.mapError` public.
