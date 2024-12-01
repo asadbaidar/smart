@@ -3,7 +3,7 @@ description: A dart wrapper around dio to handle http requests along with cancel
 homepage: https://github.com/asadbaidar/smart
 repository: https://github.com/asadbaidar/smart/tree/master/packages/smart_http
 
-version: 1.0.5
+version: 1.0.6
 
 environment:
   sdk: ">=3.5.0 <4.0.0"

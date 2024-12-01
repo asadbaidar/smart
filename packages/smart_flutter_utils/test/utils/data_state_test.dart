@@ -1,7 +1,7 @@
-import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smart_flutter_utils/smart_flutter_utils.dart';
+import 'package:smart_http/smart_http.dart';
 
 void main() {
   const value = 'value';

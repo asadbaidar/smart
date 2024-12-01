@@ -1,3 +1,7 @@
+## [1.0.6]
+
+* fix: removed all `dart:io` dependencies to make it compatible with web.
+
 ## [1.0.5]
 
 * fix: path version incompatiblility with flutter_test.
