@@ -1,3 +1,7 @@
+## [1.0.2]
+
+* chore: bumped versions of dependencies.
+
 ## [1.0.1]
 
 * refactor: changed part files into standalone files for auto barrel generation
