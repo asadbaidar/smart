@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer' as developer;
-import 'dart:io';
 
 import 'package:smart_http/smart_http.dart';
 import 'package:uuid/uuid.dart';
@@ -419,7 +418,7 @@ class HttpClient {
       case 500:
         return InternalServerException(errorMessage);
       default:
-        if (originalError is SocketException) {
+        if (originalError.runtimeType.toString().contains('SocketException')) {
           return const NoInternetException();
         }
         return NoDataException(
