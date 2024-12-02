@@ -1,31 +1,33 @@
 import 'package:bloc/bloc.dart';
 import 'package:smart_flutter_utils/smart_flutter_utils.dart';
 
-typedef OnDataValue<V> = void Function(Data<V> data);
+typedef OnDataState<V> = void Function(Data<V> data);
+typedef OnErrorCallback<V> = Data<V> Function(Object error);
 
 extension BlocBaseWhen<T> on BlocBase<T> {
   Future<void> when<V>(
-    Data<V> value, {
+    Data<V> data, {
     required FutureCallback<V> act,
-    required OnDataValue<V> emit,
-    OnDataValue<V>? onLoading,
-    OnDataValue<V>? onLoaded,
-    OnDataValue<V>? onFailure,
+    required OnDataState<V> emit,
+    OnDataState<V>? onLoading,
+    OnDataState<V>? onLoaded,
+    OnDataState<V>? onFailure,
     Callback<Data<V>>? loading,
     OnValueCallback<Data<V>, V>? loaded,
-    OnValueCallback<Data<V>, Object>? failure,
+    OnErrorCallback<V>? failure,
   }) async {
-    (onLoading ?? emit)(loading?.call() ?? value.toLoading());
+    final newData = loading?.call() ?? data.toLoading();
+    (onLoading ?? emit)(newData);
     try {
       final result = await act();
       if (V.toString() == 'void') {
-        (onLoaded ?? emit)(value.toLoaded());
+        (onLoaded ?? emit)(newData.toLoaded());
       } else {
         (onLoaded ??
-            emit)(loaded?.call(result) ?? value.toLoaded(value: result));
+            emit)(loaded?.call(result) ?? newData.toLoaded(value: result));
       }
     } catch (e) {
-      (onFailure ?? emit)(failure?.call(e) ?? value.toFailure(error: e));
+      (onFailure ?? emit)(failure?.call(e) ?? newData.toFailure(error: e));
     }
   }
 }
