@@ -1,6 +1,7 @@
 ## [1.0.5]
 
 * fix: fixed `BlocBase.when` method where it was ignoring the previous state changes in the next state emits.
+* chore: Added simplified `LifecycleObserver` to observe the lifecycle of a widget including app lifecycle.
 
 ## [1.0.4]
 
