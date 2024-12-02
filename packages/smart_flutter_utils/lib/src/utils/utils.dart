@@ -5,6 +5,7 @@ export 'date_time.dart';
 export 'debouncer.dart';
 export 'global.dart';
 export 'json.dart';
+export 'lifecycle_observer.dart';
 export 'logger.dart';
 export 'map_navigation.dart';
 export 'mapper.dart';
